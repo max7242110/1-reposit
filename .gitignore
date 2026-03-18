@@ -1,0 +1,30 @@
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+backend/venv/
+backend/.pytest_cache/
+backend/htmlcov/
+backend/staticfiles/
+*.egg-info/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# IDE
+.vscode/
+.idea/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Coverage
+.coverage
+coverage/
