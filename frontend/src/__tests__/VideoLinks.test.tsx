@@ -28,6 +28,15 @@ describe("VideoLinks", () => {
     expect(iframe?.src).toContain("youtube.com/embed/tgN0W83hQh4");
   });
 
+  it("renders YouTube embed iframe with title", () => {
+    const { container } = render(
+      <VideoLinks youtube_url="https://youtu.be/tgN0W83hQh4" rutube_url="" vk_url="" />
+    );
+    const iframe = container.querySelector("iframe");
+    expect(iframe).not.toBeNull();
+    expect(iframe?.getAttribute("title")).toBe("YouTube видеообзор");
+  });
+
   it("returns null when no URLs provided", () => {
     const { container } = render(
       <VideoLinks youtube_url="" rutube_url="" vk_url="" />
@@ -48,7 +57,7 @@ describe("VideoLinks", () => {
     expect(screen.queryByText("VK Видео")).toBeNull();
   });
 
-  it("opens links in new tab", () => {
+  it("opens links in new tab with security attributes", () => {
     render(
       <VideoLinks
         youtube_url="https://youtu.be/test123"
@@ -61,13 +70,29 @@ describe("VideoLinks", () => {
     expect(link?.getAttribute("rel")).toBe("noopener noreferrer");
   });
 
-  it("renders heading", () => {
+  it("has aria-labels on links", () => {
     render(
       <VideoLinks
-        youtube_url="https://youtu.be/test"
-        rutube_url=""
-        vk_url=""
+        youtube_url="https://youtu.be/test123"
+        rutube_url="https://rutube.ru/test/"
+        vk_url="https://vk.com/test"
       />
+    );
+    const youtubeLink = screen.getByText("YouTube").closest("a");
+    expect(youtubeLink?.getAttribute("aria-label")).toContain("YouTube");
+  });
+
+  it("renders section with aria-label", () => {
+    const { container } = render(
+      <VideoLinks youtube_url="https://youtu.be/test" rutube_url="" vk_url="" />
+    );
+    const section = container.querySelector("section[aria-label]");
+    expect(section).not.toBeNull();
+  });
+
+  it("renders heading", () => {
+    render(
+      <VideoLinks youtube_url="https://youtu.be/test" rutube_url="" vk_url="" />
     );
     expect(screen.getByText("Видеообзор")).toBeTruthy();
   });

@@ -1,16 +1,18 @@
+from __future__ import annotations
+
 import pytest
 
+from ratings.models import AirConditioner, ParameterValue
 from ratings.serializers import (
     AirConditionerDetailSerializer,
     AirConditionerListSerializer,
     ParameterValueSerializer,
 )
-from ratings.models import ParameterValue
 
 
 @pytest.mark.django_db
 class TestParameterValueSerializer:
-    def test_fields(self, sample_ac):
+    def test_fields(self, sample_ac: AirConditioner) -> None:
         pv = ParameterValue.objects.create(
             air_conditioner=sample_ac,
             parameter_name="Шум мин.",
@@ -25,34 +27,43 @@ class TestParameterValueSerializer:
         assert data["score"] == 36.0
         assert "id" in data
 
+    def test_all_fields_readonly(self) -> None:
+        expected = {"id", "parameter_name", "raw_value", "unit", "score"}
+        meta = ParameterValueSerializer.Meta
+        assert set(meta.read_only_fields) == expected
+
 
 @pytest.mark.django_db
 class TestAirConditionerListSerializer:
-    def test_fields(self, sample_ac):
+    def test_fields(self, sample_ac: AirConditioner) -> None:
         data = AirConditionerListSerializer(sample_ac).data
         assert data["brand"] == "TestBrand"
         assert data["model_name"] == "TestModel-X100"
         assert data["total_score"] == 200.5
         assert "parameters" not in data
 
-    def test_no_video_urls_in_list(self, sample_ac):
+    def test_no_video_urls_in_list(self, sample_ac: AirConditioner) -> None:
         data = AirConditionerListSerializer(sample_ac).data
         assert "youtube_url" not in data
+
+    def test_no_extra_fields(self, sample_ac: AirConditioner) -> None:
+        data = AirConditionerListSerializer(sample_ac).data
+        assert set(data.keys()) == {"id", "rank", "brand", "model_name", "total_score"}
 
 
 @pytest.mark.django_db
 class TestAirConditionerDetailSerializer:
-    def test_includes_parameters(self, sample_ac_with_params):
+    def test_includes_parameters(self, sample_ac_with_params: AirConditioner) -> None:
         data = AirConditionerDetailSerializer(sample_ac_with_params).data
         assert "parameters" in data
         assert len(data["parameters"]) == 12
 
-    def test_includes_video_urls(self, sample_ac):
+    def test_includes_video_urls(self, sample_ac: AirConditioner) -> None:
         data = AirConditionerDetailSerializer(sample_ac).data
         assert data["youtube_url"] == "https://youtu.be/test123"
         assert data["rutube_url"] == "https://rutube.ru/video/test123/"
 
-    def test_all_fields_present(self, sample_ac_with_params):
+    def test_all_fields_present(self, sample_ac_with_params: AirConditioner) -> None:
         data = AirConditionerDetailSerializer(sample_ac_with_params).data
         expected = {
             "id", "rank", "brand", "model_name",
@@ -60,3 +71,7 @@ class TestAirConditionerDetailSerializer:
             "total_score", "parameters",
         }
         assert set(data.keys()) == expected
+
+    def test_empty_parameters(self, sample_ac: AirConditioner) -> None:
+        data = AirConditionerDetailSerializer(sample_ac).data
+        assert data["parameters"] == []

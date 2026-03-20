@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import BackLink from "@/components/BackLink";
 import ParameterBar from "@/components/ParameterBar";
 import VideoLinks from "@/components/VideoLinks";
 import { getConditioner } from "@/lib/api";
@@ -39,28 +39,10 @@ export default async function ConditionerPage({ params }: Props) {
   const maxScore = Math.max(...ac.parameters.map((p) => p.score), 1);
 
   return (
-    <div>
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-6 transition-colors"
-      >
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-        Назад к рейтингу
-      </Link>
+    <article>
+      <BackLink href="/" />
 
-      <div className="mb-8">
+      <header className="mb-8">
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
@@ -70,21 +52,19 @@ export default async function ConditionerPage({ params }: Props) {
               {ac.model_name}
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="text-right">
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                Итоговый балл
-              </div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                {ac.total_score.toFixed(1)}
-              </div>
+          <div className="text-right">
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              Итоговый балл
+            </div>
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              {ac.total_score.toFixed(1)}
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div>
+        <section aria-label="Параметры кондиционера">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
             Параметры
           </h2>
@@ -97,16 +77,16 @@ export default async function ConditionerPage({ params }: Props) {
               />
             ))}
           </div>
-        </div>
+        </section>
 
-        <div>
+        <aside>
           <VideoLinks
             youtube_url={ac.youtube_url}
             rutube_url={ac.rutube_url}
             vk_url={ac.vk_url}
           />
-        </div>
+        </aside>
       </div>
-    </div>
+    </article>
   );
 }

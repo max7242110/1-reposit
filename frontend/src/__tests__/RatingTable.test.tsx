@@ -34,11 +34,15 @@ describe("RatingTable", () => {
     expect(screen.getByText("242.3")).toBeTruthy();
   });
 
-  it("renders position numbers", () => {
+  it("has accessible table with caption", () => {
     render(<RatingTable conditioners={mockData} />);
-    expect(screen.getByText("1")).toBeTruthy();
-    expect(screen.getByText("2")).toBeTruthy();
-    expect(screen.getByText("3")).toBeTruthy();
+    expect(screen.getByRole("table")).toBeTruthy();
+  });
+
+  it("renders column headers with scope", () => {
+    const { container } = render(<RatingTable conditioners={mockData} />);
+    const ths = container.querySelectorAll("th[scope='col']");
+    expect(ths.length).toBe(4);
   });
 
   it("renders links to detail pages", () => {

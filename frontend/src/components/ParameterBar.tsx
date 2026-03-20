@@ -24,7 +24,14 @@ export default function ParameterBar({ parameter, maxScore }: Props) {
           </span>
         </div>
       </div>
-      <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2">
+      <div
+        className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2"
+        role="progressbar"
+        aria-valuenow={parameter.score}
+        aria-valuemin={0}
+        aria-valuemax={maxScore}
+        aria-label={`${parameter.parameter_name}: ${parameter.score} из ${maxScore}`}
+      >
         <div
           className="bg-blue-500 dark:bg-blue-400 h-2 rounded-full transition-all duration-500"
           style={{ width: `${Math.min(percentage, 100)}%` }}

@@ -26,6 +26,14 @@ describe("ParameterBar", () => {
     expect(screen.getByText("36.0")).toBeTruthy();
   });
 
+  it("renders progressbar with ARIA attributes", () => {
+    render(<ParameterBar parameter={mockParam} maxScore={72} />);
+    const bar = screen.getByRole("progressbar");
+    expect(bar).toBeTruthy();
+    expect(bar.getAttribute("aria-valuenow")).toBe("36");
+    expect(bar.getAttribute("aria-valuemax")).toBe("72");
+  });
+
   it("renders progress bar with correct width", () => {
     const { container } = render(
       <ParameterBar parameter={mockParam} maxScore={72} />

@@ -17,7 +17,9 @@ const config = {
   collectCoverageFrom: [
     "src/components/**/*.{ts,tsx}",
     "src/lib/**/*.{ts,tsx}",
+    "src/app/**/*.{ts,tsx}",
     "!src/**/*.d.ts",
+    "!src/app/layout.tsx",
   ],
 };
 

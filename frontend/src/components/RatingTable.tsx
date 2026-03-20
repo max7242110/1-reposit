@@ -1,33 +1,30 @@
 import Link from "next/link";
 import { AirConditionerSummary } from "@/lib/types";
+import { getMedalColor } from "@/lib/utils";
 
 interface Props {
   conditioners: AirConditionerSummary[];
 }
 
-function getMedalColor(position: number): string {
-  if (position === 1) return "text-yellow-500";
-  if (position === 2) return "text-gray-400";
-  if (position === 3) return "text-amber-700";
-  return "text-gray-500";
-}
-
 export default function RatingTable({ conditioners }: Props) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full border-collapse">
+      <table className="w-full border-collapse" role="table">
+        <caption className="sr-only">
+          Рейтинг бытовых кондиционеров по суммарному индексу
+        </caption>
         <thead>
           <tr className="border-b-2 border-gray-200 dark:border-gray-700">
-            <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 w-16">
+            <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 w-16">
               #
             </th>
-            <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">
+            <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">
               Бренд
             </th>
-            <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 hidden sm:table-cell">
+            <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 hidden sm:table-cell">
               Модель
             </th>
-            <th className="px-4 py-3 text-right text-sm font-semibold text-gray-600 dark:text-gray-300 w-28">
+            <th scope="col" className="px-4 py-3 text-right text-sm font-semibold text-gray-600 dark:text-gray-300 w-28">
               Баллы
             </th>
           </tr>
@@ -39,9 +36,7 @@ export default function RatingTable({ conditioners }: Props) {
               className="border-b border-gray-100 dark:border-gray-800 hover:bg-blue-50 dark:hover:bg-gray-800/50 transition-colors"
             >
               <td className="px-4 py-4">
-                <span
-                  className={`text-lg font-bold ${getMedalColor(idx + 1)}`}
-                >
+                <span className={`text-lg font-bold ${getMedalColor(idx + 1)}`}>
                   {idx + 1}
                 </span>
               </td>

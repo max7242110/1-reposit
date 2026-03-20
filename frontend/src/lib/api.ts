@@ -1,19 +1,78 @@
-import { AirConditionerDetail, AirConditionerSummary } from "./types";
+import {
+  ACModelDetail,
+  ACModelSummary,
+  AirConditionerDetail,
+  AirConditionerSummary,
+  Methodology,
+} from "./types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const FETCH_TIMEOUT_MS = 10_000;
 
+export class ApiError extends Error {
+  constructor(
+    public status: number,
+    message: string,
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+interface PaginatedResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}
+
+async function apiFetch<T>(path: string): Promise<T> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+  try {
+    const res = await fetch(`${API_BASE}${path}`, {
+      signal: controller.signal,
+      next: { revalidate: 60 },
+    });
+
+    if (!res.ok) {
+      throw new ApiError(res.status, `API ${path}: ${res.status} ${res.statusText}`);
+    }
+
+    const contentType = res.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      throw new ApiError(res.status, `API ${path}: unexpected content-type ${contentType}`);
+    }
+
+    return (await res.json()) as T;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+// v2 API
+export async function getModels(params?: Record<string, string>): Promise<ACModelSummary[]> {
+  const query = params ? "?" + new URLSearchParams(params).toString() : "";
+  const data = await apiFetch<ACModelSummary[] | PaginatedResponse<ACModelSummary>>(
+    `/v2/models/${query}`,
+  );
+  return Array.isArray(data) ? data : data.results;
+}
+
+export async function getModel(id: number): Promise<ACModelDetail> {
+  return apiFetch<ACModelDetail>(`/v2/models/${id}/`);
+}
+
+export async function getMethodology(): Promise<Methodology> {
+  return apiFetch<Methodology>("/v2/methodology/");
+}
+
+// v1 legacy API (kept for compatibility)
 export async function getConditioners(): Promise<AirConditionerSummary[]> {
-  const res = await fetch(`${API_BASE}/conditioners/`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) throw new Error(`API error: ${res.status}`);
-  return res.json();
+  return apiFetch<AirConditionerSummary[]>("/conditioners/");
 }
 
 export async function getConditioner(id: number): Promise<AirConditionerDetail> {
-  const res = await fetch(`${API_BASE}/conditioners/${id}/`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) throw new Error(`API error: ${res.status}`);
-  return res.json();
+  return apiFetch<AirConditionerDetail>(`/conditioners/${id}/`);
 }
