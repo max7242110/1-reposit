@@ -23,7 +23,7 @@ V1_TO_V2_CRITERIA = {
     "Тип (инвертор/он-офф)": ("inverter_type", "categorical", "universal_scale", ""),
     "Наличие WiFi": ("wifi", "categorical", "custom_scale", ""),
     "Регулировка оборотов наруж. бл.": ("fan_speed_control", "binary", "binary", ""),
-    "Кол-во скоростей внутр. бл.": ("fan_speeds_indoor", "numeric", "min_median_max", ""),
+    "Кол-во скоростей внутр. бл.": ("fan_speeds_indoor", "categorical", "custom_scale", ""),
     "Макс. длина фреонопровода": ("max_pipe_length", "numeric", "min_median_max", "м"),
 }
 

@@ -28,3 +28,10 @@ frontend/out/
 # Coverage
 .coverage
 coverage/
+
+# Django local / uploads (не коммитить)
+backend/db.sqlite3
+backend/media/
+
+# Временные файлы MS Office
+~$*

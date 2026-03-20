@@ -1,7 +1,7 @@
 """Brand age scorer (TZ 3.0 criterion 30).
 
 Score is based on how long the brand has been selling in Russia.
-Uses sales_start_year_ru from BrandOriginClass.
+Uses sales_start_year_ru from Brand (справочник брендов).
 
 Scale: min=1995 (best, 100 pts) .. max=current_year (worst, 0 pts).
 Piecewise-linear through median (if defined on criterion).

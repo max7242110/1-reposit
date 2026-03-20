@@ -31,9 +31,10 @@ def validate_weights(methodology: MethodologyVersion) -> None:
     )
     total = sum(c.weight for c in criteria)
     if abs(total - 100.0) > 0.01:
+        delta = total - 100.0
         raise WeightValidationError(
-            f"Сумма весов = {total:.2f}%, должна быть 100%. "
-            f"Разница: {total - 100:.2f}%"
+            f"Сумма весов активной методики = {total:.2f}% (требуется ровно 100%). "
+            f"Отклонение: {delta:+.2f}%."
         )
 
 
@@ -73,12 +74,14 @@ def _build_model_context(ac_model: ACModel) -> dict[str, Any]:
     return ctx
 
 
-def calculate_model(
+def compute_scores_for_model(
     ac_model: ACModel,
     methodology: MethodologyVersion,
-    run: CalculationRun,
-) -> float:
-    """Calculate index for a single model. Returns total_index."""
+) -> tuple[float, list[dict[str, Any]]]:
+    """
+    Calculate total index and per-criterion breakdown.
+    No DB writes. Empty raw_value => 0 for scorers that treat missing as zero.
+    """
     criteria = Criterion.objects.filter(
         methodology=methodology, is_active=True,
     )
@@ -91,7 +94,7 @@ def calculate_model(
     model_ctx = _build_model_context(ac_model)
 
     total_index = 0.0
-    results: list[CalculationResult] = []
+    rows: list[dict[str, Any]] = []
 
     for criterion in criteria:
         rv = raw_values.get(criterion.pk)
@@ -110,18 +113,73 @@ def calculate_model(
         weighted = round(criterion.weight * result.normalized_score / 100, 4)
         total_index += weighted
 
-        results.append(CalculationResult(
+        rows.append({
+            "criterion": criterion,
+            "raw_value": str(raw),
+            "normalized_score": round(result.normalized_score, 2),
+            "weighted_score": round(weighted, 4),
+            "above_reference": result.above_reference,
+        })
+
+    return round(total_index, 2), rows
+
+
+def update_model_total_index(ac_model: ACModel) -> bool:
+    """
+    Recalculate and persist total_index only (no CalculationRun / CalculationResult).
+    Returns True if updated. False if no active methodology or weight validation fails.
+    """
+    methodology = MethodologyVersion.objects.filter(is_active=True).first()
+    if methodology is None:
+        return False
+
+    try:
+        validate_weights(methodology)
+    except WeightValidationError as e:
+        logger.warning(
+            "Не обновлён индекс для модели %s: %s",
+            ac_model.pk,
+            e,
+        )
+        return False
+
+    try:
+        fresh = ACModel.objects.select_related("brand", "brand__origin_class").get(
+            pk=ac_model.pk,
+        )
+    except ACModel.DoesNotExist:
+        return False
+
+    total_index, _ = compute_scores_for_model(fresh, methodology)
+    ACModel.objects.filter(pk=ac_model.pk).update(
+        total_index=total_index,
+        updated_at=timezone.now(),
+    )
+    ac_model.total_index = total_index
+    return True
+
+
+def calculate_model(
+    ac_model: ACModel,
+    methodology: MethodologyVersion,
+    run: CalculationRun,
+) -> float:
+    """Calculate index for a single model. Returns total_index. Writes CalculationResult rows."""
+    total_index, rows = compute_scores_for_model(ac_model, methodology)
+
+    results = [
+        CalculationResult(
             run=run,
             model=ac_model,
-            criterion=criterion,
-            raw_value=str(raw),
-            normalized_score=round(result.normalized_score, 2),
-            weighted_score=round(weighted, 4),
-            above_reference=result.above_reference,
-        ))
-
+            criterion=r["criterion"],
+            raw_value=r["raw_value"],
+            normalized_score=r["normalized_score"],
+            weighted_score=r["weighted_score"],
+            above_reference=r["above_reference"],
+        )
+        for r in rows
+    ]
     CalculationResult.objects.bulk_create(results)
-    total_index = round(total_index, 2)
 
     ac_model.total_index = total_index
     ac_model.save(update_fields=["total_index", "updated_at"])

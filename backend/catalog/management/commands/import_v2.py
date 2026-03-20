@@ -13,6 +13,8 @@ from django.db import transaction
 
 from brands.models import Brand
 from catalog.models import ACModel, EquipmentType, ModelRawValue, ModelRegion
+from catalog.sync_brand_age import sync_brand_age_for_model
+from scoring.engine import update_model_total_index
 from methodology.models import Criterion, MethodologyVersion
 
 logger = logging.getLogger(__name__)
@@ -99,6 +101,8 @@ class Command(BaseCommand):
                             raw_value=str(val), numeric_value=numeric,
                             source=f"Импорт из {path.name}",
                         )
+                sync_brand_age_for_model(ac)
+                update_model_total_index(ac)
                 imported += 1
 
         for err in errors:

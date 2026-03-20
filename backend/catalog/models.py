@@ -58,6 +58,15 @@ class ACModel(TimestampMixin):
         verbose_name = "Модель кондиционера"
         verbose_name_plural = "Модели кондиционеров"
 
+    def _normalize_unit_names(self) -> None:
+        """Хранить названия блоков в верхнем регистре (латиница и кириллица)."""
+        self.inner_unit = (self.inner_unit or "").strip().upper()
+        self.outer_unit = (self.outer_unit or "").strip().upper()
+
+    def save(self, *args, **kwargs):
+        self._normalize_unit_names()
+        super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return f"{self.brand.name} {self.inner_unit}"
 

@@ -5,7 +5,14 @@ import pytest
 from brands.models import Brand, BrandOriginClass
 from catalog.models import ACModel, EquipmentType, ModelRawValue
 from methodology.models import Criterion, MethodologyVersion
-from scoring.engine import WeightValidationError, recalculate_all, validate_weights
+from catalog.sync_brand_age import sync_brand_age_for_model
+from scoring.engine import (
+    WeightValidationError,
+    recalculate_all,
+    update_model_total_index,
+    validate_weights,
+)
+from scoring.models import CalculationRun
 from scoring.models import CalculationResult, CalculationRun
 
 
@@ -50,7 +57,7 @@ class TestWeightValidation:
             methodology=methodology, code="a", name_ru="A",
             value_type="binary", scoring_type="binary", weight=60, display_order=1,
         )
-        with pytest.raises(WeightValidationError, match="Сумма весов"):
+        with pytest.raises(WeightValidationError, match="Отклонение"):
             validate_weights(methodology)
 
 
@@ -175,3 +182,54 @@ class TestRecalculateAll:
         run = recalculate_all()
         result = CalculationResult.objects.get(run=run, criterion=c, model=model)
         assert result.normalized_score == pytest.approx(83.33, abs=0.1)
+
+    def test_sync_brand_age_for_model_updates_raw_value(self, methodology, eq_type):
+        origin, _ = BrandOriginClass.objects.get_or_create(
+            origin_type="japanese", defaults={"fallback_score": 90},
+        )
+        brand = Brand.objects.create(
+            name="SyncBrandAge", origin_class=origin, sales_start_year_ru=2012,
+        )
+        model = ACModel.objects.create(
+            brand=brand, inner_unit="Sync-X", equipment_type=eq_type,
+        )
+        c = Criterion.objects.create(
+            methodology=methodology, code="brand_age_ru", name_ru="Возраст",
+            value_type="brand_age", scoring_type="min_median_max",
+            weight=100, min_value=1995, max_value=2026, median_value=2010,
+            display_order=1,
+        )
+        rv = ModelRawValue.objects.create(
+            model=model, criterion=c, raw_value="should_be_replaced",
+        )
+        sync_brand_age_for_model(model)
+        rv.refresh_from_db()
+        assert rv.raw_value == "2012"
+
+        brand.sales_start_year_ru = 2000
+        brand.save()
+        rv.refresh_from_db()
+        assert rv.raw_value == "2000"
+
+
+@pytest.mark.django_db
+def test_update_model_total_index_without_calculation_run(methodology, ac_model):
+    c1 = Criterion.objects.create(
+        methodology=methodology, code="noise", name_ru="Шум",
+        value_type="numeric", scoring_type="min_median_max",
+        weight=50, min_value=20, median_value=30, max_value=40,
+        display_order=1,
+    )
+    c2 = Criterion.objects.create(
+        methodology=methodology, code="erv", name_ru="ЭРВ",
+        value_type="binary", scoring_type="binary",
+        weight=50, display_order=2,
+    )
+    ModelRawValue.objects.create(model=ac_model, criterion=c1, raw_value="30")
+    ModelRawValue.objects.create(model=ac_model, criterion=c2, raw_value="да")
+
+    runs_before = CalculationRun.objects.count()
+    assert update_model_total_index(ac_model) is True
+    ac_model.refresh_from_db()
+    assert ac_model.total_index == pytest.approx(75.0, abs=0.02)
+    assert CalculationRun.objects.count() == runs_before

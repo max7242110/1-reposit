@@ -47,6 +47,12 @@ python manage.py runserver
 
 Бэкенд будет доступен на `http://localhost:8000`.
 
+### Приложение `catalog` (рефакторинг структуры)
+
+- **`catalog/admin/`** — пакет админки: `ac_model_admin`, `equipment_admin`, `forms`, `inlines`, `datalist`, `constants`
+- **`catalog/services/`** — логика без HTTP (например `ensure_all_criteria_rows` для строк критериев)
+- **`catalog/signals.py`** — пересчёт итогового индекса моделей при изменении полей бренда
+
 ## 3. Фронтенд (Next.js)
 
 ```bash
@@ -75,6 +81,8 @@ npm run dev
 ```bash
 # Django admin (создать суперпользователя)
 python manage.py createsuperuser
+# Каталог моделей и критерии: http://localhost:8000/admin/catalog/
+# Раздел /admin/ratings/ (v1) в админке отключён; API /api/v1/ при необходимости сохраняется
 
 # Тесты бэкенда
 cd backend && source venv/bin/activate
