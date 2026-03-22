@@ -28,6 +28,13 @@ pip install -r requirements.txt
 # Настройка БД
 createdb ac_rating  # или через psql: CREATE DATABASE ac_rating;
 
+# Запуск PostgreSQL (Homebrew). Если `brew` в `~/homebrew`:
+export PATH="$HOME/homebrew/bin:$PATH"
+brew services start postgresql@16
+
+# Чтобы Django использовал PostgreSQL, не задавайте `DJANGO_USE_SQLITE`
+# (в `config/settings/development.py` SQLite включается только при DJANGO_USE_SQLITE=1).
+
 # Переменные окружения (опционально)
 export POSTGRES_DB=ac_rating
 export POSTGRES_USER=$USER

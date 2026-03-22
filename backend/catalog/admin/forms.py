@@ -3,13 +3,11 @@
 from __future__ import annotations
 
 from django import forms
-from django.core.exceptions import ValidationError
 from django.forms import BaseInlineFormSet
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from methodology.models import Criterion, MethodologyVersion
-from scoring.engine import WeightValidationError, validate_weights
+from methodology.models import Criterion
 
 from catalog.models import ACModel
 
@@ -82,12 +80,3 @@ class ACModelForm(forms.ModelForm):
                 attrs={"style": "width:200px;"},
             ),
         }
-
-    def clean(self):
-        methodology = MethodologyVersion.objects.filter(is_active=True).first()
-        if methodology:
-            try:
-                validate_weights(methodology)
-            except WeightValidationError as e:
-                raise ValidationError(str(e)) from e
-        return super().clean()

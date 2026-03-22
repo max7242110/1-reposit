@@ -1,0 +1,73 @@
+{% extends "admin/change_form.html" %}
+
+{% block after_field_sets %}
+{{ block.super }}
+<div id="criteria-weight-banner" class="criteria-weight-banner">
+  <div class="criteria-weight-banner__label">Сумма весов критериев (все строки таблицы ниже)</div>
+  <div class="criteria-weight-banner__value" id="criteria-weight-total">{{ criteria_weight_total_initial|default:0|floatformat:2 }}%</div>
+</div>
+<style>
+  .criteria-weight-banner {
+    margin: 1.5rem 0 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--body-bg, #f8f8f8);
+    border: 1px solid var(--hairline-color, #ddd);
+    border-radius: 6px;
+  }
+  .criteria-weight-banner__label {
+    font-size: 0.85rem;
+    color: var(--body-quiet-color, #666);
+    margin-bottom: 0.35rem;
+  }
+  .criteria-weight-banner__value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+</style>
+<script>
+(function () {
+  function parseNum(v) {
+    if (v == null || v === "") return 0;
+    var n = parseFloat(String(v).replace(",", "."));
+    return isNaN(n) ? 0 : n;
+  }
+  function recalc() {
+    var group = document.getElementById("criterion_set-group");
+    if (!group) return;
+    var inputs = group.querySelectorAll('input[name$="-weight"]');
+    var sum = 0;
+    inputs.forEach(function (inp) {
+      var row = inp.closest("tr");
+      if (row) {
+        var del = row.querySelector('input[name$="-DELETE"]');
+        if (del && del.checked) return;
+      }
+      sum += parseNum(inp.value);
+    });
+    var el = document.getElementById("criteria-weight-total");
+    if (el) el.textContent = sum.toFixed(2) + "%";
+  }
+  function bind() {
+    var group = document.getElementById("criterion_set-group");
+    if (!group) return;
+    group.addEventListener("input", function (e) {
+      var n = e.target && e.target.name;
+      if (n && (n.endsWith("-weight") || n.endsWith("-DELETE"))) recalc();
+    });
+    group.addEventListener("change", function (e) {
+      var n = e.target && e.target.name;
+      if (n && (n.endsWith("-weight") || n.endsWith("-DELETE"))) recalc();
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    recalc();
+    bind();
+    if (typeof django !== "undefined" && django.jQuery) {
+      django.jQuery(document).on("formset:added", recalc);
+    }
+  });
+})();
+</script>
+{% endblock %}

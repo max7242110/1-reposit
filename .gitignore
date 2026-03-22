@@ -19,6 +19,7 @@ frontend/out/
 # IDE
 .vscode/
 .idea/
+.cursor/
 
 # Env
 .env

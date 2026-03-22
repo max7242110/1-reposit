@@ -6,13 +6,7 @@ from brands.models import Brand, BrandOriginClass
 from catalog.models import ACModel, EquipmentType, ModelRawValue
 from methodology.models import Criterion, MethodologyVersion
 from catalog.sync_brand_age import sync_brand_age_for_model
-from scoring.engine import (
-    WeightValidationError,
-    recalculate_all,
-    update_model_total_index,
-    validate_weights,
-)
-from scoring.models import CalculationRun
+from scoring.engine import recalculate_all, update_model_total_index, validate_weights
 from scoring.models import CalculationResult, CalculationRun
 
 
@@ -51,14 +45,6 @@ class TestWeightValidation:
             value_type="binary", scoring_type="binary", weight=40, display_order=2,
         )
         validate_weights(methodology)
-
-    def test_invalid_weights(self, methodology):
-        Criterion.objects.create(
-            methodology=methodology, code="a", name_ru="A",
-            value_type="binary", scoring_type="binary", weight=60, display_order=1,
-        )
-        with pytest.raises(WeightValidationError, match="Отклонение"):
-            validate_weights(methodology)
 
 
 @pytest.mark.django_db

@@ -20,22 +20,9 @@ from scoring.scorers.lab import LabScorer
 logger = logging.getLogger(__name__)
 
 
-class WeightValidationError(Exception):
-    pass
-
-
 def validate_weights(methodology: MethodologyVersion) -> None:
-    """Validate that sum of weights = 100% (TZ section 6.1)."""
-    criteria = Criterion.objects.filter(
-        methodology=methodology, is_active=True,
-    )
-    total = sum(c.weight for c in criteria)
-    if abs(total - 100.0) > 0.01:
-        delta = total - 100.0
-        raise WeightValidationError(
-            f"Сумма весов активной методики = {total:.2f}% (требуется ровно 100%). "
-            f"Отклонение: {delta:+.2f}%."
-        )
+    """Раньше проверяла сумму весов = 100%; ограничение снято — оставлена для совместимости вызовов."""
+    return None
 
 
 def _get_scorer(criterion: Criterion) -> BaseScorer | None:
@@ -127,20 +114,10 @@ def compute_scores_for_model(
 def update_model_total_index(ac_model: ACModel) -> bool:
     """
     Recalculate and persist total_index only (no CalculationRun / CalculationResult).
-    Returns True if updated. False if no active methodology or weight validation fails.
+    Returns True if updated. False if no active methodology.
     """
     methodology = MethodologyVersion.objects.filter(is_active=True).first()
     if methodology is None:
-        return False
-
-    try:
-        validate_weights(methodology)
-    except WeightValidationError as e:
-        logger.warning(
-            "Не обновлён индекс для модели %s: %s",
-            ac_model.pk,
-            e,
-        )
         return False
 
     try:
@@ -197,8 +174,6 @@ def recalculate_all(
         methodology = MethodologyVersion.objects.filter(is_active=True).first()
         if not methodology:
             raise ValueError("Нет активной методики")
-
-    validate_weights(methodology)
 
     run = CalculationRun.objects.create(
         methodology=methodology,

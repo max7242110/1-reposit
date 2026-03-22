@@ -6,11 +6,7 @@ from django.contrib import admin, messages
 from django.http import HttpRequest
 
 from methodology.models import MethodologyVersion
-from scoring.engine import (
-    WeightValidationError,
-    update_model_total_index,
-    validate_weights,
-)
+from scoring.engine import update_model_total_index
 
 from catalog.models import ACModel, ModelRawValue
 from catalog.services import ensure_all_criteria_rows
@@ -77,11 +73,6 @@ class ACModelAdmin(admin.ModelAdmin):
         methodology = MethodologyVersion.objects.filter(is_active=True).first()
         if methodology is None:
             messages.error(request, "Нет активной методики.")
-            return
-        try:
-            validate_weights(methodology)
-        except WeightValidationError as e:
-            messages.error(request, str(e))
             return
         n = 0
         for obj in queryset.select_related("brand", "brand__origin_class"):

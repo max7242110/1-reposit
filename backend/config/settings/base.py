@@ -39,10 +39,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "config.urls"
 
+# Явный каталог: надёжнее, чем только app_directories (iCloud/дубликаты путей к пакету).
+_METHOD_TEMPLATES_DIR = BASE_DIR / "methodology" / "templates"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [_METHOD_TEMPLATES_DIR] if _METHOD_TEMPLATES_DIR.is_dir() else [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

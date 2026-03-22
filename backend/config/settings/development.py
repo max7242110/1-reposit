@@ -1,4 +1,15 @@
+import os
+
 from .base import *  # noqa: F401, F403
+
+# Локально без PostgreSQL: DJANGO_USE_SQLITE=1
+if os.environ.get("DJANGO_USE_SQLITE", "").lower() in ("1", "true", "yes"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",  # noqa: F405
+        }
+    }
 
 DEBUG = True
 

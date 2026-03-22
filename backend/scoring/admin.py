@@ -4,7 +4,7 @@ import logging
 
 from django.contrib import admin, messages
 
-from scoring.engine import WeightValidationError, recalculate_all
+from scoring.engine import recalculate_all
 
 from .models import CalculationResult, CalculationRun
 
@@ -50,7 +50,5 @@ class CalculationRunAdmin(admin.ModelAdmin):
                 request,
                 f"Расчёт #{run.pk} завершён: {run.models_processed} моделей.",
             )
-        except WeightValidationError as e:
-            messages.error(request, f"Ошибка валидации весов: {e}")
         except ValueError as e:
             messages.error(request, f"Ошибка: {e}")

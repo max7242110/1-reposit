@@ -1,8 +1,22 @@
 from __future__ import annotations
 
 import pytest
+from django.contrib.auth import get_user_model
 
 from ratings.constants import PARAMETER_DEFS
+
+
+@pytest.fixture(autouse=True)
+def _allow_testserver_host(settings):
+    hosts = list(settings.ALLOWED_HOSTS)
+    if "testserver" not in hosts:
+        settings.ALLOWED_HOSTS = [*hosts, "testserver"]
+
+
+@pytest.fixture
+def admin_user(db):
+    User = get_user_model()
+    return User.objects.create_superuser("admin", "admin@test.local", "pass")
 from ratings.models import AirConditioner, ParameterValue
 
 SAMPLE_PARAM_VALUES = {
