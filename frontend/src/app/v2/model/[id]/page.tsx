@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import BackLink from "@/components/BackLink";
-import ParameterBar from "@/components/ParameterBar";
+import IndexCriterionCard from "@/components/IndexCriterionCard";
 import RegionBadges from "@/components/RegionBadges";
 import VerificationBadge from "@/components/VerificationBadge";
 import VideoLinks from "@/components/VideoLinks";
 import { getModel } from "@/lib/api";
-import { ParameterScore } from "@/lib/types";
+import { formatIndexMax } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -17,27 +17,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   try {
     const m = await getModel(Number(id));
+    const idxLabel = `${m.total_index.toFixed(1)} / ${formatIndexMax(m.index_max ?? 100)}`;
     return {
       title: `${m.brand.name} ${m.inner_unit}`,
-      description: `Индекс «Август-климат»: ${m.total_index.toFixed(1)}. ${m.brand.name} ${m.inner_unit} — подробные параметры и видеообзор.`,
+      description: `Индекс «Август-климат»: ${idxLabel}. ${m.brand.name} ${m.inner_unit} — подробные параметры и видеообзор.`,
       openGraph: {
         title: `${m.brand.name} ${m.inner_unit} — Рейтинг «Август-климат»`,
-        description: `Индекс: ${m.total_index.toFixed(1)}. Подробные характеристики.`,
+        description: `Индекс: ${idxLabel}. Подробные характеристики.`,
       },
     };
   } catch {
     return { title: "Модель не найдена" };
   }
-}
-
-function toParameterValue(ps: ParameterScore) {
-  return {
-    id: 0,
-    parameter_name: ps.criterion_name,
-    raw_value: ps.raw_value,
-    unit: ps.unit,
-    score: ps.normalized_score,
-  };
 }
 
 export default async function ModelDetailPage({ params }: Props) {
@@ -49,20 +40,19 @@ export default async function ModelDetailPage({ params }: Props) {
     notFound();
   }
 
-  const maxScore = Math.max(...model.parameter_scores.map((p) => p.normalized_score), 1);
-
+  const indexMax = model.index_max ?? 100;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: `${model.brand.name} ${model.inner_unit}`,
     brand: { "@type": "Brand", name: model.brand.name },
-    description: `Кондиционер ${model.brand.name} ${model.inner_unit}. Индекс «Август-климат»: ${model.total_index.toFixed(1)}.`,
+    description: `Кондиционер ${model.brand.name} ${model.inner_unit}. Индекс «Август-климат»: ${model.total_index.toFixed(1)} / ${formatIndexMax(indexMax)}.`,
     review: {
       "@type": "Review",
       reviewRating: {
         "@type": "Rating",
         ratingValue: model.total_index.toFixed(1),
-        bestRating: "100",
+        bestRating: formatIndexMax(indexMax),
       },
     },
   };
@@ -97,8 +87,10 @@ export default async function ModelDetailPage({ params }: Props) {
           </div>
           <div className="text-right">
             <div className="text-sm text-gray-500 dark:text-gray-400">Индекс «Август-климат»</div>
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-              {model.total_index.toFixed(1)}
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 tabular-nums">
+              <span>{model.total_index.toFixed(1)}</span>
+              <span className="font-semibold text-blue-500/80 dark:text-blue-300/80"> / </span>
+              <span>{formatIndexMax(model.index_max ?? 100)}</span>
             </div>
           </div>
         </div>
@@ -107,17 +99,19 @@ export default async function ModelDetailPage({ params }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <section aria-label="Параметры">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Параметры</h2>
-          <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
-            {model.parameter_scores.map((ps) => (
-              <div key={ps.criterion_code} className="relative">
-                <ParameterBar parameter={toParameterValue(ps)} maxScore={maxScore} />
-                {ps.above_reference && (
-                  <span className="absolute top-3 right-0 text-xs text-green-600 dark:text-green-400 font-medium">
-                    выше эталона
-                  </span>
-                )}
-              </div>
-            ))}
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+            Все критерии, участвующие в расчёте индекса: исходное значение, балл по шкале 0–100 и вклад в итог.
+          </p>
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-xl px-4 sm:px-5">
+            {model.parameter_scores.length > 0 ? (
+              model.parameter_scores.map((ps) => (
+                <IndexCriterionCard key={ps.criterion_code} criterion={ps} />
+              ))
+            ) : (
+              <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">
+                Нет активной методики или критериев для отображения.
+              </p>
+            )}
           </div>
         </section>
 

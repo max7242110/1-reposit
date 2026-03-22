@@ -22,6 +22,7 @@ const mockModels: ACModelSummary[] = [
     series: "Comfora",
     nominal_capacity: 2.5,
     total_index: 85.5,
+    index_max: 100,
     publish_status: "published",
     region_availability: [
       { region_code: "ru", region_display: "Россия" },
@@ -34,6 +35,7 @@ const mockModels: ACModelSummary[] = [
     series: "Premium",
     nominal_capacity: 2.5,
     total_index: 92.1,
+    index_max: 100,
     publish_status: "published",
     region_availability: [
       { region_code: "ru", region_display: "Россия" },
@@ -49,10 +51,11 @@ describe("RatingTableV2", () => {
     expect(screen.getByText("Mitsubishi")).toBeTruthy();
   });
 
-  it("displays total_index values", () => {
+  it("displays total_index and scale max", () => {
     render(<RatingTableV2 models={mockModels} />);
     expect(screen.getByText("85.5")).toBeTruthy();
     expect(screen.getByText("92.1")).toBeTruthy();
+    expect(screen.getAllByText("100").length).toBeGreaterThanOrEqual(2);
   });
 
   it("renders accessible table with caption", () => {

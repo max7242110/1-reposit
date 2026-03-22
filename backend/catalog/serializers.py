@@ -3,8 +3,9 @@ from __future__ import annotations
 from rest_framework import serializers
 
 from brands.models import Brand
-from core.i18n import get_localized_field
+from core.i18n import DEFAULT_LANGUAGE, get_localized_field
 from methodology.models import Criterion, MethodologyVersion
+from scoring.engine import compute_scores_for_model, max_possible_total_index
 from scoring.models import CalculationResult
 
 from .models import ACModel, ModelRawValue, ModelRegion
@@ -59,15 +60,19 @@ class RawValueSerializer(serializers.ModelSerializer):
 class ACModelListSerializer(serializers.ModelSerializer):
     brand = serializers.CharField(source="brand.name", read_only=True)
     region_availability = RegionSerializer(source="regions", many=True, read_only=True)
+    index_max = serializers.SerializerMethodField()
 
     class Meta:
         model = ACModel
         fields = [
             "id", "brand", "inner_unit", "series",
-            "nominal_capacity", "total_index",
+            "nominal_capacity", "total_index", "index_max",
             "publish_status", "region_availability",
         ]
         read_only_fields = fields
+
+    def get_index_max(self, _obj: ACModel) -> float:
+        return float(self.context.get("index_max", 100.0))
 
 
 class ACModelDetailSerializer(serializers.ModelSerializer):
@@ -76,12 +81,13 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
     parameter_scores = serializers.SerializerMethodField()
     raw_values = RawValueSerializer(many=True, read_only=True)
     methodology_version = serializers.SerializerMethodField()
+    index_max = serializers.SerializerMethodField()
 
     class Meta:
         model = ACModel
         fields = [
             "id", "brand", "series", "inner_unit", "outer_unit",
-            "nominal_capacity", "total_index",
+            "nominal_capacity", "total_index", "index_max",
             "publish_status", "region_availability",
             "youtube_url", "rutube_url", "vk_url",
             "parameter_scores", "raw_values",
@@ -95,24 +101,40 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
             return None
         return max(results, key=lambda r: r.run_id).run_id
 
-    def get_parameter_scores(self, obj: ACModel) -> list[dict]:
+    def _get_methodology_for_detail(self, obj: ACModel) -> MethodologyVersion | None:
         run_id = self._get_latest_run_id(obj)
-        if run_id is None:
+        if run_id is not None:
+            for r in obj.calculation_results.all():
+                if r.run_id == run_id:
+                    return r.run.methodology
+        return MethodologyVersion.objects.filter(is_active=True).first()
+
+    def get_parameter_scores(self, obj: ACModel) -> list[dict]:
+        methodology = self._get_methodology_for_detail(obj)
+        if methodology is None:
             return []
-        results = [
-            r for r in obj.calculation_results.all() if r.run_id == run_id
+        _total, rows = compute_scores_for_model(obj, methodology)
+        lang = self.context.get("lang") or DEFAULT_LANGUAGE
+        rows.sort(key=lambda r: (r["criterion"].display_order, r["criterion"].code))
+        return [
+            {
+                "criterion_code": r["criterion"].code,
+                "criterion_name": get_localized_field(r["criterion"], "name", lang),
+                "unit": r["criterion"].unit or "",
+                "raw_value": r["raw_value"],
+                "normalized_score": r["normalized_score"],
+                "weighted_score": r["weighted_score"],
+                "above_reference": r["above_reference"],
+            }
+            for r in rows
         ]
-        results.sort(key=lambda r: r.criterion.display_order)
-        return ParameterScoreSerializer(results, many=True).data
 
     def get_methodology_version(self, obj: ACModel) -> str | None:
-        run_id = self._get_latest_run_id(obj)
-        if run_id is None:
-            return None
-        for r in obj.calculation_results.all():
-            if r.run_id == run_id:
-                return r.run.methodology.version
-        return None
+        methodology = self._get_methodology_for_detail(obj)
+        return methodology.version if methodology else None
+
+    def get_index_max(self, obj: ACModel) -> float:
+        return float(max_possible_total_index(self._get_methodology_for_detail(obj)))
 
 
 class CriterionSerializer(serializers.ModelSerializer):

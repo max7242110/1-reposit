@@ -1,0 +1,58 @@
+from __future__ import annotations
+
+from rest_framework import generics
+
+from methodology.models import MethodologyVersion
+from scoring.engine import max_possible_total_index
+
+from ..models import ACModel
+from ..serializers import ACModelDetailSerializer, ACModelListSerializer
+from .base import LangMixin, parse_float_param
+
+
+class ACModelListView(LangMixin, generics.ListAPIView):
+    serializer_class = ACModelListSerializer
+
+    def get_serializer_context(self):
+        ctx = super().get_serializer_context()
+        active = MethodologyVersion.objects.filter(is_active=True).first()
+        ctx["index_max"] = max_possible_total_index(active)
+        return ctx
+
+    def get_queryset(self):
+        qs = ACModel.objects.select_related("brand").prefetch_related("regions").filter(
+            publish_status=ACModel.PublishStatus.PUBLISHED,
+        ).order_by("-total_index")
+
+        brand = self.request.query_params.get("brand")
+        if brand:
+            qs = qs.filter(brand__name__icontains=brand)
+
+        region = self.request.query_params.get("region")
+        if region:
+            qs = qs.filter(regions__region_code=region)
+
+        capacity_min = parse_float_param(
+            self.request.query_params.get("capacity_min"), "capacity_min",
+        )
+        capacity_max = parse_float_param(
+            self.request.query_params.get("capacity_max"), "capacity_max",
+        )
+        if capacity_min is not None:
+            qs = qs.filter(nominal_capacity__gte=capacity_min)
+        if capacity_max is not None:
+            qs = qs.filter(nominal_capacity__lte=capacity_max)
+
+        return qs
+
+
+class ACModelDetailView(LangMixin, generics.RetrieveAPIView):
+    serializer_class = ACModelDetailSerializer
+
+    def get_queryset(self):
+        return ACModel.objects.select_related("brand").prefetch_related(
+            "regions",
+            "raw_values__criterion",
+            "calculation_results__run__methodology",
+            "calculation_results__criterion",
+        )

@@ -6,7 +6,13 @@ from brands.models import Brand, BrandOriginClass
 from catalog.models import ACModel, EquipmentType, ModelRawValue
 from methodology.models import Criterion, MethodologyVersion
 from catalog.sync_brand_age import sync_brand_age_for_model
-from scoring.engine import recalculate_all, update_model_total_index, validate_weights
+from scoring.engine import (
+    max_possible_total_index,
+    recalculate_all,
+    refresh_all_ac_model_total_indices,
+    update_model_total_index,
+    validate_weights,
+)
 from scoring.models import CalculationResult, CalculationRun
 
 
@@ -31,6 +37,34 @@ def ac_model(brand, eq_type):
         brand=brand, inner_unit="Model-X", equipment_type=eq_type,
         nominal_capacity=2.5,
     )
+
+
+@pytest.mark.django_db
+class TestMaxPossibleTotalIndex:
+    def test_sums_weights_of_scorable_criteria(self, methodology):
+        Criterion.objects.create(
+            methodology=methodology, code="a", name_ru="A",
+            value_type="binary", scoring_type="binary", weight=60, display_order=1,
+        )
+        Criterion.objects.create(
+            methodology=methodology, code="b", name_ru="B",
+            value_type="binary", scoring_type="binary", weight=40, display_order=2,
+        )
+        assert max_possible_total_index(methodology) == pytest.approx(100.0)
+
+    def test_skips_criteria_without_scorer(self, methodology):
+        Criterion.objects.create(
+            methodology=methodology, code="ok", name_ru="OK",
+            value_type="binary", scoring_type="binary", weight=50, display_order=1,
+        )
+        Criterion.objects.create(
+            methodology=methodology, code="bad", name_ru="Bad",
+            value_type="string", scoring_type="unknown_type_xyz", weight=50, display_order=2,
+        )
+        assert max_possible_total_index(methodology) == pytest.approx(50.0)
+
+    def test_none_methodology_defaults_to_hundred(self):
+        assert max_possible_total_index(None) == 100.0
 
 
 @pytest.mark.django_db
@@ -219,3 +253,21 @@ def test_update_model_total_index_without_calculation_run(methodology, ac_model)
     ac_model.refresh_from_db()
     assert ac_model.total_index == pytest.approx(75.0, abs=0.02)
     assert CalculationRun.objects.count() == runs_before
+
+
+@pytest.mark.django_db
+def test_refresh_all_ac_model_total_indices(methodology, ac_model):
+    c = Criterion.objects.create(
+        methodology=methodology,
+        code="x",
+        name_ru="X",
+        value_type="binary",
+        scoring_type="binary",
+        weight=100,
+        display_order=1,
+    )
+    ModelRawValue.objects.create(model=ac_model, criterion=c, raw_value="да")
+    ACModel.objects.filter(pk=ac_model.pk).update(total_index=0)
+    assert refresh_all_ac_model_total_indices() == 1
+    ac_model.refresh_from_db()
+    assert ac_model.total_index == pytest.approx(100.0, abs=0.02)

@@ -36,6 +36,8 @@ export interface ACModelSummary {
   series: string;
   nominal_capacity: number | null;
   total_index: number;
+  /** Верхняя граница индекса (сумма весов по активной методике). */
+  index_max: number;
   publish_status: string;
   region_availability: RegionAvailability[];
 }
@@ -48,6 +50,8 @@ export interface ACModelDetail {
   outer_unit: string;
   nominal_capacity: number | null;
   total_index: number;
+  /** Верхняя граница индекса (по методике последнего расчёта или активной). */
+  index_max: number;
   publish_status: string;
   region_availability: RegionAvailability[];
   youtube_url: string;

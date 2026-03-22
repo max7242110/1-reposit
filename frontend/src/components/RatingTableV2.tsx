@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ACModelSummary } from "@/lib/types";
-import { getMedalColor } from "@/lib/utils";
+import { formatIndexMax, getMedalColor } from "@/lib/utils";
 import RegionBadges from "./RegionBadges";
 
 interface Props {
@@ -20,7 +20,7 @@ export default function RatingTableV2({ models }: Props) {
             <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Бренд</th>
             <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 hidden sm:table-cell">Модель</th>
             <th scope="col" className="px-4 py-3 text-center text-sm font-semibold text-gray-600 dark:text-gray-300 hidden md:table-cell w-20">Регион</th>
-            <th scope="col" className="px-4 py-3 text-right text-sm font-semibold text-gray-600 dark:text-gray-300 w-28">Индекс</th>
+            <th scope="col" className="px-4 py-3 text-right text-sm font-semibold text-gray-600 dark:text-gray-300 min-w-[7.5rem]">Индекс</th>
           </tr>
         </thead>
         <tbody>
@@ -50,8 +50,10 @@ export default function RatingTableV2({ models }: Props) {
                 <RegionBadges regions={m.region_availability} />
               </td>
               <td className="px-4 py-4 text-right">
-                <span className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 font-semibold text-sm">
-                  {m.total_index.toFixed(1)}
+                <span className="inline-flex items-center justify-center gap-1 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 font-semibold text-sm tabular-nums whitespace-nowrap">
+                  <span>{m.total_index.toFixed(1)}</span>
+                  <span className="font-normal text-blue-600/80 dark:text-blue-400/80">/</span>
+                  <span>{formatIndexMax(m.index_max ?? 100)}</span>
                 </span>
               </td>
             </tr>
