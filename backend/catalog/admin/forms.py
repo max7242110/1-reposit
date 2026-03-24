@@ -54,7 +54,20 @@ class RawValueFormSet(BaseInlineFormSet):
                     "Автоматически из поля «Год начала продаж в РФ» в "
                     f'<a href="{url}" target="_blank" rel="noopener">справочнике брендов</a>.'
                 )
+                form.fields["compressor_model"].widget.attrs["readonly"] = "readonly"
+                form.fields["compressor_model"].widget.attrs["style"] = (
+                    "width:220px;background:#f4f4f4;cursor:not-allowed;"
+                )
                 continue
+
+            if criterion.code != "compressor_power":
+                form.fields["compressor_model"].widget.attrs["readonly"] = "readonly"
+                form.fields["compressor_model"].widget.attrs["style"] = (
+                    "width:220px;background:#f4f4f4;cursor:not-allowed;"
+                )
+                form.fields["compressor_model"].help_text = "Заполняется только для критерия «Мощность компрессора»."
+            else:
+                form.fields["compressor_model"].help_text = "Например: Panasonic R32 Inverter"
 
             options = build_options(criterion)
             hint = build_hint(criterion)
@@ -67,7 +80,7 @@ class RawValueFormSet(BaseInlineFormSet):
                 form.fields["raw_value"].help_text = hint
 
 
-_CAPACITY_OPTIONS = [format_number(round(2.0 + i * 0.05, 2)) for i in range(41)]
+_CAPACITY_OPTIONS = [str(v) for v in range(2000, 4100, 100)]
 
 
 class ACModelForm(forms.ModelForm):
@@ -80,3 +93,18 @@ class ACModelForm(forms.ModelForm):
                 attrs={"style": "width:200px;"},
             ),
         }
+
+
+class ACModelImportForm(forms.Form):
+    file = forms.FileField(
+        label="Файл импорта",
+        help_text="Поддерживаются форматы .csv, .xls, .xlsx",
+    )
+    publish = forms.BooleanField(
+        required=False,
+        label="Сразу публиковать импортированные модели",
+    )
+    confirm_update_existing = forms.BooleanField(
+        required=False,
+        label="Если модель уже есть в базе — обновить её критерии (не создавать дубликат)",
+    )

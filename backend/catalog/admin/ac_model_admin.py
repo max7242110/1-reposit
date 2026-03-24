@@ -2,22 +2,30 @@
 
 from __future__ import annotations
 
+import tempfile
+from pathlib import Path
+
 from django.contrib import admin, messages
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect
+from django.template.response import TemplateResponse
+from django.urls import path, reverse
 
 from methodology.models import MethodologyVersion
 from scoring.engine import update_model_total_index
 
 from catalog.models import ACModel, ModelRawValue
-from catalog.services import ensure_all_criteria_rows
+from catalog.services import ensure_all_criteria_rows, generate_import_template_xlsx
+from catalog.services.model_import import find_existing_models_in_file, import_models_from_file
 from catalog.sync_brand_age import sync_brand_age_for_model
 
-from .forms import ACModelForm
+from .forms import ACModelForm, ACModelImportForm
 from .inlines import ModelRawValueInline, ModelRegionInline
 
 
 @admin.register(ACModel)
 class ACModelAdmin(admin.ModelAdmin):
+    change_list_template = "admin/catalog/acmodel/change_list.html"
     form = ACModelForm
     list_display = (
         "brand",
@@ -60,6 +68,115 @@ class ACModelAdmin(admin.ModelAdmin):
             {"classes": ("collapse",), "fields": ("created_at", "updated_at")},
         ),
     )
+
+    def get_urls(self):
+        info = self.opts.app_label, self.opts.model_name
+        return [
+            path(
+                "import-template-xlsx/",
+                self.admin_site.admin_view(self.download_import_template_xlsx),
+                name="%s_%s_import_template_xlsx" % info,
+            ),
+            path(
+                "import-models/",
+                self.admin_site.admin_view(self.import_models_view),
+                name="%s_%s_import_models" % info,
+            ),
+            *super().get_urls(),
+        ]
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        methodology = MethodologyVersion.objects.filter(is_active=True).first()
+        extra_context["import_template_available"] = methodology is not None
+        extra_context["import_models_url"] = reverse(
+            "admin:%s_%s_import_models" % (self.opts.app_label, self.opts.model_name),
+        )
+        if methodology:
+            extra_context["import_template_url"] = reverse(
+                "admin:%s_%s_import_template_xlsx" % (self.opts.app_label, self.opts.model_name),
+            )
+        return super().changelist_view(request, extra_context=extra_context)
+
+    def download_import_template_xlsx(self, request: HttpRequest) -> HttpResponse:
+        try:
+            content, filename = generate_import_template_xlsx()
+        except ValueError as e:
+            messages.error(request, str(e))
+            return redirect(
+                "admin:%s_%s_changelist" % (self.opts.app_label, self.opts.model_name),
+            )
+        response = HttpResponse(
+            content,
+            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        return response
+
+    def import_models_view(self, request: HttpRequest):
+        opts = self.model._meta
+        if request.method == "POST":
+            form = ACModelImportForm(request.POST, request.FILES)
+            if form.is_valid():
+                upload = form.cleaned_data["file"]
+                publish = bool(form.cleaned_data["publish"])
+                confirm_update_existing = bool(form.cleaned_data["confirm_update_existing"])
+                suffix = Path(upload.name).suffix.lower()
+                if suffix not in {".csv", ".xls", ".xlsx"}:
+                    form.add_error("file", "Поддерживаются только .csv, .xls, .xlsx")
+                else:
+                    with tempfile.NamedTemporaryFile(suffix=suffix, delete=True) as tmp:
+                        for chunk in upload.chunks():
+                            tmp.write(chunk)
+                        tmp.flush()
+                        existing = find_existing_models_in_file(Path(tmp.name))
+                        if existing and not confirm_update_existing:
+                            preview = ", ".join(existing[:5])
+                            more = f" и ещё {len(existing) - 5}" if len(existing) > 5 else ""
+                            form.add_error(
+                                None,
+                                "В файле найдены уже существующие модели. "
+                                "Подтвердите обновление критериев существующих моделей "
+                                "(новые одноимённые не будут созданы). "
+                                f"Примеры: {preview}{more}.",
+                            )
+                            context = {
+                                **self.admin_site.each_context(request),
+                                "opts": opts,
+                                "form": form,
+                                "title": "Импорт моделей",
+                                "subtitle": "Загрузка CSV/XLS/XLSX",
+                            }
+                            return TemplateResponse(
+                                request,
+                                "admin/catalog/acmodel/import_models.html",
+                                context,
+                            )
+                        try:
+                            imported, errors = import_models_from_file(Path(tmp.name), publish=publish)
+                        except ValueError as e:
+                            messages.error(request, str(e))
+                        else:
+                            for err in errors:
+                                messages.warning(request, err)
+                            messages.success(
+                                request,
+                                f"Импорт завершён: {imported} моделей, предупреждений: {len(errors)}.",
+                            )
+                            return redirect(
+                                "admin:%s_%s_changelist" % (self.opts.app_label, self.opts.model_name),
+                            )
+        else:
+            form = ACModelImportForm()
+
+        context = {
+            **self.admin_site.each_context(request),
+            "opts": opts,
+            "form": form,
+            "title": "Импорт моделей",
+            "subtitle": "Загрузка CSV/XLS/XLSX",
+        }
+        return TemplateResponse(request, "admin/catalog/acmodel/import_models.html", context)
 
     def change_view(self, request: HttpRequest, object_id, form_url="", extra_context=None):
         ac_model = self.get_object(request, object_id)

@@ -11,6 +11,8 @@ export interface RegionAvailability {
 export interface ParameterScore {
   criterion_code: string;
   criterion_name: string;
+  criterion_note?: string;
+  compressor_model?: string;
   unit: string;
   raw_value: string;
   normalized_score: number;

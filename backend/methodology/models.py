@@ -153,6 +153,8 @@ class Criterion(TimestampMixin):
         max_length=10, choices=RegionScope.choices, default=RegionScope.GLOBAL,
         verbose_name="Регион",
     )
+    note = models.TextField(blank=True, default="", verbose_name="Примечание")
+    show_note_on_site = models.BooleanField(default=False, verbose_name="Отображать на сайте")
     is_public = models.BooleanField(default=True, verbose_name="Публичный")
     display_order = models.PositiveIntegerField(default=0, verbose_name="Порядок отображения")
     is_active = models.BooleanField(default=True, verbose_name="Активен")

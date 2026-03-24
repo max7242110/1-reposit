@@ -32,8 +32,7 @@ createdb ac_rating  # или через psql: CREATE DATABASE ac_rating;
 export PATH="$HOME/homebrew/bin:$PATH"
 brew services start postgresql@16
 
-# Чтобы Django использовал PostgreSQL, не задавайте `DJANGO_USE_SQLITE`
-# (в `config/settings/development.py` SQLite включается только при DJANGO_USE_SQLITE=1).
+# Django в development использует PostgreSQL по умолчанию (без SQLite fallback).
 
 # Переменные окружения (опционально)
 export POSTGRES_DB=ac_rating
@@ -45,8 +44,8 @@ export POSTGRES_PORT=5432
 # Миграции
 python manage.py migrate
 
-# Импорт данных из xlsx
-python manage.py import_xlsx
+# Импорт данных каталога (CSV/XLS/XLSX)
+python manage.py import_v2 /path/to/file.xlsx
 
 # Запуск сервера разработки
 python manage.py runserver
@@ -82,6 +81,14 @@ npm run dev
 1. Откройте `http://localhost:8000/api/conditioners/` — должен вернуться JSON со списком кондиционеров
 2. Откройте `http://localhost:3000` — должна отображаться таблица рейтинга
 3. Кликните на любую строку — откроется детальная страница с параметрами и видео
+
+## Единицы мощности (важно)
+
+- `nominal_capacity` хранится и импортируется в **Вт**.
+- Критерий `compressor_power` хранится и импортируется в **Вт**.
+- В админке для этих полей выпадающие подсказки также в **Вт**.
+- Для старых файлов с кВт включена совместимость: значения `< 100` автоматически
+  интерпретируются как кВт и переводятся в Вт.
 
 ## Полезные команды
 

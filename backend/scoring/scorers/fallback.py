@@ -1,8 +1,11 @@
 """Fallback scorer using brand origin class for compressor power (TZ 3.0 criterion 3).
 
 When raw_value is provided, it is treated as compressor refrigeration capacity (W)
-and compared to the model's nominal_capacity.  The ratio (compressor / catalog * 100)
+and compared to model.nominal_capacity (also W). The ratio (compressor / catalog * 100)
 is scored via interval scale.
+
+For backward compatibility with old datasets, small values are interpreted as kW:
+if compressor value < 100, it is converted from kW to W by *1000.
 
 When raw_value is missing, a fallback coefficient is applied:
   - Japanese brands: 100 * 0.9 = 90
@@ -53,8 +56,16 @@ class FallbackScorer(BaseScorer):
         if not nominal_capacity:
             return ScoreResult(normalized_score=0)
 
-        catalog_w = nominal_capacity * 1000
-        ratio = compressor_w / catalog_w * 100
+        nominal_w = float(nominal_capacity)
+        # Legacy support: historical nominal_capacity values may still be in kW.
+        if 0 < nominal_w < 100:
+            nominal_w = nominal_w * 1000.0
+
+        # Legacy support: compressor power in old datasets can be in kW.
+        if 0 < compressor_w < 100:
+            compressor_w = compressor_w * 1000.0
+
+        ratio = compressor_w / nominal_w * 100
 
         intervals = (
             criterion.formula_json

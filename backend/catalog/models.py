@@ -34,7 +34,7 @@ class ACModel(TimestampMixin):
     inner_unit = models.CharField(max_length=255, verbose_name="Модель внутреннего блока")
     outer_unit = models.CharField(max_length=255, blank=True, default="", verbose_name="Модель наружного блока")
     nominal_capacity = models.FloatField(
-        null=True, blank=True, verbose_name="Номинальная холодопроизводительность (кВт)",
+        null=True, blank=True, verbose_name="Номинальная холодопроизводительность (Вт)",
     )
     equipment_type = models.ForeignKey(
         EquipmentType, on_delete=models.SET_NULL, null=True, blank=True,
@@ -119,6 +119,13 @@ class ModelRawValue(TimestampMixin):
         verbose_name="Критерий",
     )
     raw_value = models.CharField(max_length=500, blank=True, default="", verbose_name="Значение")
+    compressor_model = models.CharField(
+        max_length=255,
+        blank=True,
+        default="",
+        verbose_name="Модель компрессора",
+        help_text="Используется для критерия «Мощность компрессора».",
+    )
     numeric_value = models.FloatField(null=True, blank=True, verbose_name="Числовое значение")
 
     source = models.CharField(max_length=255, blank=True, default="", verbose_name="Источник")

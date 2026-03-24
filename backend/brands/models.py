@@ -8,13 +8,8 @@ from core.models import TimestampMixin
 class BrandOriginClass(TimestampMixin):
     """Справочник типов происхождения бренда для fallback-логики."""
 
-    class OriginType(models.TextChoices):
-        JAPANESE = "japanese", "Японский"
-        CHINESE_FACTORY = "chinese_factory", "Китайский заводской"
-        CHINESE_OEM = "chinese_oem", "Китайский ОЕМ"
-
     origin_type = models.CharField(
-        max_length=30, choices=OriginType.choices, unique=True,
+        max_length=255, unique=True,
         verbose_name="Тип происхождения",
     )
     fallback_score = models.FloatField(
@@ -27,7 +22,7 @@ class BrandOriginClass(TimestampMixin):
         verbose_name_plural = "Типы происхождения брендов"
 
     def __str__(self) -> str:
-        return f"{self.get_origin_type_display()} ({self.fallback_score})"
+        return f"{self.origin_type} ({self.fallback_score})"
 
 
 class Brand(TimestampMixin):

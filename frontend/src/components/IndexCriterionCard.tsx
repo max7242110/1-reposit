@@ -15,6 +15,8 @@ interface Props {
 export default function IndexCriterionCard({ criterion }: Props) {
   const {
     criterion_name,
+    criterion_note,
+    compressor_model,
     raw_value,
     unit,
     normalized_score,
@@ -27,9 +29,19 @@ export default function IndexCriterionCard({ criterion }: Props) {
   return (
     <div className="py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
       <div className="flex items-start justify-between gap-2 mb-2">
-        <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug">
-          {criterion_name}
-        </h3>
+        <div>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug">
+            {criterion_name}
+          </h3>
+          {compressor_model ? (
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Модель компрессора: {compressor_model}
+            </p>
+          ) : null}
+          {criterion_note ? (
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{criterion_note}</p>
+          ) : null}
+        </div>
         {above_reference && (
           <span className="shrink-0 text-xs font-medium text-emerald-600 dark:text-emerald-400">
             выше эталона

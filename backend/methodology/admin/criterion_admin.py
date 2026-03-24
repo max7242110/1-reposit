@@ -2,16 +2,49 @@ from __future__ import annotations
 
 from django.contrib import admin, messages
 
-from ..models import Criterion
+from ..models import Criterion, MethodologyVersion
+
+
+class MethodologyMultiFilter(admin.SimpleListFilter):
+    title = "Методики"
+    parameter_name = "methodology__id__in"
+    template = "admin/methodology/filters/methodology_multiselect_filter.html"
+
+    def lookups(self, request, model_admin):
+        qs = MethodologyVersion.objects.order_by("-created_at").only("id", "name", "version")
+        return [(str(m.pk), f"{m.name} (v{m.version})") for m in qs]
+
+    def _selected_ids(self) -> set[str]:
+        raw = self.value() or ""
+        return {x.strip() for x in raw.split(",") if x.strip()}
+
+    def queryset(self, request, queryset):
+        selected = self._selected_ids()
+        if not selected:
+            return queryset
+        valid_int_ids = [int(x) for x in selected if x.isdigit()]
+        if not valid_int_ids:
+            return queryset.none()
+        return queryset.filter(methodology_id__in=valid_int_ids)
+
+    def choices(self, changelist):
+        selected = self._selected_ids()
+        for lookup, title in self.lookup_choices:
+            lookup_s = str(lookup)
+            yield {
+                "lookup": lookup_s,
+                "title": title,
+                "selected": lookup_s in selected,
+            }
 
 
 @admin.register(Criterion)
 class CriterionAdmin(admin.ModelAdmin):
     list_display = (
         "code", "name_ru", "methodology", "value_type", "scoring_type", "weight",
-        "is_inverted", "is_lab", "region_scope", "is_active",
+        "is_inverted", "is_lab", "show_note_on_site", "region_scope", "is_active",
     )
-    list_filter = ("methodology", "value_type", "scoring_type", "is_lab", "region_scope", "is_active")
+    list_filter = (MethodologyMultiFilter, "value_type", "scoring_type", "is_lab", "region_scope", "is_active")
     search_fields = ("code", "name_ru", "name_en")
     list_select_related = ("methodology",)
     list_per_page = 50
@@ -22,7 +55,10 @@ class CriterionAdmin(admin.ModelAdmin):
         }),
         ("Описание", {
             "classes": ("collapse",),
-            "fields": ("description_ru", "description_en", "description_de", "description_pt"),
+            "fields": (
+                "description_ru", "description_en", "description_de", "description_pt",
+                "note", "show_note_on_site",
+            ),
         }),
         ("Скоринг", {
             "fields": (

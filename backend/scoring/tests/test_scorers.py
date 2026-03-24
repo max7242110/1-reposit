@@ -250,8 +250,8 @@ class TestFallbackScorer:
                 {"from": 100, "to": 999, "score": 100},
             ],
         )
-        # compressor 2500W vs 2.5 kW model → ratio = 2500/2500*100 = 100%
-        r = FallbackScorer().calculate(c, "2500", nominal_capacity=2.5)
+        # compressor 2500W vs 2500W model → ratio = 100%
+        r = FallbackScorer().calculate(c, "2500", nominal_capacity=2500)
         assert r.normalized_score == 100
 
     def test_underpowered_compressor(self, methodology):
@@ -265,9 +265,24 @@ class TestFallbackScorer:
                 {"from": 100, "to": 999, "score": 100},
             ],
         )
-        # compressor 2000W vs 2.5 kW → ratio = 80%
-        r = FallbackScorer().calculate(c, "2000", nominal_capacity=2.5)
+        # compressor 2000W vs 2500W model → ratio = 80%
+        r = FallbackScorer().calculate(c, "2000", nominal_capacity=2500)
         assert r.normalized_score == 50
+
+    def test_legacy_kw_input_is_supported(self, methodology):
+        c = _make_criterion(
+            methodology, scoring_type="formula", value_type="fallback",
+            formula_json=[
+                {"from": 0, "to": 80, "score": 15},
+                {"from": 80, "to": 90, "score": 50},
+                {"from": 90, "to": 95, "score": 70},
+                {"from": 95, "to": 100, "score": 90},
+                {"from": 100, "to": 999, "score": 100},
+            ],
+        )
+        # Legacy values in kW: 2.5kW -> 2500W
+        r = FallbackScorer().calculate(c, "2.5", nominal_capacity=2.5)
+        assert r.normalized_score == 100
 
     def test_without_value_japanese(self, methodology):
         c = _make_criterion(methodology, scoring_type="formula", value_type="fallback")

@@ -18,7 +18,7 @@ class ModelRawValueInline(admin.TabularInline):
     model = ModelRawValue
     formset = RawValueFormSet
     extra = 0
-    fields = ("criterion", "raw_value", "verification_status", "source")
+    fields = ("criterion", "raw_value", "compressor_model", "verification_status", "source")
     readonly_fields = ("criterion",)
     ordering = ("criterion__display_order",)
     can_delete = False

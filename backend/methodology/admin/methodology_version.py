@@ -8,6 +8,7 @@ from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
 
+from catalog.services import migrate_model_raw_values_between_methodologies
 from .inlines import CriterionInline
 from ..forms import DuplicateMethodologyVersionForm
 from ..models import Criterion, MethodologyVersion
@@ -125,6 +126,8 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
         return super().changeform_view(request, object_id, form_url, extra_context)
 
     def save_model(self, request, obj, form, change):
+        previous_active = MethodologyVersion.objects.filter(is_active=True).exclude(pk=obj.pk).first()
+        request._previous_active_methodology_pk = previous_active.pk if previous_active is not None else None
         if not change:
             active_before = MethodologyVersion.objects.filter(is_active=True).first()
             request._methodology_backfill_template_pk = (
@@ -141,6 +144,15 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
     def save_related(self, request, form, formsets, change):
         super().save_related(request, form, formsets, change)
         if form.instance.pk and form.instance.is_active:
+            moved = migrate_model_raw_values_between_methodologies(
+                source_methodology_id=getattr(request, "_previous_active_methodology_pk", None),
+                target_methodology_id=form.instance.pk,
+            )
+            if moved:
+                messages.info(
+                    request,
+                    _("Скопированы значения критериев в новую методику: %(n)s.") % {"n": moved},
+                )
             n = refresh_all_ac_model_total_indices()
             if n:
                 messages.success(

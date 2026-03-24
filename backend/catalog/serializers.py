@@ -120,6 +120,8 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
             {
                 "criterion_code": r["criterion"].code,
                 "criterion_name": get_localized_field(r["criterion"], "name", lang),
+                "criterion_note": r["criterion"].note if r["criterion"].show_note_on_site else "",
+                "compressor_model": (r.get("compressor_model") or "").strip(),
                 "unit": r["criterion"].unit or "",
                 "raw_value": r["raw_value"],
                 "normalized_score": r["normalized_score"],

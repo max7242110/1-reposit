@@ -114,6 +114,7 @@ def compute_scores_for_model(
         rows.append({
             "criterion": criterion,
             "raw_value": str(raw),
+            "compressor_model": rv.compressor_model if rv else "",
             "normalized_score": round(result.normalized_score, 2),
             "weighted_score": round(weighted, 4),
             "above_reference": result.above_reference,

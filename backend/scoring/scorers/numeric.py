@@ -13,11 +13,15 @@ def _resolve_median(criterion: Criterion, nominal_capacity: float | None) -> flo
     """Pick capacity-specific median when available, else fall back to scalar."""
     by_cap = criterion.median_by_capacity
     if by_cap and isinstance(by_cap, dict) and nominal_capacity is not None:
+        cap_for_map = float(nominal_capacity)
+        # Median map keys in criteria are in kW historically.
+        if cap_for_map > 100:
+            cap_for_map = cap_for_map / 1000.0
         best_key: str | None = None
         best_dist = float("inf")
         for key in by_cap:
             try:
-                dist = abs(float(key) - nominal_capacity)
+                dist = abs(float(key) - cap_for_map)
             except (ValueError, TypeError):
                 continue
             if dist < best_dist:
