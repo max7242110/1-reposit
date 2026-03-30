@@ -16,6 +16,7 @@ export default function IndexCriterionCard({ criterion }: Props) {
   const {
     criterion_name,
     criterion_note,
+    criterion_description,
     compressor_model,
     raw_value,
     unit,
@@ -30,8 +31,16 @@ export default function IndexCriterionCard({ criterion }: Props) {
     <div className="py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
       <div className="flex items-start justify-between gap-2 mb-2">
         <div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug flex items-center gap-1.5">
             {criterion_name}
+            {criterion_description && (
+              <span
+                title={criterion_description}
+                className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-gray-400 dark:border-gray-500 text-[10px] font-bold text-gray-400 dark:text-gray-500 cursor-help shrink-0"
+              >
+                ?
+              </span>
+            )}
           </h3>
           {compressor_model ? (
             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
@@ -78,8 +87,7 @@ export default function IndexCriterionCard({ criterion }: Props) {
             style={{ width: `${pct}%` }}
           />
         </div>
-        <div className="flex items-center justify-between text-sm pt-0.5">
-          <span className="text-gray-500 dark:text-gray-400">Балл по методике (0–100)</span>
+        <div className="flex items-center justify-end text-sm pt-0.5">
           <span className="font-semibold text-gray-900 dark:text-gray-100 tabular-nums">
             {normalized_score.toFixed(1)}
             <span className="font-normal text-gray-400 dark:text-gray-500"> / {SCALE_MAX}</span>

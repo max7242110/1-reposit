@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from rest_framework import generics
 
-from methodology.models import MethodologyVersion
+from methodology.models import Criterion, MethodologyVersion
 from scoring.engine import max_possible_total_index
 
 from ..models import ACModel
@@ -17,10 +17,17 @@ class ACModelListView(LangMixin, generics.ListAPIView):
         ctx = super().get_serializer_context()
         active = MethodologyVersion.objects.filter(is_active=True).first()
         ctx["index_max"] = max_possible_total_index(active)
+        ctx["methodology"] = active
+        ctx["criteria"] = list(
+            Criterion.objects.filter(methodology=active, is_active=True).order_by("display_order", "code")
+        ) if active else []
         return ctx
 
     def get_queryset(self):
-        qs = ACModel.objects.select_related("brand").prefetch_related("regions").filter(
+        qs = ACModel.objects.select_related("brand", "brand__origin_class").prefetch_related(
+            "regions",
+            "raw_values__criterion",
+        ).filter(
             publish_status=ACModel.PublishStatus.PUBLISHED,
         ).order_by("-total_index")
 
@@ -43,6 +50,17 @@ class ACModelListView(LangMixin, generics.ListAPIView):
         if capacity_max is not None:
             qs = qs.filter(nominal_capacity__lte=capacity_max)
 
+        price_min = parse_float_param(
+            self.request.query_params.get("price_min"), "price_min",
+        )
+        price_max = parse_float_param(
+            self.request.query_params.get("price_max"), "price_max",
+        )
+        if price_min is not None:
+            qs = qs.filter(price__gte=price_min)
+        if price_max is not None:
+            qs = qs.filter(price__lte=price_max)
+
         return qs
 
 
@@ -55,4 +73,6 @@ class ACModelDetailView(LangMixin, generics.RetrieveAPIView):
             "raw_values__criterion",
             "calculation_results__run__methodology",
             "calculation_results__criterion",
+            "photos",
+            "suppliers",
         )

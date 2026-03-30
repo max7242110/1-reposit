@@ -6,9 +6,10 @@ from brands.models import Brand
 from core.i18n import DEFAULT_LANGUAGE, get_localized_field
 from methodology.models import Criterion, MethodologyVersion
 from scoring.engine import compute_scores_for_model, max_possible_total_index
+from scoring.engine.computation import _build_model_context, _get_scorer
 from scoring.models import CalculationResult
 
-from .models import ACModel, ModelRawValue, ModelRegion
+from .models import ACModel, ACModelPhoto, ACModelSupplier, ModelRawValue, ModelRegion
 
 
 class BrandSerializer(serializers.ModelSerializer):
@@ -57,10 +58,37 @@ class RawValueSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
+class ACModelPhotoSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ACModelPhoto
+        fields = ["id", "image_url", "order"]
+        read_only_fields = fields
+
+    def get_image_url(self, obj: ACModelPhoto) -> str:
+        request = self.context.get("request")
+        if obj.image and request:
+            return request.build_absolute_uri(obj.image.url)
+        if obj.image:
+            return obj.image.url
+        return ""
+
+
+class ACModelSupplierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ACModelSupplier
+        fields = ["id", "name", "url", "order"]
+        read_only_fields = fields
+
+
 class ACModelListSerializer(serializers.ModelSerializer):
     brand = serializers.CharField(source="brand.name", read_only=True)
     region_availability = RegionSerializer(source="regions", many=True, read_only=True)
     index_max = serializers.SerializerMethodField()
+    noise_score = serializers.SerializerMethodField()
+    has_noise_measurement = serializers.SerializerMethodField()
+    scores = serializers.SerializerMethodField()
 
     class Meta:
         model = ACModel
@@ -68,11 +96,45 @@ class ACModelListSerializer(serializers.ModelSerializer):
             "id", "brand", "inner_unit", "series",
             "nominal_capacity", "total_index", "index_max",
             "publish_status", "region_availability",
+            "price", "noise_score", "has_noise_measurement", "scores",
         ]
         read_only_fields = fields
 
     def get_index_max(self, _obj: ACModel) -> float:
         return float(self.context.get("index_max", 100.0))
+
+    def _get_scores_cache(self, obj: ACModel) -> dict:
+        if not hasattr(obj, "_scores_cache"):
+            criteria = self.context.get("criteria", [])
+            if not criteria:
+                obj._scores_cache = {}
+                return obj._scores_cache
+
+            raw_values_map = {rv.criterion_id: rv for rv in obj.raw_values.all()}
+            model_ctx = _build_model_context(obj)
+            scores = {}
+            for criterion in criteria:
+                rv = raw_values_map.get(criterion.pk)
+                raw = rv.raw_value if rv else ""
+                scorer = _get_scorer(criterion)
+                if scorer:
+                    ctx = {**model_ctx}
+                    if rv:
+                        ctx["lab_status"] = rv.lab_status
+                    result = scorer.calculate(criterion, raw, **ctx)
+                    scores[criterion.code] = round(result.normalized_score, 2)
+            obj._scores_cache = scores
+        return obj._scores_cache
+
+    def get_scores(self, obj: ACModel) -> dict:
+        return self._get_scores_cache(obj)
+
+    def get_noise_score(self, obj: ACModel) -> float | None:
+        return self._get_scores_cache(obj).get("noise")
+
+    def get_has_noise_measurement(self, obj: ACModel) -> bool:
+        score = self._get_scores_cache(obj).get("noise")
+        return score is not None and score > 0
 
 
 class ACModelDetailSerializer(serializers.ModelSerializer):
@@ -82,6 +144,8 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
     raw_values = RawValueSerializer(many=True, read_only=True)
     methodology_version = serializers.SerializerMethodField()
     index_max = serializers.SerializerMethodField()
+    photos = ACModelPhotoSerializer(many=True, read_only=True)
+    suppliers = ACModelSupplierSerializer(many=True, read_only=True)
 
     class Meta:
         model = ACModel
@@ -89,7 +153,9 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
             "id", "brand", "series", "inner_unit", "outer_unit",
             "nominal_capacity", "total_index", "index_max",
             "publish_status", "region_availability",
+            "price", "pros_text", "cons_text",
             "youtube_url", "rutube_url", "vk_url",
+            "photos", "suppliers",
             "parameter_scores", "raw_values",
             "methodology_version",
         ]
@@ -121,6 +187,7 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
                 "criterion_code": r["criterion"].code,
                 "criterion_name": get_localized_field(r["criterion"], "name", lang),
                 "criterion_note": r["criterion"].note if r["criterion"].show_note_on_site else "",
+                "criterion_description": get_localized_field(r["criterion"], "description", lang) or "",
                 "compressor_model": (r.get("compressor_model") or "").strip(),
                 "unit": r["criterion"].unit or "",
                 "raw_value": r["raw_value"],

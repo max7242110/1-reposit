@@ -24,10 +24,10 @@ export default function RatingFilters() {
     [router, searchParams],
   );
 
-  const handleBrandChange = useCallback(
-    (value: string) => {
+  const handleDebounced = useCallback(
+    (key: string, value: string) => {
       if (timerRef.current) clearTimeout(timerRef.current);
-      timerRef.current = setTimeout(() => updateParam("brand", value), DEBOUNCE_MS);
+      timerRef.current = setTimeout(() => updateParam(key, value), DEBOUNCE_MS);
     },
     [updateParam],
   );
@@ -40,22 +40,32 @@ export default function RatingFilters() {
         type="text"
         placeholder="Поиск по бренду..."
         defaultValue={searchParams.get("brand") || ""}
-        onChange={(e) => handleBrandChange(e.target.value)}
+        onChange={(e) => handleDebounced("brand", e.target.value)}
         aria-label="Поиск по бренду"
         className="px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
       />
-      <label className="sr-only" htmlFor="region-filter">Выберите регион</label>
-      <select
-        id="region-filter"
-        defaultValue={searchParams.get("region") || ""}
-        onChange={(e) => updateParam("region", e.target.value)}
-        aria-label="Фильтр по региону"
-        className="px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-      >
-        <option value="">Все регионы</option>
-        <option value="ru">Россия</option>
-        <option value="eu">Европа</option>
-      </select>
+      <label className="sr-only" htmlFor="price-min-filter">Цена от</label>
+      <input
+        id="price-min-filter"
+        type="number"
+        placeholder="Цена от (₽)"
+        defaultValue={searchParams.get("price_min") || ""}
+        onChange={(e) => handleDebounced("price_min", e.target.value)}
+        aria-label="Цена от"
+        min={0}
+        className="px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none w-36"
+      />
+      <label className="sr-only" htmlFor="price-max-filter">Цена до</label>
+      <input
+        id="price-max-filter"
+        type="number"
+        placeholder="Цена до (₽)"
+        defaultValue={searchParams.get("price_max") || ""}
+        onChange={(e) => handleDebounced("price_max", e.target.value)}
+        aria-label="Цена до"
+        min={0}
+        className="px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none w-36"
+      />
     </div>
   );
 }

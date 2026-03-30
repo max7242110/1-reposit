@@ -53,6 +53,13 @@ class ACModel(TimestampMixin):
     rutube_url = models.URLField(max_length=512, blank=True, default="")
     vk_url = models.URLField(max_length=512, blank=True, default="")
 
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True,
+        verbose_name="Рекомендованная цена (руб.)",
+    )
+    pros_text = models.TextField(blank=True, default="", verbose_name="Плюсы (AI)")
+    cons_text = models.TextField(blank=True, default="", verbose_name="Минусы (AI)")
+
     class Meta:
         ordering = ["-total_index"]
         verbose_name = "Модель кондиционера"
@@ -163,3 +170,38 @@ class ModelRawValue(TimestampMixin):
 
     def __str__(self) -> str:
         return f"{self.model} / {self.criterion.code}: {self.raw_value}"
+
+
+class ACModelPhoto(TimestampMixin):
+    model = models.ForeignKey(
+        ACModel, on_delete=models.CASCADE, related_name="photos",
+        verbose_name="Модель",
+    )
+    image = models.ImageField(upload_to="ac_photos/", verbose_name="Фото")
+    order = models.PositiveSmallIntegerField(default=0, verbose_name="Порядок")
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Фото модели"
+        verbose_name_plural = "Фото моделей"
+
+    def __str__(self) -> str:
+        return f"{self.model} — фото #{self.order}"
+
+
+class ACModelSupplier(TimestampMixin):
+    model = models.ForeignKey(
+        ACModel, on_delete=models.CASCADE, related_name="suppliers",
+        verbose_name="Модель",
+    )
+    name = models.CharField(max_length=200, verbose_name="Название поставщика")
+    url = models.URLField(verbose_name="Ссылка")
+    order = models.PositiveSmallIntegerField(default=0, verbose_name="Порядок")
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Поставщик (Где купить)"
+        verbose_name_plural = "Поставщики (Где купить)"
+
+    def __str__(self) -> str:
+        return f"{self.model} — {self.name}"

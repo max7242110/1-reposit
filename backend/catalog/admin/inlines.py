@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from django.contrib import admin
 
-from catalog.models import ModelRawValue, ModelRegion
+from catalog.models import ACModelPhoto, ACModelSupplier, ModelRawValue, ModelRegion
 
 from .forms import RawValueFormSet
 
@@ -28,3 +28,15 @@ class ModelRawValueInline(admin.TabularInline):
 
     def has_add_permission(self, request, obj=None):
         return False
+
+
+class ACModelPhotoInline(admin.TabularInline):
+    model = ACModelPhoto
+    extra = 1
+    fields = ("image", "order")
+
+
+class ACModelSupplierInline(admin.TabularInline):
+    model = ACModelSupplier
+    extra = 1
+    fields = ("name", "url", "order")

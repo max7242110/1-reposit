@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import tempfile
 from pathlib import Path
 
@@ -12,7 +13,7 @@ from django.template.response import TemplateResponse
 from django.urls import path, reverse
 
 from methodology.models import MethodologyVersion
-from scoring.engine import update_model_total_index
+from scoring.engine import compute_scores_for_model, update_model_total_index
 
 from catalog.models import ACModel, ModelRawValue
 from catalog.services import ensure_all_criteria_rows, generate_import_template_xlsx
@@ -20,7 +21,7 @@ from catalog.services.model_import import find_existing_models_in_file, import_m
 from catalog.sync_brand_age import sync_brand_age_for_model
 
 from .forms import ACModelForm, ACModelImportForm
-from .inlines import ModelRawValueInline, ModelRegionInline
+from .inlines import ACModelPhotoInline, ACModelSupplierInline, ModelRawValueInline, ModelRegionInline
 
 
 @admin.register(ACModel)
@@ -40,9 +41,9 @@ class ACModelAdmin(admin.ModelAdmin):
     search_fields = ("inner_unit", "outer_unit", "brand__name", "series")
     list_per_page = 30
     ordering = ("-total_index",)
-    inlines = [ModelRegionInline, ModelRawValueInline]
+    inlines = [ModelRegionInline, ACModelPhotoInline, ACModelSupplierInline, ModelRawValueInline]
     readonly_fields = ("total_index", "created_at", "updated_at")
-    actions = ["recalculate_selected"]
+    actions = ["recalculate_selected", "generate_pros_cons"]
 
     fieldsets = (
         (
@@ -58,7 +59,11 @@ class ACModelAdmin(admin.ModelAdmin):
                 ),
             },
         ),
-        ("Публикация", {"fields": ("publish_status", "total_index")}),
+        ("Публикация", {"fields": ("publish_status", "total_index", "price")}),
+        (
+            "Плюсы / Минусы (AI)",
+            {"classes": ("collapse",), "fields": ("pros_text", "cons_text")},
+        ),
         (
             "Видео",
             {"classes": ("collapse",), "fields": ("youtube_url", "rutube_url", "vk_url")},
@@ -196,6 +201,71 @@ class ACModelAdmin(admin.ModelAdmin):
             if update_model_total_index(obj):
                 n += 1
         messages.success(request, f"Индекс пересчитан для моделей: {n}.")
+
+    @admin.action(description="Сгенерировать плюсы/минусы через Claude AI")
+    def generate_pros_cons(self, request, queryset):
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            messages.error(request, "ANTHROPIC_API_KEY не задан в переменных окружения.")
+            return
+
+        try:
+            import anthropic
+        except ImportError:
+            messages.error(request, "Установите пакет anthropic: pip install anthropic")
+            return
+
+        methodology = MethodologyVersion.objects.filter(is_active=True).first()
+        if methodology is None:
+            messages.error(request, "Нет активной методики.")
+            return
+
+        client = anthropic.Anthropic(api_key=api_key)
+        success = 0
+
+        for obj in queryset.select_related("brand"):
+            try:
+                _total, rows = compute_scores_for_model(obj, methodology)
+                params_lines = [
+                    f"- {r['criterion'].name_ru}: {r['raw_value']} {r['criterion'].unit or ''} "
+                    f"(балл {r['normalized_score']:.0f}/100)"
+                    for r in rows if r["raw_value"]
+                ]
+                params_text = "\n".join(params_lines) if params_lines else "Данные по параметрам отсутствуют."
+
+                prompt = (
+                    f"Ты эксперт по бытовым кондиционерам. "
+                    f"Напиши краткие плюсы и минусы для кондиционера "
+                    f"{obj.brand.name} {obj.inner_unit} на основе его технических характеристик.\n\n"
+                    f"Характеристики:\n{params_text}\n\n"
+                    f"Ответ дай строго в формате:\n"
+                    f"ПЛЮСЫ:\n- ...\n- ...\n\nМИНУСЫ:\n- ...\n- ..."
+                )
+
+                message = client.messages.create(
+                    model="claude-haiku-4-5-20251001",
+                    max_tokens=500,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                text = message.content[0].text.strip()
+
+                # Разбиваем на блоки плюсов и минусов
+                pros = cons = ""
+                if "ПЛЮСЫ:" in text and "МИНУСЫ:" in text:
+                    parts = text.split("МИНУСЫ:")
+                    pros = parts[0].replace("ПЛЮСЫ:", "").strip()
+                    cons = parts[1].strip()
+                else:
+                    pros = text
+
+                obj.pros_text = pros
+                obj.cons_text = cons
+                obj.save(update_fields=["pros_text", "cons_text"])
+                success += 1
+            except Exception as exc:
+                messages.warning(request, f"{obj}: ошибка генерации — {exc}")
+
+        messages.success(request, f"Плюсы/минусы сгенерированы для {success} моделей.")
 
     def save_formset(self, request, form, formset, change):
         instances = formset.save(commit=False)

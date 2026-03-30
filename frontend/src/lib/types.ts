@@ -12,6 +12,7 @@ export interface ParameterScore {
   criterion_code: string;
   criterion_name: string;
   criterion_note?: string;
+  criterion_description?: string;
   compressor_model?: string;
   unit: string;
   raw_value: string;
@@ -31,6 +32,19 @@ export interface RawValue {
   verification_display: string;
 }
 
+export interface Photo {
+  id: number;
+  image_url: string;
+  order: number;
+}
+
+export interface Supplier {
+  id: number;
+  name: string;
+  url: string;
+  order: number;
+}
+
 export interface ACModelSummary {
   id: number;
   brand: string;
@@ -42,6 +56,11 @@ export interface ACModelSummary {
   index_max: number;
   publish_status: string;
   region_availability: RegionAvailability[];
+  price: string | null;
+  noise_score: number | null;
+  has_noise_measurement: boolean;
+  /** Словарь {criterion_code: normalized_score} для пользовательского рейтинга. */
+  scores: Record<string, number>;
 }
 
 export interface ACModelDetail {
@@ -56,9 +75,14 @@ export interface ACModelDetail {
   index_max: number;
   publish_status: string;
   region_availability: RegionAvailability[];
+  price: string | null;
+  pros_text: string;
+  cons_text: string;
   youtube_url: string;
   rutube_url: string;
   vk_url: string;
+  photos: Photo[];
+  suppliers: Supplier[];
   parameter_scores: ParameterScore[];
   raw_values: RawValue[];
   methodology_version: string | null;

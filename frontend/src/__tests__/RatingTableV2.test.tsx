@@ -24,9 +24,11 @@ const mockModels: ACModelSummary[] = [
     total_index: 85.5,
     index_max: 100,
     publish_status: "published",
-    region_availability: [
-      { region_code: "ru", region_display: "Россия" },
-    ],
+    region_availability: [{ region_code: "ru", region_display: "Россия" }],
+    price: null,
+    noise_score: null,
+    has_noise_measurement: false,
+    scores: {},
   },
   {
     id: 2,
@@ -41,6 +43,10 @@ const mockModels: ACModelSummary[] = [
       { region_code: "ru", region_display: "Россия" },
       { region_code: "eu", region_display: "Европа" },
     ],
+    price: "45000.00",
+    noise_score: 78.5,
+    has_noise_measurement: true,
+    scores: { noise: 78.5 },
   },
 ];
 
