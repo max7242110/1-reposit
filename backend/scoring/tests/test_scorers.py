@@ -269,7 +269,7 @@ class TestFallbackScorer:
         r = FallbackScorer().calculate(c, "2000", nominal_capacity=2500)
         assert r.normalized_score == 50
 
-    def test_legacy_kw_input_is_supported(self, methodology):
+    def test_values_must_be_in_watts(self, methodology):
         c = _make_criterion(
             methodology, scoring_type="formula", value_type="fallback",
             formula_json=[
@@ -280,8 +280,8 @@ class TestFallbackScorer:
                 {"from": 100, "to": 999, "score": 100},
             ],
         )
-        # Legacy values in kW: 2.5kW -> 2500W
-        r = FallbackScorer().calculate(c, "2.5", nominal_capacity=2.5)
+        # Both values in watts: 2500W compressor / 2500W nominal = 100%
+        r = FallbackScorer().calculate(c, "2500", nominal_capacity=2500)
         assert r.normalized_score == 100
 
     def test_without_value_japanese(self, methodology):
@@ -343,3 +343,79 @@ class TestBrandAgeScorer:
         )
         r = BrandAgeScorer().calculate(c, "")
         assert r.normalized_score == 0
+
+
+# ── Edge-case tests (Audit Issues #17-18) ────────────────────────────
+
+@pytest.mark.django_db
+class TestEdgeCases:
+    """Граничные случаи, выявленные аудитом."""
+
+    def test_binary_inverted(self, methodology):
+        """Issue #4: BinaryScorer должен уважать is_inverted."""
+        c = _make_criterion(methodology, value_type="binary", scoring_type="binary", is_inverted=True)
+        assert BinaryScorer().calculate(c, "да").normalized_score == 0
+        assert BinaryScorer().calculate(c, "нет").normalized_score == 100
+
+    def test_custom_scale_interval_boundary(self, methodology):
+        """Issue #2: граница интервала [from, to) — value==to попадает в следующий."""
+        c = _make_criterion(
+            methodology, value_type="custom_scale", scoring_type="custom_scale",
+            custom_scale_json=[
+                {"from": 0, "to": 50, "score": 10},
+                {"from": 50, "to": 100, "score": 90},
+            ],
+        )
+        r = CustomScaleScorer().calculate(c, "50")
+        assert r.normalized_score == 90  # попадает во второй интервал, не в первый
+
+    def test_custom_scale_empty_dict(self, methodology):
+        """custom_scale_json = {} — должен вернуть 0."""
+        c = _make_criterion(
+            methodology, value_type="custom_scale", scoring_type="custom_scale",
+            custom_scale_json={},
+        )
+        r = CustomScaleScorer().calculate(c, "anything")
+        assert r.normalized_score == 0
+
+    def test_categorical_custom_scale_no_fallback_to_keywords(self, methodology):
+        """Issue #15: если custom_scale задан, не проваливаться в QUALITY_KEYWORDS."""
+        c = _make_criterion(
+            methodology, value_type="categorical", scoring_type="universal_scale",
+            custom_scale_json={"да": 100, "нет": 0},
+        )
+        # "хорошо" есть в QUALITY_KEYWORDS (70), но НЕ в custom_scale → должен быть 0
+        r = CategoricalScorer().calculate(c, "хорошо")
+        assert r.normalized_score == 0
+
+    def test_fallback_nominal_capacity_zero(self, methodology):
+        """Issue #9: nominal_capacity=0 не должен вызывать деление на ноль."""
+        c = _make_criterion(
+            methodology, value_type="fallback", scoring_type="formula",
+        )
+        r = FallbackScorer().calculate(c, "500", nominal_capacity=0)
+        assert r.normalized_score == 0
+
+    def test_numeric_min_greater_than_max(self, methodology):
+        """Issue #6: min > max → score=0, не крэш."""
+        c = _make_criterion(methodology, min_value=100, max_value=10, median_value=50)
+        r = NumericScorer().calculate(c, "50")
+        assert r.normalized_score == 0
+
+    def test_lab_unknown_status_returns_zero(self, methodology):
+        """Issue #16: неизвестный lab_status → 0 (whitelist подход)."""
+        c = _make_criterion(
+            methodology, value_type="lab", scoring_type="min_median_max",
+            min_value=0, max_value=100, median_value=50,
+        )
+        r = LabScorer().calculate(c, "50", lab_status="some_new_status")
+        assert r.normalized_score == 0
+
+    def test_median_by_capacity_nonnumeric_keys(self, methodology):
+        """Issue #8: нечисловые ключи в median_by_capacity игнорируются."""
+        c = _make_criterion(
+            methodology, min_value=0, max_value=100, median_value=50,
+            median_by_capacity={"invalid": 30, "2.5": 60},
+        )
+        r = NumericScorer().calculate(c, "60", nominal_capacity=2.5)
+        assert r.normalized_score == 50.0  # median=60, value=60 → 50

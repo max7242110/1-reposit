@@ -48,7 +48,7 @@ class CustomScaleScorer(BaseScorer):
         for interval in scale:
             low = float(interval.get("from", float("-inf")))
             high = float(interval.get("to", float("inf")))
-            if low <= value <= high:
+            if low <= value < high:
                 return ScoreResult(normalized_score=float(interval["score"])).clamp()
 
         return ScoreResult(normalized_score=0)

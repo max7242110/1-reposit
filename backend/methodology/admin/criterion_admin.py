@@ -1,8 +1,18 @@
 from __future__ import annotations
 
 from django.contrib import admin, messages
+from django.core.exceptions import ValidationError
+from django.db.models import Sum
 
 from ..models import Criterion, MethodologyVersion
+
+INVERSION_BLOCKED_SCORING_TYPES = {
+    "custom_scale", "universal_scale", "formula", "interval",
+}
+
+INVERSION_BLOCKED_VALUE_TYPES = {
+    "brand_age", "fallback",
+}
 
 
 class MethodologyMultiFilter(admin.SimpleListFilter):
@@ -68,21 +78,31 @@ class CriterionAdmin(admin.ModelAdmin):
                 "custom_scale_json", "formula_json",
             ),
         }),
-        ("Режимы и обязательность", {
-            "fields": (
-                "is_lab", "is_required_lab", "is_required_checklist", "is_required_catalog",
-                "use_in_lab", "use_in_checklist", "use_in_catalog",
-            ),
-        }),
         ("Отображение", {
             "fields": ("region_scope", "is_public", "display_order", "is_active"),
         }),
     )
 
     def save_model(self, request, obj, form, change):
+        if obj.is_inverted and (obj.scoring_type in INVERSION_BLOCKED_SCORING_TYPES or obj.value_type in INVERSION_BLOCKED_VALUE_TYPES):
+            raise ValidationError(
+                f"Флаг is_inverted нельзя использовать с типом скоринга «{obj.scoring_type}». "
+                "Для этого типа направление шкалы задаётся в самих данных (custom_scale_json / formula_json)."
+            )
         super().save_model(request, obj, form, change)
         methodology = obj.methodology
         if not methodology.needs_recalculation:
             methodology.needs_recalculation = True
             methodology.save(update_fields=["needs_recalculation", "updated_at"])
             messages.info(request, "Методика отмечена для пересчёта.")
+        total = (
+            Criterion.objects.filter(methodology=methodology, is_active=True)
+            .aggregate(s=Sum("weight"))["s"]
+            or 0
+        )
+        if abs(total - 100) > 0.01:
+            self.message_user(
+                request,
+                f"⚠️ Сумма весов активных параметров = {total:.2f}%. Должно быть ровно 100%.",
+                level=messages.WARNING,
+            )

@@ -14,9 +14,6 @@ def _resolve_median(criterion: Criterion, nominal_capacity: float | None) -> flo
     by_cap = criterion.median_by_capacity
     if by_cap and isinstance(by_cap, dict) and nominal_capacity is not None:
         cap_for_map = float(nominal_capacity)
-        # Median map keys in criteria are in kW historically.
-        if cap_for_map > 100:
-            cap_for_map = cap_for_map / 1000.0
         best_key: str | None = None
         best_dist = float("inf")
         for key in by_cap:
@@ -24,7 +21,7 @@ def _resolve_median(criterion: Criterion, nominal_capacity: float | None) -> flo
                 dist = abs(float(key) - cap_for_map)
             except (ValueError, TypeError):
                 continue
-            if dist < best_dist:
+            if dist < best_dist or (dist == best_dist and best_key is not None and float(key) < float(best_key)):
                 best_dist = dist
                 best_key = key
         if best_key is not None:

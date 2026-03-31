@@ -27,6 +27,7 @@ class CategoricalScorer(BaseScorer):
             for key, score in criterion.custom_scale_json.items():
                 if val == str(key).strip().lower():
                     return ScoreResult(normalized_score=float(score)).clamp()
+            return ScoreResult(normalized_score=0)
 
         for score, keywords in QUALITY_KEYWORDS.items():
             if val in keywords:

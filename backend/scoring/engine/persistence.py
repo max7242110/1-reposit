@@ -21,13 +21,13 @@ def update_model_total_index(ac_model: ACModel) -> bool:
         return False
 
     try:
-        fresh = ACModel.objects.select_related("brand", "brand__origin_class").get(
+        ac_model = ACModel.objects.select_related("brand", "brand__origin_class").get(
             pk=ac_model.pk,
         )
     except ACModel.DoesNotExist:
         return False
 
-    total_index, _ = compute_scores_for_model(fresh, methodology)
+    total_index, _ = compute_scores_for_model(ac_model, methodology)
     ACModel.objects.filter(pk=ac_model.pk).update(
         total_index=total_index,
         updated_at=timezone.now(),
@@ -41,12 +41,17 @@ def refresh_all_ac_model_total_indices() -> int:
     Пересчитывает total_index у всех моделей каталога по текущей активной методике.
     Без CalculationRun. Возвращает число обработанных моделей.
     """
-    if MethodologyVersion.objects.filter(is_active=True).first() is None:
+    methodology = MethodologyVersion.objects.filter(is_active=True).first()
+    if methodology is None:
         return 0
     n = 0
     for ac in ACModel.objects.select_related("brand", "brand__origin_class").iterator():
-        if update_model_total_index(ac):
-            n += 1
+        total_index, _ = compute_scores_for_model(ac, methodology)
+        ACModel.objects.filter(pk=ac.pk).update(
+            total_index=total_index,
+            updated_at=timezone.now(),
+        )
+        n += 1
     return n
 
 

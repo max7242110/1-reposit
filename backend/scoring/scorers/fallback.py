@@ -4,8 +4,7 @@ When raw_value is provided, it is treated as compressor refrigeration capacity (
 and compared to model.nominal_capacity (also W). The ratio (compressor / catalog * 100)
 is scored via interval scale.
 
-For backward compatibility with old datasets, small values are interpreted as kW:
-if compressor value < 100, it is converted from kW to W by *1000.
+All values (nominal_capacity and compressor power) must be in watts (W).
 
 When raw_value is missing, a fallback coefficient is applied:
   - Japanese brands: 100 * 0.9 = 90
@@ -57,13 +56,8 @@ class FallbackScorer(BaseScorer):
             return ScoreResult(normalized_score=0)
 
         nominal_w = float(nominal_capacity)
-        # Legacy support: historical nominal_capacity values may still be in kW.
-        if 0 < nominal_w < 100:
-            nominal_w = nominal_w * 1000.0
-
-        # Legacy support: compressor power in old datasets can be in kW.
-        if 0 < compressor_w < 100:
-            compressor_w = compressor_w * 1000.0
+        if nominal_w == 0:
+            return ScoreResult(normalized_score=0)
 
         ratio = compressor_w / nominal_w * 100
 

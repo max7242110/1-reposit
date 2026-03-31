@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from core.models import TimestampMixin
@@ -161,14 +162,31 @@ class Criterion(TimestampMixin):
 
     class Meta:
         ordering = ["display_order"]
-        verbose_name = "Критерий"
-        verbose_name_plural = "Критерии"
+        verbose_name = "Параметр"
+        verbose_name_plural = "Параметры"
         constraints = [
             models.UniqueConstraint(
                 fields=["methodology", "code"],
                 name="unique_criterion_code_per_methodology",
-            )
+            ),
+            models.CheckConstraint(
+                condition=models.Q(weight__gte=0),
+                name="criterion_weight_non_negative",
+            ),
         ]
+
+    def clean(self):
+        super().clean()
+        if self.weight < 0:
+            raise ValidationError({"weight": "Вес не может быть отрицательным."})
+        if self.min_value is not None and self.max_value is not None:
+            if self.min_value > self.max_value:
+                raise ValidationError({"min_value": "min_value не может быть больше max_value."})
+        if self.median_value is not None:
+            if self.min_value is not None and self.median_value < self.min_value:
+                raise ValidationError({"median_value": "median_value не может быть меньше min_value."})
+            if self.max_value is not None and self.median_value > self.max_value:
+                raise ValidationError({"median_value": "median_value не может быть больше max_value."})
 
     def __str__(self) -> str:
         return f"{self.name_ru} ({self.weight}%)"

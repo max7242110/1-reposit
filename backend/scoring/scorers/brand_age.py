@@ -21,6 +21,12 @@ OLDEST_YEAR = 1995
 
 
 class BrandAgeScorer(BaseScorer):
+    """Инверсия by design: меньший год (старше бренд) = выше балл.
+
+    is_inverted не используется, т.к. направление шкалы зашито в логику
+    доменной области — бренд с большим стажем на рынке всегда оценивается выше.
+    """
+
     def calculate(self, criterion: Criterion, raw_value: Any, **context: Any) -> ScoreResult:
         start_year = context.get("sales_start_year_ru")
         if start_year is None:

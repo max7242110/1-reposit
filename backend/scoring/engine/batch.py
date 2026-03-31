@@ -27,19 +27,28 @@ def recalculate_all(
         if not methodology:
             raise ValueError("Нет активной методики")
 
-    run = CalculationRun.objects.create(
-        methodology=methodology,
-        triggered_by=user,
-        status=CalculationRun.Status.RUNNING,
-    )
+    with transaction.atomic():
+        # Блокируем запущенные runs для предотвращения race condition
+        running = (
+            CalculationRun.objects
+            .select_for_update()
+            .filter(status=CalculationRun.Status.RUNNING)
+            .exists()
+        )
+        if running:
+            raise ValueError("Расчёт уже выполняется")
+
+        run = CalculationRun.objects.create(
+            methodology=methodology,
+            triggered_by=user,
+            status=CalculationRun.Status.RUNNING,
+        )
 
     try:
         with transaction.atomic():
             qs = ACModel.objects.select_related("brand", "brand__origin_class")
             if model_ids:
                 qs = qs.filter(pk__in=model_ids)
-
-            CalculationResult.objects.filter(run=run).delete()
 
             count = 0
             for ac_model in qs:
@@ -54,10 +63,10 @@ def recalculate_all(
             methodology.needs_recalculation = False
             methodology.save(update_fields=["needs_recalculation", "updated_at"])
 
-    except Exception:
+    except Exception as e:
         logger.exception("Recalculation failed for run #%s", run.pk)
         run.status = CalculationRun.Status.FAILED
-        run.error_message = str(run.pk)
+        run.error_message = str(e)
         run.finished_at = timezone.now()
         run.save()
         raise

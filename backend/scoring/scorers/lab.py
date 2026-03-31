@@ -20,7 +20,7 @@ class LabScorer(BaseScorer):
     def calculate(self, criterion: Criterion, raw_value: Any, **context: Any) -> ScoreResult:
         lab_status = context.get("lab_status", "not_measured")
 
-        if lab_status in ("not_measured", "pending", "not_in_mode"):
+        if lab_status != "measured":
             return ScoreResult(normalized_score=0)
 
         if criterion.custom_scale_json:
