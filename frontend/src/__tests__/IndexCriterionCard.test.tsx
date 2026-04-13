@@ -15,7 +15,7 @@ const mockCriterion: ParameterScore = {
 describe("IndexCriterionCard", () => {
   it("renders name, raw value with unit, and scores", () => {
     render(<IndexCriterionCard criterion={mockCriterion} />);
-    expect(screen.getByText("Уровень шума")).toBeTruthy();
+    expect(screen.getByText("Уровень шума:")).toBeTruthy();
     expect(screen.getByText("32")).toBeTruthy();
     expect(screen.getByText("дБ(А)")).toBeTruthy();
     expect(screen.getByText("48.5")).toBeTruthy();

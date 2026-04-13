@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 
+from django.db import transaction
+
 from catalog.models import ModelRawValue
 from methodology.models import MethodologyVersion
 
@@ -15,6 +17,7 @@ def _build_code_to_criterion_id(methodology_id: int) -> dict[str, int]:
     }
 
 
+@transaction.atomic
 def migrate_model_raw_values_between_methodologies(
     source_methodology_id: int | None,
     target_methodology_id: int,

@@ -164,10 +164,12 @@ class ModelRawValue(TimestampMixin):
     verification_status = models.CharField(
         max_length=20, choices=VerificationStatus.choices,
         default=VerificationStatus.CATALOG, verbose_name="Статус верификации",
+        db_index=True,
     )
     lab_status = models.CharField(
         max_length=20, choices=LabStatus.choices,
         default=LabStatus.NOT_MEASURED, verbose_name="Статус лаб. измерения",
+        db_index=True,
     )
 
     entered_by = models.ForeignKey(

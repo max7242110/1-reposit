@@ -190,18 +190,11 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = fields
 
-    def _get_latest_run_id(self, obj: ACModel) -> int | None:
-        results = list(obj.calculation_results.all())
-        if not results:
-            return None
-        return max(results, key=lambda r: r.run_id).run_id
-
     def _get_methodology_for_detail(self, obj: ACModel) -> MethodologyVersion | None:
-        run_id = self._get_latest_run_id(obj)
-        if run_id is not None:
-            for r in obj.calculation_results.all():
-                if r.run_id == run_id:
-                    return r.run.methodology
+        results = list(obj.calculation_results.all())
+        if results:
+            latest = max(results, key=lambda r: r.run_id)
+            return latest.run.methodology
         return MethodologyVersion.objects.filter(is_active=True).first()
 
     def get_parameter_scores(self, obj: ACModel) -> list[dict]:

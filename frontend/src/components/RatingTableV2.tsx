@@ -82,7 +82,7 @@ export default function RatingTableV2({ models, indexMode = "standard", customIn
                     {m.brand_logo && (
                       <img
                         src={m.brand_logo}
-                        alt=""
+                        alt={m.brand}
                         className="h-5 w-5 object-contain shrink-0"
                         loading="lazy"
                       />

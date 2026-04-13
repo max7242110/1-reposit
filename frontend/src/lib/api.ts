@@ -1,8 +1,6 @@
 import {
   ACModelDetail,
   ACModelSummary,
-  AirConditionerDetail,
-  AirConditionerSummary,
   Methodology,
 } from "./types";
 
@@ -45,7 +43,11 @@ async function apiFetch<T>(path: string): Promise<T> {
       throw new ApiError(res.status, `API ${path}: unexpected content-type ${contentType}`);
     }
 
-    return (await res.json()) as T;
+    try {
+      return (await res.json()) as T;
+    } catch {
+      throw new ApiError(res.status, `API ${path}: invalid JSON in response body`);
+    }
   } finally {
     clearTimeout(timeout);
   }
@@ -77,13 +79,4 @@ export async function getArchivedModels(): Promise<ACModelSummary[]> {
 
 export async function getMethodology(): Promise<Methodology> {
   return apiFetch<Methodology>("/v2/methodology/");
-}
-
-// v1 legacy API (kept for compatibility)
-export async function getConditioners(): Promise<AirConditionerSummary[]> {
-  return apiFetch<AirConditionerSummary[]>("/conditioners/");
-}
-
-export async function getConditioner(id: number): Promise<AirConditionerDetail> {
-  return apiFetch<AirConditionerDetail>(`/conditioners/${id}/`);
 }
