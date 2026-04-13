@@ -42,6 +42,15 @@ def _is_empty(val: Any) -> bool:
     return val is None or str(val).strip() == ""
 
 
+def _safe_price(val: Any) -> float | None:
+    if _is_empty(val):
+        return None
+    try:
+        return float(_normalize_decimal_string(val))
+    except (ValueError, TypeError):
+        return None
+
+
 def _prepare_criterion_value(criterion: Criterion, val: Any) -> tuple[str | None, float | None]:
     """
     Возвращает (raw_value, numeric_value) или (None, None), если значение пустое
@@ -189,6 +198,7 @@ def import_models_from_file(path: Path, *, publish: bool = False) -> tuple[int, 
                     outer_unit=str(row.get("outer_unit", "")),
                     series=str(row.get("series", "")),
                     nominal_capacity=_safe_float(row.get("nominal_capacity")),
+                    price=_safe_price(row.get("price")),
                     equipment_type=eq_type,
                     publish_status=status,
                     youtube_url=str(row.get("youtube_url", "")),
@@ -200,6 +210,9 @@ def import_models_from_file(path: Path, *, publish: bool = False) -> tuple[int, 
                 errors.append(
                     f"Строка {idx}: модель уже существует ({brand_name} {model_name}) — обновлены только критерии.",
                 )
+                price_val = _safe_price(row.get("price"))
+                if price_val is not None:
+                    ACModel.objects.filter(pk=ac.pk).update(price=price_val)
 
             region_raw = str(row.get("region", "ru") or "").strip()
             tokens = (

@@ -52,9 +52,9 @@ class MethodologyMultiFilter(admin.SimpleListFilter):
 class CriterionAdmin(admin.ModelAdmin):
     list_display = (
         "code", "name_ru", "methodology", "value_type", "scoring_type", "weight",
-        "is_inverted", "is_lab", "show_note_on_site", "region_scope", "is_active",
+        "is_inverted", "region_scope", "is_active",
     )
-    list_filter = (MethodologyMultiFilter, "value_type", "scoring_type", "is_lab", "region_scope", "is_active")
+    list_filter = (MethodologyMultiFilter, "value_type", "scoring_type", "region_scope", "is_active")
     search_fields = ("code", "name_ru", "name_en")
     list_select_related = ("methodology",)
     list_per_page = 50
@@ -67,7 +67,7 @@ class CriterionAdmin(admin.ModelAdmin):
             "classes": ("collapse",),
             "fields": (
                 "description_ru", "description_en", "description_de", "description_pt",
-                "note", "show_note_on_site",
+                "note",
             ),
         }),
         ("Скоринг", {

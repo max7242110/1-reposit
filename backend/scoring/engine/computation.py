@@ -26,7 +26,7 @@ def _get_scorer(criterion: Criterion) -> BaseScorer | None:
         return BrandAgeScorer()
     if criterion.value_type == Criterion.ValueType.FALLBACK:
         return FallbackScorer()
-    if criterion.value_type == Criterion.ValueType.LAB or criterion.is_lab:
+    if criterion.value_type == Criterion.ValueType.LAB:
         return LabScorer()
 
     scorer_class = SCORER_MAP.get(criterion.scoring_type)
@@ -86,7 +86,9 @@ def compute_scores_for_model(
 
     raw_values = {
         rv.criterion_id: rv
-        for rv in ModelRawValue.objects.filter(model=ac_model).select_related("criterion")
+        for rv in ModelRawValue.objects.filter(
+            model=ac_model, criterion__isnull=False,
+        ).select_related("criterion")
     }
 
     model_ctx = _build_model_context(ac_model)

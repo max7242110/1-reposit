@@ -10,8 +10,9 @@ interface Props {
 }
 
 export default function CustomRatingPanel({ criteria, enabled, onChange, onReset }: Props) {
-  const publicCriteria = criteria.filter((c) => c.is_public);
+  const publicCriteria = criteria.filter((c) => c.is_public).sort((a, b) => b.weight - a.weight);
   const enabledCount = publicCriteria.filter((c) => enabled[c.code] !== false).length;
+  const allEnabled = enabledCount === publicCriteria.length;
 
   return (
     <div className="mb-6 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20 p-4">
@@ -19,12 +20,14 @@ export default function CustomRatingPanel({ criteria, enabled, onChange, onReset
         <p className="text-sm font-medium text-blue-800 dark:text-blue-300">
           Выберите критерии для ранжирования ({enabledCount} из {publicCriteria.length})
         </p>
-        <button
-          onClick={onReset}
-          className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Сбросить к умолчанию
-        </button>
+        {!allEnabled && (
+          <button
+            onClick={onReset}
+            className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Включить все
+          </button>
+        )}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 max-h-64 overflow-y-auto pr-1">
         {publicCriteria.map((c) => {

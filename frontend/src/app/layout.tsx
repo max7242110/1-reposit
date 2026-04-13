@@ -57,8 +57,16 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="border-t border-gray-200 dark:border-gray-800 mt-16">
-          <div className="max-w-5xl mx-auto px-4 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-            Данные основаны на независимых измерениях и тестированиях
+          <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex gap-4">
+              <Link
+                href="/archive"
+                className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+              >
+                Архивные модели
+              </Link>
+            </div>
+            <span>Данные основаны на независимых измерениях и тестированиях</span>
           </div>
         </footer>
       </body>

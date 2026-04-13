@@ -11,6 +11,20 @@ function extractYoutubeId(url: string): string | null {
   return match ? match[1] : null;
 }
 
+function extractRutubeEmbed(url: string): string | null {
+  const match = url.match(/rutube\.ru\/video\/([a-f0-9]+)/);
+  return match ? `https://rutube.ru/play/embed/${match[1]}` : null;
+}
+
+function extractVkVideoEmbed(url: string): string | null {
+  // Формат: vk.com/video-123456_789012 или vkvideo.ru/video-123456_789012
+  const match = url.match(/(?:vk\.com|vkvideo\.ru)\/(?:video|clip)(-?\d+)_(\d+)/);
+  if (match) {
+    return `https://vk.com/video_ext.php?oid=${match[1]}&id=${match[2]}&hd=2`;
+  }
+  return null;
+}
+
 export default function VideoLinks({
   youtube_url,
   rutube_url,
@@ -19,7 +33,13 @@ export default function VideoLinks({
   const hasAny = youtube_url || rutube_url || vk_url;
   if (!hasAny) return null;
 
+  const vkEmbed = vk_url ? extractVkVideoEmbed(vk_url) : null;
+  const rutubeEmbed = rutube_url ? extractRutubeEmbed(rutube_url) : null;
   const youtubeId = youtube_url ? extractYoutubeId(youtube_url) : null;
+
+  // Приоритет: VK → RuTube → YouTube
+  const embedSrc = vkEmbed || rutubeEmbed || (youtubeId ? `https://www.youtube.com/embed/${youtubeId}` : null);
+  const embedTitle = vkEmbed ? "VK Видео обзор" : rutubeEmbed ? "RuTube видеообзор" : "YouTube видеообзор";
 
   return (
     <section aria-label="Видеообзоры">
@@ -27,11 +47,11 @@ export default function VideoLinks({
         Видеообзор
       </h2>
 
-      {youtubeId && (
+      {embedSrc && (
         <div className="aspect-video rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 mb-4">
           <iframe
-            src={`https://www.youtube.com/embed/${youtubeId}`}
-            title="YouTube видеообзор"
+            src={embedSrc}
+            title={embedTitle}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="w-full h-full"

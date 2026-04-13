@@ -1,4 +1,6 @@
 import { ParameterScore } from "@/lib/types";
+import { formatYears } from "@/lib/utils";
+import Tooltip from "./Tooltip";
 
 const SCALE_MAX = 100;
 
@@ -25,7 +27,9 @@ export default function IndexCriterionCard({ criterion }: Props) {
     above_reference,
   } = criterion;
   const pct = Math.min(Math.max((normalized_score / SCALE_MAX) * 100, 0), 100);
-  const displayValue = raw_value.trim() ? raw_value : "—";
+  const rawDisplay = raw_value.trim() ? raw_value : "—";
+  const displayValue = unit === "лет" && rawDisplay !== "—" ? formatYears(rawDisplay) : rawDisplay;
+  const displayUnit = unit === "лет" ? "" : unit;
 
   return (
     <div className="py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
@@ -34,12 +38,11 @@ export default function IndexCriterionCard({ criterion }: Props) {
           <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug flex items-center gap-1.5">
             {criterion_name}
             {criterion_description && (
-              <span
-                title={criterion_description}
-                className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-gray-400 dark:border-gray-500 text-[10px] font-bold text-gray-400 dark:text-gray-500 cursor-help shrink-0"
-              >
-                ?
-              </span>
+              <Tooltip text={criterion_description}>
+                <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-gray-400 dark:border-gray-500 text-[10px] font-bold text-gray-400 dark:text-gray-500 cursor-help shrink-0">
+                  ?
+                </span>
+              </Tooltip>
             )}
           </h3>
           {compressor_model ? (
@@ -63,8 +66,8 @@ export default function IndexCriterionCard({ criterion }: Props) {
         <span className="font-medium text-gray-900 dark:text-gray-100 tabular-nums">
           {displayValue}
         </span>
-        {unit ? (
-          <span className="text-gray-500 dark:text-gray-400 ml-1">{unit}</span>
+        {displayUnit ? (
+          <span className="text-gray-500 dark:text-gray-400 ml-1">{displayUnit}</span>
         ) : null}
       </p>
 
@@ -87,18 +90,18 @@ export default function IndexCriterionCard({ criterion }: Props) {
             style={{ width: `${pct}%` }}
           />
         </div>
-        <div className="flex items-center justify-end text-sm pt-0.5">
+        <div className="flex items-center justify-between text-sm pt-0.5">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Вклад в индекс:{" "}
+            <span className="tabular-nums font-medium text-gray-700 dark:text-gray-300">
+              {weighted_score.toFixed(2)}
+            </span>
+          </p>
           <span className="font-semibold text-gray-900 dark:text-gray-100 tabular-nums">
             {normalized_score.toFixed(1)}
             <span className="font-normal text-gray-400 dark:text-gray-500"> / {SCALE_MAX}</span>
           </span>
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Вклад в индекс:{" "}
-          <span className="tabular-nums font-medium text-gray-700 dark:text-gray-300">
-            {weighted_score.toFixed(2)}
-          </span>
-        </p>
       </div>
     </div>
   );

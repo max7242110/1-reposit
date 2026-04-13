@@ -288,7 +288,6 @@ def test_activate_methodology_migrates_raw_values_by_code(client, admin_user):
             "criteria-0-value_type": c_tgt.value_type,
             "criteria-0-scoring_type": c_tgt.scoring_type,
             "criteria-0-weight": str(c_tgt.weight),
-            "criteria-0-is_lab": "on" if c_tgt.is_lab else "",
             "criteria-0-region_scope": c_tgt.region_scope,
             "criteria-0-is_public": "on" if c_tgt.is_public else "",
             "criteria-0-is_active": "on" if c_tgt.is_active else "",

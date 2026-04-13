@@ -64,6 +64,17 @@ export async function getModel(id: number): Promise<ACModelDetail> {
   return apiFetch<ACModelDetail>(`/v2/models/${id}/`);
 }
 
+export async function getModelBySlug(slug: string): Promise<ACModelDetail> {
+  return apiFetch<ACModelDetail>(`/v2/models/by-slug/${slug}/`);
+}
+
+export async function getArchivedModels(): Promise<ACModelSummary[]> {
+  const data = await apiFetch<ACModelSummary[] | PaginatedResponse<ACModelSummary>>(
+    "/v2/models/archive/",
+  );
+  return Array.isArray(data) ? data : data.results;
+}
+
 export async function getMethodology(): Promise<Methodology> {
   return apiFetch<Methodology>("/v2/methodology/");
 }

@@ -76,3 +76,20 @@ class ACModelDetailView(LangMixin, generics.RetrieveAPIView):
             "photos",
             "suppliers",
         )
+
+
+class ACModelDetailBySlugView(ACModelDetailView):
+    lookup_field = "slug"
+
+
+class ACModelArchiveListView(ACModelListView):
+    """Список архивных моделей."""
+
+    def get_queryset(self):
+        qs = ACModel.objects.select_related("brand", "brand__origin_class").prefetch_related(
+            "regions",
+            "raw_values__criterion",
+        ).filter(
+            publish_status=ACModel.PublishStatus.ARCHIVED,
+        ).order_by("-total_index")
+        return qs

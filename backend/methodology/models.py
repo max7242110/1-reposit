@@ -10,6 +10,18 @@ class MethodologyVersion(TimestampMixin):
     version = models.CharField(max_length=30, unique=True, verbose_name="Версия")
     name = models.CharField(max_length=255, verbose_name="Название")
     description = models.TextField(blank=True, default="", verbose_name="Описание")
+    tab_description_index = models.TextField(
+        blank=True, default="",
+        verbose_name="Описание таба «По индексу»",
+    )
+    tab_description_quiet = models.TextField(
+        blank=True, default="",
+        verbose_name="Описание таба «Самые тихие»",
+    )
+    tab_description_custom = models.TextField(
+        blank=True, default="",
+        verbose_name="Описание таба «Пользовательский рейтинг»",
+    )
     is_active = models.BooleanField(
         default=False, verbose_name="Активна",
         help_text="Только одна методика может быть активной",
@@ -141,7 +153,6 @@ class Criterion(TimestampMixin):
         help_text="Описание формулы расчёта для формульных параметров",
     )
 
-    is_lab = models.BooleanField(default=False, verbose_name="Лабораторный параметр")
     is_required_lab = models.BooleanField(default=False, verbose_name="Обязателен для LAB режима")
     is_required_checklist = models.BooleanField(default=False, verbose_name="Обязателен для CHECKLIST")
     is_required_catalog = models.BooleanField(default=False, verbose_name="Обязателен для CATALOG")
@@ -155,7 +166,6 @@ class Criterion(TimestampMixin):
         verbose_name="Регион",
     )
     note = models.TextField(blank=True, default="", verbose_name="Примечание")
-    show_note_on_site = models.BooleanField(default=False, verbose_name="Отображать на сайте")
     is_public = models.BooleanField(default=True, verbose_name="Публичный")
     display_order = models.PositiveIntegerField(default=0, verbose_name="Порядок отображения")
     is_active = models.BooleanField(default=True, verbose_name="Активен")

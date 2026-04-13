@@ -57,6 +57,12 @@ class ACModel(TimestampMixin):
         max_digits=10, decimal_places=2, null=True, blank=True,
         verbose_name="Рекомендованная цена (руб.)",
     )
+    slug = models.SlugField(
+        max_length=500, unique=True, blank=True, default="",
+        verbose_name="URL-slug",
+        help_text="Генерируется автоматически из бренда, серии и блоков",
+        allow_unicode=True,
+    )
     pros_text = models.TextField(blank=True, default="", verbose_name="Плюсы (AI)")
     cons_text = models.TextField(blank=True, default="", verbose_name="Минусы (AI)")
 
@@ -70,8 +76,17 @@ class ACModel(TimestampMixin):
         self.inner_unit = (self.inner_unit or "").strip().upper()
         self.outer_unit = (self.outer_unit or "").strip().upper()
 
+    def _generate_slug(self) -> None:
+        from .utils import generate_acmodel_slug
+
+        if not self.slug:
+            self.slug = generate_acmodel_slug(
+                self.brand.name, self.series, self.inner_unit, self.outer_unit,
+            )
+
     def save(self, *args, **kwargs):
         self._normalize_unit_names()
+        self._generate_slug()
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -122,8 +137,15 @@ class ModelRawValue(TimestampMixin):
         verbose_name="Модель",
     )
     criterion = models.ForeignKey(
-        Criterion, on_delete=models.CASCADE, related_name="values",
+        Criterion, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name="values",
         verbose_name="Критерий",
+    )
+    criterion_code = models.CharField(
+        max_length=50, blank=True, default="",
+        verbose_name="Код критерия",
+        help_text="Дублирует criterion.code для сохранения идентичности при удалении критерия",
+        db_index=True,
     )
     raw_value = models.CharField(max_length=500, blank=True, default="", verbose_name="Значение")
     compressor_model = models.CharField(
@@ -165,11 +187,23 @@ class ModelRawValue(TimestampMixin):
             models.UniqueConstraint(
                 fields=["model", "criterion"],
                 name="unique_model_criterion_value",
-            )
+                condition=models.Q(criterion__isnull=False),
+            ),
+            models.UniqueConstraint(
+                fields=["model", "criterion_code"],
+                name="unique_model_criterion_code_orphan",
+                condition=models.Q(criterion__isnull=True),
+            ),
         ]
 
+    def save(self, *args, **kwargs):
+        if self.criterion_id and self.criterion:
+            self.criterion_code = self.criterion.code
+        super().save(*args, **kwargs)
+
     def __str__(self) -> str:
-        return f"{self.model} / {self.criterion.code}: {self.raw_value}"
+        code = self.criterion.code if self.criterion else self.criterion_code
+        return f"{self.model} / {code}: {self.raw_value}"
 
 
 class ACModelPhoto(TimestampMixin):

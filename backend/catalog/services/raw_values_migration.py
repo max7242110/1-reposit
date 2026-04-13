@@ -40,6 +40,9 @@ def migrate_model_raw_values_between_methodologies(
         source_by_code[code]: target_by_code[code]
         for code in common_codes
     }
+    target_id_to_code: dict[int, str] = {
+        target_by_code[code]: code for code in common_codes
+    }
     target_criterion_ids = set(source_to_target.values())
 
     existing_pairs = set(
@@ -50,6 +53,7 @@ def migrate_model_raw_values_between_methodologies(
 
     source_rows: Iterable[ModelRawValue] = ModelRawValue.objects.filter(
         criterion_id__in=source_to_target.keys(),
+        criterion__isnull=False,
     ).iterator()
 
     to_create: list[ModelRawValue] = []
@@ -65,6 +69,7 @@ def migrate_model_raw_values_between_methodologies(
             ModelRawValue(
                 model_id=rv.model_id,
                 criterion_id=target_criterion_id,
+                criterion_code=target_id_to_code.get(target_criterion_id, ""),
                 raw_value=rv.raw_value,
                 numeric_value=rv.numeric_value,
                 source=rv.source,

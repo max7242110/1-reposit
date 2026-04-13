@@ -3,10 +3,11 @@ from __future__ import annotations
 from django.contrib import admin, messages
 from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q, QuerySet, Sum
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.http import require_POST
 
 from catalog.services import migrate_model_raw_values_between_methodologies
 from .inlines import CriterionInline
@@ -61,6 +62,11 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
                 "<path:object_id>/duplicate/",
                 self.admin_site.admin_view(self.duplicate_view),
                 name="%s_%s_duplicate" % info,
+            ),
+            path(
+                "<path:object_id>/delete-criterion/<int:criterion_id>/",
+                self.admin_site.admin_view(self.delete_criterion_view),
+                name="%s_%s_delete_criterion" % info,
             ),
         ] + super().get_urls()
 
@@ -124,6 +130,29 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
                     )
         extra_context["criteria_weight_total_initial"] = round(total, 2)
         return super().changeform_view(request, object_id, form_url, extra_context)
+
+    def delete_criterion_view(self, request, object_id, criterion_id):
+        if request.method != "POST":
+            return JsonResponse({"error": "POST required"}, status=405)
+        methodology = self.get_object(request, object_id)
+        if methodology is None:
+            return JsonResponse({"error": "Methodology not found"}, status=404)
+        if not self.has_change_permission(request, methodology):
+            return JsonResponse({"error": "Permission denied"}, status=403)
+        try:
+            criterion = Criterion.objects.get(
+                pk=criterion_id, methodology_id=object_id,
+            )
+        except Criterion.DoesNotExist:
+            return JsonResponse({"error": "Criterion not found"}, status=404)
+        criterion.delete()
+        return JsonResponse({"ok": True})
+
+    def delete_model(self, request, obj):
+        if obj.is_active:
+            messages.error(request, "Нельзя удалить активную методику. Сначала деактивируйте её.")
+            return
+        super().delete_model(request, obj)
 
     def save_model(self, request, obj, form, change):
         previous_active = MethodologyVersion.objects.filter(is_active=True).exclude(pk=obj.pk).first()

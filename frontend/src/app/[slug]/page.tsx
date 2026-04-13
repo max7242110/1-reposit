@@ -7,17 +7,17 @@ import PhotoGallery from "@/components/PhotoGallery";
 import ProsConsBlock from "@/components/ProsConsBlock";
 import SupplierLinks from "@/components/SupplierLinks";
 import VideoLinks from "@/components/VideoLinks";
-import { getModel } from "@/lib/api";
+import { getModelBySlug } from "@/lib/api";
 import { formatIndexMax } from "@/lib/utils";
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+  const { slug } = await params;
   try {
-    const m = await getModel(Number(id));
+    const m = await getModelBySlug(slug);
     const idxLabel = `${m.total_index.toFixed(1)} / ${formatIndexMax(m.index_max ?? 100)}`;
     return {
       title: `${m.brand.name} ${m.inner_unit}`,
@@ -33,19 +33,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ModelDetailPage({ params }: Props) {
-  const { id } = await params;
+  const { slug } = await params;
   let model;
   try {
-    model = await getModel(Number(id));
+    model = await getModelBySlug(slug);
   } catch {
     notFound();
   }
 
   const indexMax = model.index_max ?? 100;
   const hasVideo = model.youtube_url || model.rutube_url || model.vk_url;
+  const isArchived = model.publish_status === "archived";
 
   const sortedScores = [...model.parameter_scores].sort(
-    (a, b) => b.normalized_score - a.normalized_score,
+    (a, b) => b.normalized_score - a.normalized_score || b.weighted_score - a.weighted_score,
   );
 
   const jsonLd = {
@@ -73,12 +74,27 @@ export default async function ModelDetailPage({ params }: Props) {
 
       <BackLink href="/" />
 
+      {isArchived && (
+        <div className="mb-4 px-4 py-2 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-sm font-medium">
+          Архивная модель — не участвует в рейтинге
+        </div>
+      )}
+
       <header className="mb-8">
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-              {model.brand.name}
-            </h1>
+            <div className="flex items-center gap-4">
+              {model.brand.logo && (
+                <img
+                  src={model.brand.logo}
+                  alt={model.brand.name}
+                  className="h-16 sm:h-20 w-auto object-contain shrink-0"
+                />
+              )}
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                {model.brand.name}
+              </h1>
+            </div>
             {model.series && (
               <p className="text-base font-semibold text-gray-700 dark:text-gray-300 mt-1">
                 Серия: {model.series}
@@ -94,23 +110,14 @@ export default async function ModelDetailPage({ params }: Props) {
             )}
           </div>
           <div className="text-right">
-            <div className="text-sm text-gray-500 dark:text-gray-400">Индекс «Август-климат»</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              {isArchived ? "Последнее значение индекса" : "Индекс «Август-климат»"}
+            </div>
             <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 tabular-nums">
               <span>{model.total_index.toFixed(1)}</span>
               <span className="font-semibold text-blue-500/80 dark:text-blue-300/80"> / </span>
               <span>{formatIndexMax(model.index_max ?? 100)}</span>
             </div>
-            {model.price && (
-              <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                Рекомендованная цена:{" "}
-                <span className="font-semibold text-gray-800 dark:text-gray-200">
-                  {new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(
-                    parseFloat(model.price),
-                  )}{" "}
-                  ₽
-                </span>
-              </div>
-            )}
           </div>
         </div>
       </header>
@@ -138,6 +145,20 @@ export default async function ModelDetailPage({ params }: Props) {
           )}
 
           <ProsConsBlock prosText={model.pros_text} consText={model.cons_text} />
+
+          {model.price && (
+            <div className="px-4 py-3 bg-gray-50 dark:bg-gray-900 rounded-xl">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Рекомендованная цена:{" "}
+                <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                  {new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(
+                    parseFloat(model.price),
+                  )}{" "}
+                  ₽
+                </span>
+              </p>
+            </div>
+          )}
 
           <SupplierLinks suppliers={model.suppliers} />
         </div>

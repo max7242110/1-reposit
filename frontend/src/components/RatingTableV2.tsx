@@ -76,9 +76,17 @@ export default function RatingTableV2({ models, indexMode = "standard", customIn
                 </td>
                 <td className="px-4 py-4">
                   <Link
-                    href={`/v2/model/${m.id}`}
-                    className="font-medium text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    href={`/${m.slug}`}
+                    className="inline-flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
+                    {m.brand_logo && (
+                      <img
+                        src={m.brand_logo}
+                        alt=""
+                        className="h-5 w-5 object-contain shrink-0"
+                        loading="lazy"
+                      />
+                    )}
                     {m.brand}
                   </Link>
                   <div className="text-sm text-gray-500 dark:text-gray-400 sm:hidden mt-0.5">

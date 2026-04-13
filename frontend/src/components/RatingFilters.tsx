@@ -5,7 +5,12 @@ import { useCallback, useRef } from "react";
 
 const DEBOUNCE_MS = 400;
 
-export default function RatingFilters() {
+interface Props {
+  defaultPriceMin?: number;
+  defaultPriceMax?: number;
+}
+
+export default function RatingFilters({ defaultPriceMin, defaultPriceMax }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -48,7 +53,7 @@ export default function RatingFilters() {
       <input
         id="price-min-filter"
         type="number"
-        placeholder="Цена от (₽)"
+        placeholder={defaultPriceMin ? `от ${defaultPriceMin.toLocaleString("ru-RU")} ₽` : "Цена от (₽)"}
         defaultValue={searchParams.get("price_min") || ""}
         onChange={(e) => handleDebounced("price_min", e.target.value)}
         aria-label="Цена от"
@@ -59,7 +64,7 @@ export default function RatingFilters() {
       <input
         id="price-max-filter"
         type="number"
-        placeholder="Цена до (₽)"
+        placeholder={defaultPriceMax ? `до ${defaultPriceMax.toLocaleString("ru-RU")} ₽` : "Цена до (₽)"}
         defaultValue={searchParams.get("price_max") || ""}
         onChange={(e) => handleDebounced("price_max", e.target.value)}
         aria-label="Цена до"

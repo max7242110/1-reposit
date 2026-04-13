@@ -226,11 +226,11 @@ class TestFormulaScorer:
 @pytest.mark.django_db
 class TestLabScorer:
     def test_not_measured(self, methodology):
-        c = _make_criterion(methodology, is_lab=True)
+        c = _make_criterion(methodology, value_type="lab")
         assert LabScorer().calculate(c, "50", lab_status="not_measured").normalized_score == 0
 
     def test_measured_numeric(self, methodology):
-        c = _make_criterion(methodology, is_lab=True, min_value=0, max_value=100)
+        c = _make_criterion(methodology, value_type="lab", min_value=0, max_value=100)
         r = LabScorer().calculate(c, "50", lab_status="measured")
         assert r.normalized_score == 50.0
 

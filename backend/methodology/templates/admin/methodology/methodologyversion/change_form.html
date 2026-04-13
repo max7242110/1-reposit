@@ -35,13 +35,16 @@
 </style>
 <script>
 (function () {
+  var methodologyId = "{{ original.pk|default:'' }}";
+
   function parseNum(v) {
     if (v == null || v === "") return 0;
     var n = parseFloat(String(v).replace(",", "."));
     return isNaN(n) ? 0 : n;
   }
+
   function recalc() {
-    var group = document.getElementById("criterion_set-group");
+    var group = document.getElementById("criteria-group");
     if (!group) return;
     var inputs = group.querySelectorAll('input[name$="-weight"]');
     var sum = 0;
@@ -56,8 +59,9 @@
     var el = document.getElementById("criteria-weight-total");
     if (el) el.textContent = sum.toFixed(2) + "%";
   }
+
   function bind() {
-    var group = document.getElementById("criterion_set-group");
+    var group = document.getElementById("criteria-group");
     if (!group) return;
     group.addEventListener("input", function (e) {
       var n = e.target && e.target.name;
@@ -68,13 +72,127 @@
       if (n && (n.endsWith("-weight") || n.endsWith("-DELETE"))) recalc();
     });
   }
+
+  function getCSRF() {
+    var input = document.querySelector("input[name=csrfmiddlewaretoken]");
+    return input ? input.value : "";
+  }
+
+  function setupDeleteButtons() {
+    var group = document.getElementById("criteria-group");
+    if (!group) return;
+    var rows = group.querySelectorAll("tr.form-row, tr.dynamic-criteria");
+    rows.forEach(function (row) {
+      if (row.querySelector(".criterion-delete-btn")) return; // уже есть кнопка
+      var delCheckbox = row.querySelector('input[name$="-DELETE"]');
+      if (!delCheckbox) return;
+      var idInput = row.querySelector('input[name$="-id"]');
+      var criterionId = idInput ? idInput.value : "";
+
+      // Скрываем чекбокс и его label, но TD оставляем
+      delCheckbox.style.display = "none";
+      var delLabel = delCheckbox.parentElement;
+      if (delLabel && delLabel.tagName === "LABEL") delLabel.style.display = "none";
+
+      // Переименуем заголовок колонки DELETE
+      var thead = group.querySelector("thead");
+      if (thead && !thead._headerFixed) {
+        var ths = thead.querySelectorAll("th");
+        ths.forEach(function (th) {
+          if (th.textContent.trim().toLowerCase() === "удалить?") {
+            th.textContent = "";
+          }
+        });
+        thead._headerFixed = true;
+      }
+
+      // Кнопка удаления — вставляем в ту же ячейку где был чекбокс
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "criterion-delete-btn";
+      btn.title = "Удалить параметр";
+      btn.textContent = "✕";
+
+      var delTd = delCheckbox.closest("td");
+      if (delTd) {
+        delTd.appendChild(btn);
+      }
+
+      btn.addEventListener("click", function () {
+        var nameInput = row.querySelector('input[name$="-name_ru"]');
+        var name = nameInput ? nameInput.value : "этот параметр";
+
+        if (!confirm('Удалить параметр «' + name + '»?')) return;
+
+        // Новая строка (не сохранена) — просто убираем из DOM
+        if (!criterionId) {
+          row.style.display = "none";
+          delCheckbox.checked = true;
+          recalc();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = "…";
+        var url = "../delete-criterion/" + criterionId + "/";
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": getCSRF(),
+            "Content-Type": "application/json",
+          },
+        }).then(function (res) {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.json();
+        }).then(function () {
+          row.style.transition = "opacity 0.3s";
+          row.style.opacity = "0";
+          setTimeout(function () {
+            row.style.display = "none";
+            recalc();
+          }, 300);
+        }).catch(function (err) {
+          alert("Ошибка удаления: " + err.message);
+          btn.disabled = false;
+          btn.textContent = "✕";
+        });
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     recalc();
     bind();
+    setupDeleteButtons();
     if (typeof django !== "undefined" && django.jQuery) {
-      django.jQuery(document).on("formset:added", recalc);
+      django.jQuery(document).on("formset:added", function () {
+        recalc();
+        setupDeleteButtons();
+      });
     }
   });
 })();
 </script>
+<style>
+  .criterion-delete-btn {
+    background: #ba2121;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+  }
+  .criterion-delete-btn:hover {
+    background: #a11;
+  }
+  .criterion-delete-btn:disabled {
+    background: #999;
+    cursor: wait;
+  }
+</style>
 {% endblock %}

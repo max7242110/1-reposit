@@ -1,6 +1,7 @@
 export interface Brand {
   id: number;
   name: string;
+  logo: string;
 }
 
 export interface RegionAvailability {
@@ -47,7 +48,9 @@ export interface Supplier {
 
 export interface ACModelSummary {
   id: number;
+  slug: string;
   brand: string;
+  brand_logo: string;
   inner_unit: string;
   series: string;
   nominal_capacity: number | null;
@@ -65,6 +68,7 @@ export interface ACModelSummary {
 
 export interface ACModelDetail {
   id: number;
+  slug: string;
   brand: Brand;
   series: string;
   inner_unit: string;
@@ -100,7 +104,6 @@ export interface CriterionInfo {
   min_value: number | null;
   median_value: number | null;
   max_value: number | null;
-  is_lab: boolean;
   region_scope: string;
   is_public: boolean;
   display_order: number;
@@ -110,6 +113,9 @@ export interface Methodology {
   version: string;
   name: string;
   description: string;
+  tab_description_index: string;
+  tab_description_quiet: string;
+  tab_description_custom: string;
   is_active: boolean;
   criteria: CriterionInfo[];
 }

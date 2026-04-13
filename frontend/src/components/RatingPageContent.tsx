@@ -71,10 +71,21 @@ export default function RatingPageContent({ models, methodology }: Props) {
   }, [activeTab, models, methodology, enabled]);
 
   const tabs: { key: TabKey; label: string }[] = [
-    { key: "standard", label: "Рейтинг Август-климат" },
+    { key: "standard", label: "По индексу «Август-климат»" },
     { key: "quiet", label: "Самые тихие" },
     { key: "custom", label: "Пользовательский рейтинг" },
   ];
+
+  const priceBounds = useMemo(() => {
+    const prices = models
+      .filter((m) => m.price !== null && parseFloat(m.price!) > 0)
+      .map((m) => parseFloat(m.price!));
+    if (!prices.length) return { min: undefined, max: undefined };
+    return {
+      min: Math.floor(Math.min(...prices)),
+      max: Math.ceil(Math.max(...prices)),
+    };
+  }, [models]);
 
   return (
     <>
@@ -88,7 +99,7 @@ export default function RatingPageContent({ models, methodology }: Props) {
       </section>
 
       <Suspense fallback={<div className="text-center text-gray-400 py-4">Загрузка фильтров...</div>}>
-        <RatingFilters />
+        <RatingFilters defaultPriceMin={priceBounds.min} defaultPriceMax={priceBounds.max} />
       </Suspense>
 
       {/* Табы */}
@@ -139,17 +150,20 @@ export default function RatingPageContent({ models, methodology }: Props) {
         </p>
       )}
 
-      {/* Описание методологии */}
-      {methodology?.description && (
-        <div className="mt-10 p-6 bg-gray-50 dark:bg-gray-900 rounded-xl">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">
-            Как рассчитывается индекс
-          </h2>
-          <div className="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line leading-relaxed">
-            {methodology.description}
+      {/* Описание для активного таба */}
+      {(() => {
+        const tabDescription =
+          activeTab === "standard" ? methodology?.tab_description_index :
+          activeTab === "quiet" ? methodology?.tab_description_quiet :
+          activeTab === "custom" ? methodology?.tab_description_custom : "";
+        return tabDescription ? (
+          <div className="mt-10 p-6 bg-gray-50 dark:bg-gray-900 rounded-xl">
+            <div className="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line leading-relaxed">
+              {tabDescription}
+            </div>
           </div>
-        </div>
-      )}
+        ) : null;
+      })()}
     </>
   );
 }

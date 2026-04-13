@@ -13,10 +13,20 @@ from .models import ACModel, ACModelPhoto, ACModelSupplier, ModelRawValue, Model
 
 
 class BrandSerializer(serializers.ModelSerializer):
+    logo = serializers.SerializerMethodField()
+
     class Meta:
         model = Brand
-        fields = ["id", "name"]
-        read_only_fields = fields
+        fields = ["id", "name", "logo"]
+        read_only_fields = ["id", "name"]
+
+    def get_logo(self, obj: Brand) -> str:
+        if not obj.logo:
+            return ""
+        request = self.context.get("request")
+        if request:
+            return request.build_absolute_uri(obj.logo.url)
+        return obj.logo.url
 
 
 class RegionSerializer(serializers.ModelSerializer):
@@ -43,8 +53,8 @@ class ParameterScoreSerializer(serializers.ModelSerializer):
 
 
 class RawValueSerializer(serializers.ModelSerializer):
-    criterion_code = serializers.CharField(source="criterion.code", read_only=True)
-    criterion_name = serializers.CharField(source="criterion.name_ru", read_only=True)
+    criterion_code = serializers.SerializerMethodField()
+    criterion_name = serializers.SerializerMethodField()
     verification_display = serializers.CharField(source="get_verification_status_display", read_only=True)
 
     class Meta:
@@ -56,6 +66,16 @@ class RawValueSerializer(serializers.ModelSerializer):
             "verification_status", "verification_display",
         ]
         read_only_fields = fields
+
+    def get_criterion_code(self, obj: ModelRawValue) -> str:
+        if obj.criterion:
+            return obj.criterion.code
+        return obj.criterion_code
+
+    def get_criterion_name(self, obj: ModelRawValue) -> str:
+        if obj.criterion:
+            return obj.criterion.name_ru
+        return obj.criterion_code
 
 
 class ACModelPhotoSerializer(serializers.ModelSerializer):
@@ -84,6 +104,7 @@ class ACModelSupplierSerializer(serializers.ModelSerializer):
 
 class ACModelListSerializer(serializers.ModelSerializer):
     brand = serializers.CharField(source="brand.name", read_only=True)
+    brand_logo = serializers.SerializerMethodField()
     region_availability = RegionSerializer(source="regions", many=True, read_only=True)
     index_max = serializers.SerializerMethodField()
     noise_score = serializers.SerializerMethodField()
@@ -93,12 +114,20 @@ class ACModelListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ACModel
         fields = [
-            "id", "brand", "inner_unit", "series",
+            "id", "slug", "brand", "brand_logo", "inner_unit", "series",
             "nominal_capacity", "total_index", "index_max",
             "publish_status", "region_availability",
             "price", "noise_score", "has_noise_measurement", "scores",
         ]
         read_only_fields = fields
+
+    def get_brand_logo(self, obj: ACModel) -> str:
+        if not obj.brand.logo:
+            return ""
+        request = self.context.get("request")
+        if request:
+            return request.build_absolute_uri(obj.brand.logo.url)
+        return obj.brand.logo.url
 
     def get_index_max(self, _obj: ACModel) -> float:
         return float(self.context.get("index_max", 100.0))
@@ -110,7 +139,7 @@ class ACModelListSerializer(serializers.ModelSerializer):
                 obj._scores_cache = {}
                 return obj._scores_cache
 
-            raw_values_map = {rv.criterion_id: rv for rv in obj.raw_values.all()}
+            raw_values_map = {rv.criterion_id: rv for rv in obj.raw_values.all() if rv.criterion_id}
             model_ctx = _build_model_context(obj)
             scores = {}
             for criterion in criteria:
@@ -150,7 +179,7 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = ACModel
         fields = [
-            "id", "brand", "series", "inner_unit", "outer_unit",
+            "id", "slug", "brand", "series", "inner_unit", "outer_unit",
             "nominal_capacity", "total_index", "index_max",
             "publish_status", "region_availability",
             "price", "pros_text", "cons_text",
@@ -186,7 +215,7 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
             {
                 "criterion_code": r["criterion"].code,
                 "criterion_name": get_localized_field(r["criterion"], "name", lang),
-                "criterion_note": r["criterion"].note if r["criterion"].show_note_on_site else "",
+                "criterion_note": r["criterion"].note or "",
                 "criterion_description": get_localized_field(r["criterion"], "description", lang) or "",
                 "compressor_model": (r.get("compressor_model") or "").strip(),
                 "unit": r["criterion"].unit or "",
@@ -213,7 +242,7 @@ class CriterionSerializer(serializers.ModelSerializer):
             "code", "name_ru", "name_en", "description_ru",
             "unit", "value_type", "scoring_type", "weight",
             "min_value", "median_value", "max_value",
-            "is_lab", "region_scope", "is_public",
+            "region_scope", "is_public",
             "display_order",
         ]
         read_only_fields = fields
@@ -224,5 +253,9 @@ class MethodologySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MethodologyVersion
-        fields = ["version", "name", "description", "is_active", "criteria"]
+        fields = [
+            "version", "name", "description", "is_active",
+            "tab_description_index", "tab_description_quiet", "tab_description_custom",
+            "criteria",
+        ]
         read_only_fields = fields

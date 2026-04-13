@@ -18,6 +18,8 @@ const mockModels: ACModelSummary[] = [
   {
     id: 1,
     brand: "Daikin",
+    brand_logo: "",
+    slug: "Daikin-Comfora-FTXB25C",
     inner_unit: "FTXB25C",
     series: "Comfora",
     nominal_capacity: 2.5,
@@ -33,6 +35,8 @@ const mockModels: ACModelSummary[] = [
   {
     id: 2,
     brand: "Mitsubishi",
+    brand_logo: "",
+    slug: "Mitsubishi-Premium-MSZ-LN25VGW",
     inner_unit: "MSZ-LN25VGW",
     series: "Premium",
     nominal_capacity: 2.5,
@@ -75,11 +79,11 @@ describe("RatingTableV2", () => {
     expect(ths.length).toBe(5);
   });
 
-  it("renders links to v2 model detail pages", () => {
+  it("renders links to model detail pages by slug", () => {
     render(<RatingTableV2 models={mockModels} />);
     const links = screen.getAllByRole("link");
-    expect(links[0].getAttribute("href")).toBe("/v2/model/1");
-    expect(links[1].getAttribute("href")).toBe("/v2/model/2");
+    expect(links[0].getAttribute("href")).toBe("/Daikin-Comfora-FTXB25C");
+    expect(links[1].getAttribute("href")).toBe("/Mitsubishi-Premium-MSZ-LN25VGW");
   });
 
   it("renders model unit names", () => {

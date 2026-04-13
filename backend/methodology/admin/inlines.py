@@ -12,7 +12,7 @@ class CriterionInline(admin.TabularInline):
     extra = 0
     fields = (
         "code", "name_ru", "value_type", "scoring_type", "weight",
-        "note", "show_note_on_site", "is_lab", "region_scope", "is_public", "is_active", "display_order",
+        "note", "region_scope", "is_public", "is_active", "display_order",
     )
     ordering = ("display_order",)
 
