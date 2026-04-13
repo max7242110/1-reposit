@@ -123,20 +123,6 @@ export default async function ModelDetailPage({ params }: Props) {
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <section aria-label="Параметры">
-          <div className="bg-gray-50 dark:bg-gray-900 rounded-xl px-4 sm:px-5">
-            {sortedScores.length > 0 ? (
-              sortedScores.map((ps) => (
-                <IndexCriterionCard key={ps.criterion_code} criterion={ps} />
-              ))
-            ) : (
-              <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">
-                Нет активной методики или критериев для отображения.
-              </p>
-            )}
-          </div>
-        </section>
-
         <div className="space-y-8">
           <PhotoGallery photos={model.photos} />
 
@@ -162,6 +148,20 @@ export default async function ModelDetailPage({ params }: Props) {
 
           <SupplierLinks suppliers={model.suppliers} />
         </div>
+
+        <section aria-label="Параметры">
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-xl px-4 sm:px-5">
+            {sortedScores.length > 0 ? (
+              sortedScores.map((ps) => (
+                <IndexCriterionCard key={ps.criterion_code} criterion={ps} />
+              ))
+            ) : (
+              <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">
+                Нет активной методики или критериев для отображения.
+              </p>
+            )}
+          </div>
+        </section>
       </div>
     </article>
   );

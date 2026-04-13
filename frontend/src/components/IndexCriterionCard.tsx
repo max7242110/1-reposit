@@ -35,8 +35,14 @@ export default function IndexCriterionCard({ criterion }: Props) {
     <div className="py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
       <div className="flex items-start justify-between gap-2 mb-2">
         <div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug flex items-center gap-1.5">
-            {criterion_name}
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+            <span>{criterion_name}:</span>
+            <span className="inline-flex items-center gap-1 rounded-md bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 text-base font-semibold text-blue-700 dark:text-blue-300 tabular-nums">
+              {displayValue}
+              {displayUnit ? (
+                <span className="font-normal text-blue-500 dark:text-blue-400">{displayUnit}</span>
+              ) : null}
+            </span>
             {criterion_description && (
               <Tooltip text={criterion_description}>
                 <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-gray-400 dark:border-gray-500 text-[10px] font-bold text-gray-400 dark:text-gray-500 cursor-help shrink-0">
@@ -61,22 +67,7 @@ export default function IndexCriterionCard({ criterion }: Props) {
         )}
       </div>
 
-      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-        <span className="text-gray-500 dark:text-gray-500">Значение:</span>{" "}
-        <span className="font-medium text-gray-900 dark:text-gray-100 tabular-nums">
-          {displayValue}
-        </span>
-        {displayUnit ? (
-          <span className="text-gray-500 dark:text-gray-400 ml-1">{displayUnit}</span>
-        ) : null}
-      </p>
-
       <div className="space-y-1.5">
-        <div className="flex justify-between text-[10px] uppercase tracking-wide text-gray-400 dark:text-gray-500 px-0.5">
-          <span>0</span>
-          <span>50</span>
-          <span>100</span>
-        </div>
         <div
           className="relative w-full h-3 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden shadow-inner"
           role="progressbar"
