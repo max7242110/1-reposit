@@ -37,13 +37,42 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
     inlines = [MethodologyCriterionInline]
     readonly_fields = ("created_at", "updated_at")
 
+    def _warn_if_noise_missing(self, request) -> None:
+        """Предупреждение: в активной методике нет параметра noise.
+
+        Таб «Самые тихие кондиционеры» на фронтенде использует noise
+        независимо от общего индекса — если критерия нет вовсе, таб будет
+        пустым. Снятый is_active — штатный режим, предупреждение НЕ шлём.
+        """
+        active = MethodologyVersion.objects.filter(is_active=True).first()
+        if not active:
+            return
+        has_noise = MethodologyCriterion.objects.filter(
+            methodology=active, criterion__code="noise",
+        ).exists()
+        if not has_noise:
+            messages.warning(
+                request,
+                "В активной методике отсутствует параметр «Замер уровня шума» "
+                "(code=noise). Таб «Самые тихие кондиционеры» на фронтенде "
+                "будет пустым. Добавьте параметр в активную методику "
+                "(можно со снятым чек-боксом «Активен»).",
+            )
+
+    def changelist_view(self, request, extra_context=None):
+        self._warn_if_noise_missing(request)
+        return super().changelist_view(request, extra_context)
+
     def get_queryset(self, request) -> QuerySet:
         return super().get_queryset(request).annotate(
             _criteria_count=Count(
                 "methodology_criteria",
                 filter=Q(methodology_criteria__is_active=True),
             ),
-            _weight_sum=Sum("methodology_criteria__weight"),
+            _weight_sum=Sum(
+                "methodology_criteria__weight",
+                filter=Q(methodology_criteria__is_active=True),
+            ),
         )
 
     @admin.display(description="Критериев")
@@ -117,13 +146,14 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
         return TemplateResponse(request, self.duplicate_form_template, context)
 
     def changeform_view(self, request, object_id=None, form_url="", extra_context=None):
+        self._warn_if_noise_missing(request)
         extra_context = extra_context or {}
         total = 0.0
         if object_id:
             obj = self.get_object(request, object_id)
             if obj is not None:
                 agg = MethodologyCriterion.objects.filter(
-                    methodology=obj,
+                    methodology=obj, is_active=True,
                 ).aggregate(s=Sum("weight"))
                 total = float(agg["s"] or 0)
                 if self.has_change_permission(request, obj):

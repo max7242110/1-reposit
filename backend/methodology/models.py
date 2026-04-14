@@ -213,6 +213,14 @@ class MethodologyCriterion(TimestampMixin):
             ),
         ]
 
+    # Несовместимые пары (value_type параметра × scoring_type методики).
+    # Ловит явные опечатки: напр. бинарное поле нельзя скорить линейной
+    # шкалой min-median-max. Всё, что не в списке — допустимо.
+    _INCOMPATIBLE_SCORING = {
+        "binary": {"min_median_max", "interval"},
+        "categorical": {"min_median_max", "interval"},
+    }
+
     def clean(self):
         super().clean()
         if self.weight < 0:
@@ -225,6 +233,37 @@ class MethodologyCriterion(TimestampMixin):
                 raise ValidationError({"median_value": "median_value не может быть меньше min_value."})
             if self.max_value is not None and self.median_value > self.max_value:
                 raise ValidationError({"median_value": "median_value не может быть больше max_value."})
+
+        # Совместимость value_type параметра и scoring_type методики.
+        # criterion_id может быть None, если форма ещё не выбрала параметр.
+        if self.criterion_id:
+            vt = self.criterion.value_type
+            forbidden = self._INCOMPATIBLE_SCORING.get(vt, set())
+            if self.scoring_type in forbidden:
+                raise ValidationError({
+                    "scoring_type": (
+                        f"Тип скоринга «{self.get_scoring_type_display()}» "
+                        f"несовместим с типом значения параметра «{vt}». "
+                        f"Выберите другой тип скоринга."
+                    ),
+                })
+
+        # Обязательные поля для конкретных scoring_type.
+        if self.scoring_type == self.ScoringType.MIN_MEDIAN_MAX:
+            if self.min_value is None or self.max_value is None:
+                raise ValidationError({
+                    "min_value": "Для скоринга «Min / Median / Max» обязательны min_value и max_value.",
+                })
+        elif self.scoring_type == self.ScoringType.CUSTOM_SCALE:
+            if not self.custom_scale_json:
+                raise ValidationError({
+                    "custom_scale_json": "Для скоринга «Индивидуальная шкала» нужно заполнить JSON.",
+                })
+        elif self.scoring_type == self.ScoringType.FORMULA:
+            if not self.formula_json:
+                raise ValidationError({
+                    "formula_json": "Для скоринга «Формула» нужно заполнить JSON.",
+                })
 
     def __str__(self) -> str:
         return f"{self.criterion.name_ru} ({self.weight}%) — {self.methodology}"

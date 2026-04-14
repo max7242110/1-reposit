@@ -50,7 +50,7 @@ def integer_range_options(mn: float, mx: float) -> list[str]:
 def build_options(criterion: MethodologyCriterion) -> list[str]:
     """Варианты для datalist по типу критерия."""
     if criterion.value_type == Criterion.ValueType.BINARY:
-        return ["да", "нет"]
+        return ["есть", "нет"]
 
     if criterion.value_type == Criterion.ValueType.BRAND_AGE:
         return []

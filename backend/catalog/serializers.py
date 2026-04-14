@@ -158,11 +158,40 @@ class ACModelListSerializer(serializers.ModelSerializer):
     def get_scores(self, obj: ACModel) -> dict:
         return self._get_scores_cache(obj)
 
+    def _get_noise_score(self, obj: ACModel) -> float | None:
+        """Считает noise_score независимо от _get_scores_cache.
+
+        Нужно, чтобы таб «Самые тихие кондиционеры» работал даже если
+        в активной методике у noise снят чек-бокс is_active (и параметр
+        исключён из расчёта общего индекса).
+        """
+        if hasattr(obj, "_noise_score_cache"):
+            return obj._noise_score_cache
+
+        noise_mc = self.context.get("noise_mc")
+        score: float | None = None
+        if noise_mc:
+            rv = next(
+                (r for r in obj.raw_values.all()
+                 if r.criterion_id == noise_mc.criterion_id),
+                None,
+            )
+            raw = rv.raw_value if rv else ""
+            scorer = _get_scorer(noise_mc)
+            if scorer:
+                model_ctx = _build_model_context(obj)
+                if rv:
+                    model_ctx["lab_status"] = rv.lab_status
+                result = scorer.calculate(noise_mc, raw, **model_ctx)
+                score = round(result.normalized_score, 2)
+        obj._noise_score_cache = score
+        return score
+
     def get_noise_score(self, obj: ACModel) -> float | None:
-        return self._get_scores_cache(obj).get("noise")
+        return self._get_noise_score(obj)
 
     def get_has_noise_measurement(self, obj: ACModel) -> bool:
-        score = self._get_scores_cache(obj).get("noise")
+        score = self._get_noise_score(obj)
         return score is not None and score > 0
 
 
@@ -259,9 +288,7 @@ class MethodologyCriterionSerializer(serializers.ModelSerializer):
 
 
 class MethodologySerializer(serializers.ModelSerializer):
-    criteria = MethodologyCriterionSerializer(
-        source="methodology_criteria", many=True, read_only=True,
-    )
+    criteria = serializers.SerializerMethodField()
 
     class Meta:
         model = MethodologyVersion
@@ -271,3 +298,16 @@ class MethodologySerializer(serializers.ModelSerializer):
             "criteria",
         ]
         read_only_fields = fields
+
+    def get_criteria(self, obj: MethodologyVersion) -> list:
+        # Отдаём только активные параметры — неактивные (включая snятый noise)
+        # не должны участвовать в «Пользовательском рейтинге» и на публичной
+        # странице методики. Таб «Самые тихие» использует отдельный noise_mc
+        # из context ACModelListView — не зависит от этого endpoint'а.
+        qs = (
+            obj.methodology_criteria
+            .filter(is_active=True)
+            .select_related("criterion")
+            .order_by("display_order", "criterion__code")
+        )
+        return MethodologyCriterionSerializer(qs, many=True, context=self.context).data

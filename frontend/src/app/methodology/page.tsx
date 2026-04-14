@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const SCORING_LABELS: Record<string, string> = {
   min_median_max: "Линейная шкала (min / медиана / max)",
-  binary: "Да / Нет",
+  binary: "Есть / Нет",
   universal_scale: "Универсальная шкала",
   custom_scale: "Индивидуальная шкала",
   formula: "Расчёт по формуле",

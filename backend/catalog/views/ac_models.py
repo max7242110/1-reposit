@@ -23,6 +23,15 @@ class ACModelListView(LangMixin, generics.ListAPIView):
                 methodology=active, is_active=True,
             ).select_related("criterion").order_by("display_order", "criterion__code")
         ) if active else []
+        # noise_mc — отдельно, БЕЗ фильтра is_active. Нужен для таба
+        # «Самые тихие»: он должен работать, даже если noise снят с is_active
+        # в активной методике (и потому не участвует в общем индексе).
+        ctx["noise_mc"] = (
+            MethodologyCriterion.objects
+            .filter(methodology=active, criterion__code="noise")
+            .select_related("criterion")
+            .first()
+        ) if active else None
         return ctx
 
     def get_queryset(self):
