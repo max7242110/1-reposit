@@ -79,14 +79,20 @@ export default function RatingTableV2({ models, indexMode = "standard", customIn
                     href={`/${m.slug}`}
                     className="inline-flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
-                    {m.brand_logo && (
-                      <img
-                        src={m.brand_logo}
-                        alt={m.brand}
-                        className="h-5 w-5 object-contain shrink-0"
-                        loading="lazy"
-                      />
-                    )}
+                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shrink-0">
+                      {m.brand_logo ? (
+                        <img
+                          src={m.brand_logo}
+                          alt={m.brand}
+                          className="max-w-[80%] max-h-[80%] object-contain"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase">
+                          {m.brand.slice(0, 2)}
+                        </span>
+                      )}
+                    </span>
                     {m.brand}
                   </Link>
                   <div className="text-sm text-gray-500 dark:text-gray-400 sm:hidden mt-0.5">

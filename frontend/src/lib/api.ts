@@ -2,6 +2,7 @@ import {
   ACModelDetail,
   ACModelSummary,
   Methodology,
+  Review,
 } from "./types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
@@ -89,4 +90,41 @@ export interface PageContent {
 
 export async function getPage(slug: string): Promise<PageContent> {
   return apiFetch<PageContent>(`/v2/pages/${slug}/`);
+}
+
+// Reviews
+export async function getReviews(modelId: number): Promise<Review[]> {
+  // Список без пагинации; на всякий случай поддерживаем оба формата.
+  const data = await apiFetch<Review[] | PaginatedResponse<Review>>(
+    `/v2/models/${modelId}/reviews/`,
+  );
+  return Array.isArray(data) ? data : data.results;
+}
+
+export interface ReviewCreatePayload {
+  model: number;
+  author_name: string;
+  rating: number;
+  pros?: string;
+  cons?: string;
+  comment?: string;
+  /** Honeypot: должно остаться пустым. */
+  website?: string;
+}
+
+export async function createReview(payload: ReviewCreatePayload): Promise<Review> {
+  const res = await fetch(`${API_BASE}/v2/reviews/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    let msg = `${res.status} ${res.statusText}`;
+    try {
+      const data = await res.json();
+      msg = typeof data === "string" ? data : JSON.stringify(data);
+    } catch {}
+    throw new ApiError(res.status, msg);
+  }
+  return (await res.json()) as Review;
 }

@@ -24,3 +24,16 @@ SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Кэш: Redis общий для всех gunicorn-воркеров.
+# Нужен, чтобы django-ratelimit корректно считал лимиты по IP в многопроцессной среде.
+# Если REDIS_URL не задан — падаем на LocMemCache (ratelimit будет считать per-worker).
+_REDIS_URL = os.environ.get("REDIS_URL", "")
+if _REDIS_URL:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": _REDIS_URL,
+        }
+    }
+

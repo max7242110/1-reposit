@@ -110,6 +110,16 @@ export interface CriterionInfo {
   photo_url: string;
 }
 
+export interface Review {
+  id: number;
+  author_name: string;
+  rating: number;
+  pros: string;
+  cons: string;
+  comment: string;
+  created_at: string;
+}
+
 export interface Methodology {
   version: string;
   name: string;

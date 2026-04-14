@@ -2,12 +2,14 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import BackLink from "@/components/BackLink";
-import IndexCriterionCard from "@/components/IndexCriterionCard";
+import CollapsibleParameters from "@/components/CollapsibleParameters";
 import PhotoGallery from "@/components/PhotoGallery";
 import ProsConsBlock from "@/components/ProsConsBlock";
+import ReviewForm from "@/components/ReviewForm";
+import ReviewsList from "@/components/ReviewsList";
 import SupplierLinks from "@/components/SupplierLinks";
 import VideoLinks from "@/components/VideoLinks";
-import { getModelBySlug } from "@/lib/api";
+import { getModelBySlug, getReviews } from "@/lib/api";
 import { formatIndexMax } from "@/lib/utils";
 
 interface Props {
@@ -48,6 +50,8 @@ export default async function ModelDetailPage({ params }: Props) {
   const sortedScores = [...model.parameter_scores].sort(
     (a, b) => b.normalized_score - a.normalized_score || b.weighted_score - a.weighted_score,
   );
+
+  const reviews = await getReviews(model.id).catch(() => []);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -152,9 +156,7 @@ export default async function ModelDetailPage({ params }: Props) {
         <section aria-label="Параметры">
           <div className="bg-gray-50 dark:bg-gray-900 rounded-xl px-4 sm:px-5">
             {sortedScores.length > 0 ? (
-              sortedScores.map((ps) => (
-                <IndexCriterionCard key={ps.criterion_code} criterion={ps} />
-              ))
+              <CollapsibleParameters scores={sortedScores} />
             ) : (
               <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">
                 Нет активной методики или критериев для отображения.
@@ -163,6 +165,14 @@ export default async function ModelDetailPage({ params }: Props) {
           </div>
         </section>
       </div>
+
+      <section aria-label="Отзывы" className="mt-12">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+          Отзывы пользователей
+        </h2>
+        <ReviewsList reviews={reviews} />
+        <ReviewForm modelId={model.id} />
+      </section>
     </article>
   );
 }
