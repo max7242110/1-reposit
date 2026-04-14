@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import CustomRatingPanel from "@/components/CustomRatingPanel";
 import RatingFilters from "@/components/RatingFilters";
@@ -130,20 +131,30 @@ export default function RatingPageContent({ models, methodology }: Props) {
       )}
 
       {displayModels.length > 0 ? (
-        <RatingTableV2
-          models={displayModels}
-          indexMode={activeTab === "quiet" ? "noise" : "standard"}
-          customIndex={
-            activeTab === "custom" && methodology
-              ? Object.fromEntries(
-                  displayModels.map((m) => [
-                    m.id,
-                    computeCustomIndex(m, methodology.criteria, enabled),
-                  ]),
-                )
-              : undefined
-          }
-        />
+        <>
+          <RatingTableV2
+            models={displayModels}
+            indexMode={activeTab === "quiet" ? "noise" : "standard"}
+            customIndex={
+              activeTab === "custom" && methodology
+                ? Object.fromEntries(
+                    displayModels.map((m) => [
+                      m.id,
+                      computeCustomIndex(m, methodology.criteria, enabled),
+                    ]),
+                  )
+                : undefined
+            }
+          />
+          <div className="mt-4 flex justify-end">
+            <Link
+              href="/submit"
+              className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+            >
+              Добавить кондиционер в рейтинг
+            </Link>
+          </div>
+        </>
       ) : (
         <p className="text-center text-gray-500 dark:text-gray-400 py-12">
           Модели не найдены. Попробуйте изменить фильтры.

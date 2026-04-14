@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .audit import AuditLog
+from .models import Page
 
 
 @admin.register(AuditLog)
@@ -23,3 +24,11 @@ class AuditLogAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    list_display = ("title_ru", "slug", "is_active", "updated_at")
+    list_filter = ("is_active",)
+    prepopulated_fields = {"slug": ("title_ru",)}
+    search_fields = ("title_ru", "slug")

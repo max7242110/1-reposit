@@ -16,7 +16,7 @@ class CriterionAdmin(admin.ModelAdmin):
     ordering = ("code",)
     fieldsets = (
         ("Основное", {
-            "fields": ("code", "name_ru", "name_en", "name_de", "name_pt", "unit"),
+            "fields": ("code", "name_ru", "name_en", "name_de", "name_pt", "unit", "photo"),
         }),
         ("Описание", {
             "classes": ("collapse",),

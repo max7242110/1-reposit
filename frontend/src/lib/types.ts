@@ -107,6 +107,7 @@ export interface CriterionInfo {
   region_scope: string;
   is_public: boolean;
   display_order: number;
+  photo_url: string;
 }
 
 export interface Methodology {

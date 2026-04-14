@@ -58,7 +58,19 @@ export default function RootLayout({
         </main>
         <footer className="border-t border-gray-200 dark:border-gray-800 mt-16">
           <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-            <div className="flex gap-4">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+              <Link
+                href="/methodology"
+                className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+              >
+                Методика рейтинга
+              </Link>
+              <Link
+                href="/submit"
+                className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+              >
+                Добавить в рейтинг
+              </Link>
               <Link
                 href="/archive"
                 className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors"

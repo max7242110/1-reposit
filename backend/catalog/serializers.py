@@ -235,6 +235,7 @@ class MethodologyCriterionSerializer(serializers.ModelSerializer):
     description_ru = serializers.CharField(source="criterion.description_ru", read_only=True)
     unit = serializers.CharField(source="criterion.unit", read_only=True)
     value_type = serializers.CharField(source="criterion.value_type", read_only=True)
+    photo_url = serializers.SerializerMethodField()
 
     class Meta:
         model = MethodologyCriterion
@@ -243,9 +244,18 @@ class MethodologyCriterionSerializer(serializers.ModelSerializer):
             "unit", "value_type", "scoring_type", "weight",
             "min_value", "median_value", "max_value",
             "region_scope", "is_public",
-            "display_order",
+            "display_order", "photo_url",
         ]
         read_only_fields = fields
+
+    def get_photo_url(self, obj: MethodologyCriterion) -> str:
+        photo = obj.criterion.photo
+        if not photo:
+            return ""
+        request = self.context.get("request")
+        if request:
+            return request.build_absolute_uri(photo.url)
+        return photo.url
 
 
 class MethodologySerializer(serializers.ModelSerializer):

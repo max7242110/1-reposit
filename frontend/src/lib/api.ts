@@ -80,3 +80,13 @@ export async function getArchivedModels(): Promise<ACModelSummary[]> {
 export async function getMethodology(): Promise<Methodology> {
   return apiFetch<Methodology>("/v2/methodology/");
 }
+
+export interface PageContent {
+  slug: string;
+  title_ru: string;
+  content_ru: string;
+}
+
+export async function getPage(slug: string): Promise<PageContent> {
+  return apiFetch<PageContent>(`/v2/pages/${slug}/`);
+}

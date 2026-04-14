@@ -103,6 +103,11 @@ class Criterion(TimestampMixin):
 
     unit = models.CharField(max_length=50, blank=True, default="", verbose_name="Ед. измерения")
 
+    photo = models.ImageField(
+        upload_to="criteria/", blank=True, default="",
+        verbose_name="Фото",
+    )
+
     value_type = models.CharField(
         max_length=30, choices=ValueType.choices, verbose_name="Тип значения",
     )
