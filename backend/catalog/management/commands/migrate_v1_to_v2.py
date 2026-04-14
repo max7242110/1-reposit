@@ -9,7 +9,7 @@ from django.db import transaction
 
 from brands.models import Brand
 from catalog.models import ACModel, EquipmentType, ModelRawValue, ModelRegion
-from methodology.models import Criterion, MethodologyVersion
+from methodology.models import Criterion, MethodologyCriterion, MethodologyVersion
 from ratings.models import AirConditioner, ParameterValue
 
 V1_TO_V2_CRITERIA = {
@@ -90,11 +90,18 @@ class Command(BaseCommand):
         criteria_map: dict[str, Criterion] = {}
         for idx, (v1_name, (code, vtype, stype, unit)) in enumerate(V1_TO_V2_CRITERIA.items()):
             criterion, _ = Criterion.objects.get_or_create(
-                methodology=methodology, code=code,
+                code=code,
                 defaults={
                     "name_ru": v1_name,
                     "unit": unit,
                     "value_type": vtype,
+                    "is_active": True,
+                },
+            )
+            MethodologyCriterion.objects.get_or_create(
+                methodology=methodology,
+                criterion=criterion,
+                defaults={
                     "scoring_type": stype,
                     "weight": round(100 / len(V1_TO_V2_CRITERIA), 2),
                     "display_order": idx + 1,

@@ -67,7 +67,7 @@ def calculate_model(
         CalculationResult(
             run=run,
             model=ac_model,
-            criterion=r["criterion"],
+            criterion=r["criterion"].criterion,
             raw_value=r["raw_value"],
             normalized_score=r["normalized_score"],
             weighted_score=r["weighted_score"],

@@ -13,7 +13,7 @@ from typing import Any
 
 from django.utils import timezone
 
-from methodology.models import Criterion
+from methodology.models import MethodologyCriterion as Criterion
 
 from .base import BaseScorer, ScoreResult
 

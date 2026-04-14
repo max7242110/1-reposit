@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 from brands.models import Brand
 from core.i18n import DEFAULT_LANGUAGE, get_localized_field
-from methodology.models import Criterion, MethodologyVersion
+from methodology.models import MethodologyCriterion, MethodologyVersion
 from scoring.engine import compute_scores_for_model, max_possible_total_index
 from scoring.engine.computation import _build_model_context, _get_scorer
 from scoring.models import CalculationResult
@@ -134,24 +134,24 @@ class ACModelListSerializer(serializers.ModelSerializer):
 
     def _get_scores_cache(self, obj: ACModel) -> dict:
         if not hasattr(obj, "_scores_cache"):
-            criteria = self.context.get("criteria", [])
-            if not criteria:
+            mc_list = self.context.get("criteria", [])
+            if not mc_list:
                 obj._scores_cache = {}
                 return obj._scores_cache
 
             raw_values_map = {rv.criterion_id: rv for rv in obj.raw_values.all() if rv.criterion_id}
             model_ctx = _build_model_context(obj)
             scores = {}
-            for criterion in criteria:
-                rv = raw_values_map.get(criterion.pk)
+            for mc in mc_list:
+                rv = raw_values_map.get(mc.criterion_id)
                 raw = rv.raw_value if rv else ""
-                scorer = _get_scorer(criterion)
+                scorer = _get_scorer(mc)
                 if scorer:
                     ctx = {**model_ctx}
                     if rv:
                         ctx["lab_status"] = rv.lab_status
-                    result = scorer.calculate(criterion, raw, **ctx)
-                    scores[criterion.code] = round(result.normalized_score, 2)
+                    result = scorer.calculate(mc, raw, **ctx)
+                    scores[mc.code] = round(result.normalized_score, 2)
             obj._scores_cache = scores
         return obj._scores_cache
 
@@ -228,9 +228,16 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
         return float(max_possible_total_index(self._get_methodology_for_detail(obj)))
 
 
-class CriterionSerializer(serializers.ModelSerializer):
+class MethodologyCriterionSerializer(serializers.ModelSerializer):
+    code = serializers.CharField(source="criterion.code", read_only=True)
+    name_ru = serializers.CharField(source="criterion.name_ru", read_only=True)
+    name_en = serializers.CharField(source="criterion.name_en", read_only=True)
+    description_ru = serializers.CharField(source="criterion.description_ru", read_only=True)
+    unit = serializers.CharField(source="criterion.unit", read_only=True)
+    value_type = serializers.CharField(source="criterion.value_type", read_only=True)
+
     class Meta:
-        model = Criterion
+        model = MethodologyCriterion
         fields = [
             "code", "name_ru", "name_en", "description_ru",
             "unit", "value_type", "scoring_type", "weight",
@@ -242,7 +249,9 @@ class CriterionSerializer(serializers.ModelSerializer):
 
 
 class MethodologySerializer(serializers.ModelSerializer):
-    criteria = CriterionSerializer(many=True, read_only=True)
+    criteria = MethodologyCriterionSerializer(
+        source="methodology_criteria", many=True, read_only=True,
+    )
 
     class Meta:
         model = MethodologyVersion

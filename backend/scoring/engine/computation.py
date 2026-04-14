@@ -6,7 +6,7 @@ import logging
 from typing import Any
 
 from catalog.models import ACModel, ModelRawValue
-from methodology.models import Criterion, MethodologyVersion
+from methodology.models import MethodologyCriterion, MethodologyVersion
 from scoring.scorers import SCORER_MAP
 from scoring.scorers.base import BaseScorer, ScoreResult
 from scoring.scorers.brand_age import BrandAgeScorer
@@ -21,21 +21,21 @@ def validate_weights(methodology: MethodologyVersion) -> None:
     return None
 
 
-def _get_scorer(criterion: Criterion) -> BaseScorer | None:
-    if criterion.value_type == Criterion.ValueType.BRAND_AGE:
+def _get_scorer(mc: MethodologyCriterion) -> BaseScorer | None:
+    if mc.value_type == "brand_age":
         return BrandAgeScorer()
-    if criterion.value_type == Criterion.ValueType.FALLBACK:
+    if mc.value_type == "fallback":
         return FallbackScorer()
-    if criterion.value_type == Criterion.ValueType.LAB:
+    if mc.value_type == "lab":
         return LabScorer()
 
-    scorer_class = SCORER_MAP.get(criterion.scoring_type)
+    scorer_class = SCORER_MAP.get(mc.scoring_type)
     if scorer_class:
         return scorer_class()
 
     logger.warning(
         "No scorer for criterion %s (type=%s, scoring=%s)",
-        criterion.code, criterion.value_type, criterion.scoring_type,
+        mc.code, mc.value_type, mc.scoring_type,
     )
     return None
 
@@ -62,13 +62,13 @@ def max_possible_total_index(methodology: MethodologyVersion | None) -> float:
     """
     if methodology is None:
         return 100.0
-    criteria = Criterion.objects.filter(
+    mc_qs = MethodologyCriterion.objects.filter(
         methodology=methodology, is_active=True,
-    ).order_by("display_order", "code")
+    ).select_related("criterion").order_by("display_order", "criterion__code")
     total = 0.0
-    for criterion in criteria:
-        if _get_scorer(criterion):
-            total += float(criterion.weight)
+    for mc in mc_qs:
+        if _get_scorer(mc):
+            total += float(mc.weight)
     return round(total, 2)
 
 
@@ -80,9 +80,9 @@ def compute_scores_for_model(
     Считает итоговый индекс и разбивку по критериям.
     Без записи в БД. Пустой raw_value — как у соответствующих скореров (часто 0).
     """
-    criteria = Criterion.objects.filter(
+    mc_qs = MethodologyCriterion.objects.filter(
         methodology=methodology, is_active=True,
-    ).order_by("display_order", "code")
+    ).select_related("criterion").order_by("display_order", "criterion__code")
 
     raw_values = {
         rv.criterion_id: rv
@@ -96,11 +96,11 @@ def compute_scores_for_model(
     total_index = 0.0
     rows: list[dict[str, Any]] = []
 
-    for criterion in criteria:
-        rv = raw_values.get(criterion.pk)
+    for mc in mc_qs:
+        rv = raw_values.get(mc.criterion_id)
         raw = rv.raw_value if rv else ""
 
-        scorer = _get_scorer(criterion)
+        scorer = _get_scorer(mc)
         if not scorer:
             continue
 
@@ -108,13 +108,13 @@ def compute_scores_for_model(
         if rv:
             context["lab_status"] = rv.lab_status
 
-        result: ScoreResult = scorer.calculate(criterion, raw, **context)
+        result: ScoreResult = scorer.calculate(mc, raw, **context)
 
-        weighted = round(criterion.weight * result.normalized_score / 100, 4)
+        weighted = round(mc.weight * result.normalized_score / 100, 4)
         total_index += weighted
 
         rows.append({
-            "criterion": criterion,
+            "criterion": mc,
             "raw_value": str(raw),
             "compressor_model": rv.compressor_model if rv else "",
             "normalized_score": round(result.normalized_score, 2),

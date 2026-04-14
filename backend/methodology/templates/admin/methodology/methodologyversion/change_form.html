@@ -44,7 +44,7 @@
   }
 
   function recalc() {
-    var group = document.getElementById("criteria-group");
+    var group = document.getElementById("methodology_criteria-group");
     if (!group) return;
     var inputs = group.querySelectorAll('input[name$="-weight"]');
     var sum = 0;
@@ -61,7 +61,7 @@
   }
 
   function bind() {
-    var group = document.getElementById("criteria-group");
+    var group = document.getElementById("methodology_criteria-group");
     if (!group) return;
     group.addEventListener("input", function (e) {
       var n = e.target && e.target.name;
@@ -79,9 +79,9 @@
   }
 
   function setupDeleteButtons() {
-    var group = document.getElementById("criteria-group");
+    var group = document.getElementById("methodology_criteria-group");
     if (!group) return;
-    var rows = group.querySelectorAll("tr.form-row, tr.dynamic-criteria");
+    var rows = group.querySelectorAll("tr.form-row, tr.dynamic-methodology_criteria");
     rows.forEach(function (row) {
       if (row.querySelector(".criterion-delete-btn")) return; // уже есть кнопка
       var delCheckbox = row.querySelector('input[name$="-DELETE"]');

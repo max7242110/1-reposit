@@ -20,7 +20,7 @@ class MethodologyView(LangMixin, generics.RetrieveAPIView):
 
     def get_object(self):
         obj = MethodologyVersion.objects.prefetch_related(
-            "criteria",
+            "methodology_criteria__criterion",
         ).filter(is_active=True).first()
         if obj is None:
             raise NotFound("Активная методика не найдена")

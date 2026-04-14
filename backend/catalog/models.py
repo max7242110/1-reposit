@@ -182,7 +182,7 @@ class ModelRawValue(TimestampMixin):
     )
 
     class Meta:
-        ordering = ["criterion__display_order"]
+        ordering = ["criterion__code"]
         verbose_name = "Значение параметра модели"
         verbose_name_plural = "Значения параметров моделей"
         constraints = [

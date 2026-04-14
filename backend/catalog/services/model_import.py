@@ -13,7 +13,7 @@ from django.db import transaction
 from brands.models import Brand
 from catalog.models import ACModel, EquipmentType, ModelRawValue, ModelRegion
 from catalog.sync_brand_age import sync_brand_age_for_model
-from methodology.models import Criterion, MethodologyVersion
+from methodology.models import Criterion, MethodologyCriterion, MethodologyVersion
 from scoring.engine import update_model_total_index
 
 
@@ -51,7 +51,7 @@ def _safe_price(val: Any) -> float | None:
         return None
 
 
-def _prepare_criterion_value(criterion: Criterion, val: Any) -> tuple[str | None, float | None]:
+def _prepare_criterion_value(mc: MethodologyCriterion, val: Any) -> tuple[str | None, float | None]:
     """
     Возвращает (raw_value, numeric_value) или (None, None), если значение пустое
     либо конфликтует с типом критерия.
@@ -60,7 +60,7 @@ def _prepare_criterion_value(criterion: Criterion, val: Any) -> tuple[str | None
         return None, None
 
     normalized = _normalize_decimal_string(val)
-    vtype = criterion.value_type
+    vtype = mc.value_type  # proxy -> criterion.value_type
     numeric_types = {
         Criterion.ValueType.NUMERIC,
         Criterion.ValueType.LAB,
@@ -75,7 +75,7 @@ def _prepare_criterion_value(criterion: Criterion, val: Any) -> tuple[str | None
         except (ValueError, TypeError):
             return None, None
         # compressor_power is stored in watts; support legacy kW inputs.
-        if criterion.code == "compressor_power" and 0 < numeric < 100:
+        if mc.code == "compressor_power" and 0 < numeric < 100:
             numeric = numeric * 1000.0
             normalized = f"{numeric:g}"
         return normalized, numeric
@@ -166,9 +166,9 @@ def import_models_from_file(path: Path, *, publish: bool = False) -> tuple[int, 
         raise ValueError("Нет активной методики")
 
     criteria = {
-        c.code: c for c in Criterion.objects.filter(
+        mc.code: mc for mc in MethodologyCriterion.objects.filter(
             methodology=methodology, is_active=True,
-        )
+        ).select_related("criterion")
     }
 
     rows = _read_rows(path)
@@ -227,8 +227,8 @@ def import_models_from_file(path: Path, *, publish: bool = False) -> tuple[int, 
             for code in to_add:
                 ModelRegion.objects.get_or_create(model=ac, region_code=code)
 
-            for code, criterion in criteria.items():
-                raw_value, numeric = _prepare_criterion_value(criterion, row.get(code, ""))
+            for code, mc in criteria.items():
+                raw_value, numeric = _prepare_criterion_value(mc, row.get(code, ""))
                 if raw_value is None:
                     continue
                 compressor_model = ""
@@ -236,7 +236,7 @@ def import_models_from_file(path: Path, *, publish: bool = False) -> tuple[int, 
                     compressor_model = str(row.get("compressor_model", "") or "").strip()
                 ModelRawValue.objects.update_or_create(
                     model=ac,
-                    criterion=criterion,
+                    criterion=mc.criterion,
                     defaults={
                         "raw_value": raw_value,
                         "compressor_model": compressor_model,

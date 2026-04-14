@@ -7,7 +7,7 @@ from django.forms import BaseInlineFormSet
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from methodology.models import Criterion
+from methodology.models import Criterion, MethodologyCriterion, MethodologyVersion
 
 from catalog.models import ACModel
 
@@ -25,11 +25,25 @@ class RawValueFormSet(BaseInlineFormSet):
             for f in self.forms
             if f.instance and f.instance.criterion_id
         }
-        criteria_cache: dict[int, Criterion] = {}
-        if criterion_ids:
-            criteria_cache = {
-                c.pk: c
-                for c in Criterion.objects.filter(pk__in=criterion_ids)
+        if not criterion_ids:
+            return
+
+        # Загружаем standalone Criterion для value_type/code
+        criteria_cache: dict[int, Criterion] = {
+            c.pk: c
+            for c in Criterion.objects.filter(pk__in=criterion_ids)
+        }
+
+        # Загружаем MethodologyCriterion для активной методики (min/max/scale и т.д.)
+        active = MethodologyVersion.objects.filter(is_active=True).first()
+        mc_cache: dict[int, MethodologyCriterion] = {}
+        if active:
+            mc_cache = {
+                mc.criterion_id: mc
+                for mc in MethodologyCriterion.objects.filter(
+                    methodology=active,
+                    criterion_id__in=criterion_ids,
+                ).select_related("criterion")
             }
 
         for form in self.forms:
@@ -69,15 +83,17 @@ class RawValueFormSet(BaseInlineFormSet):
             else:
                 form.fields["compressor_model"].help_text = "Например: Panasonic R32 Inverter"
 
-            options = build_options(criterion)
-            hint = build_hint(criterion)
+            mc = mc_cache.get(inst.criterion_id)
+            if mc:
+                options = build_options(mc)
+                hint = build_hint(mc)
 
-            if options:
-                form.fields["raw_value"].widget = DatalistTextInput(
-                    datalist_options=options,
-                )
-            if hint:
-                form.fields["raw_value"].help_text = hint
+                if options:
+                    form.fields["raw_value"].widget = DatalistTextInput(
+                        datalist_options=options,
+                    )
+                if hint:
+                    form.fields["raw_value"].help_text = hint
 
 
 _CAPACITY_OPTIONS = [str(v) for v in range(2000, 4100, 100)]

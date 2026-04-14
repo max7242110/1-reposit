@@ -11,7 +11,7 @@ import openpyxl
 from openpyxl.styles import Font
 
 from catalog.models import ACModel, ModelRawValue, ModelRegion
-from methodology.models import Criterion, MethodologyVersion
+from methodology.models import MethodologyCriterion, MethodologyVersion
 
 # Порядок и имена колонок совпадают с import_v2 (management command).
 FIXED_COLUMNS = [
@@ -70,14 +70,14 @@ def generate_import_template_xlsx() -> tuple[bytes, str]:
     if methodology is None:
         raise ValueError("Нет активной методики — шаблон недоступен.")
 
-    criteria = list(
-        Criterion.objects.filter(
+    mc_list = list(
+        MethodologyCriterion.objects.filter(
             methodology=methodology,
             is_active=True,
-        ).order_by("display_order", "code"),
+        ).select_related("criterion").order_by("display_order", "criterion__code"),
     )
-    crit_ids = [c.pk for c in criteria]
-    code_list = [c.code for c in criteria]
+    crit_ids = [mc.criterion_id for mc in mc_list]
+    code_list = [mc.code for mc in mc_list]
     headers = FIXED_COLUMNS + code_list
 
     rv_prefetch = Prefetch(
@@ -134,8 +134,8 @@ def generate_import_template_xlsx() -> tuple[bytes, str]:
 
     ws2 = wb.create_sheet("Критерии", 1)
     ws2.append(["code", "name_ru", "unit", "weight"])
-    for c in criteria:
-        ws2.append([c.code, c.name_ru, c.unit or "", float(c.weight)])
+    for mc in mc_list:
+        ws2.append([mc.code, mc.name_ru, mc.unit or "", float(mc.weight)])
 
     for column_cells in ws2.columns:
         length = max(len(str(cell.value or "")) for cell in column_cells)

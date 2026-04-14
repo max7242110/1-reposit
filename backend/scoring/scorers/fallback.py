@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from methodology.models import Criterion
+from methodology.models import MethodologyCriterion as Criterion
 
 from .base import BaseScorer, ScoreResult
 

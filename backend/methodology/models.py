@@ -26,6 +26,10 @@ class MethodologyVersion(TimestampMixin):
         default=False, verbose_name="Активна",
         help_text="Только одна методика может быть активной",
     )
+    criteria = models.ManyToManyField(
+        "Criterion", through="MethodologyCriterion",
+        related_name="methodologies", verbose_name="Параметры",
+    )
     needs_recalculation = models.BooleanField(
         default=False, verbose_name="Требуется пересчёт",
         help_text="Устанавливается при изменении весов или формул",
@@ -70,6 +74,8 @@ class CriterionGroup(TimestampMixin):
 
 
 class Criterion(TimestampMixin):
+    """Справочник параметров (standalone, без привязки к методике)."""
+
     class ValueType(models.TextChoices):
         NUMERIC = "numeric", "Числовой"
         BINARY = "binary", "Бинарный (да/нет)"
@@ -80,30 +86,9 @@ class Criterion(TimestampMixin):
         FALLBACK = "fallback", "С fallback-логикой"
         BRAND_AGE = "brand_age", "Возраст бренда в РФ"
 
-    class ScoringType(models.TextChoices):
-        MIN_MEDIAN_MAX = "min_median_max", "Min / Median / Max"
-        BINARY = "binary", "Бинарный (0 или 100)"
-        UNIVERSAL_SCALE = "universal_scale", "Универсальная шкала (100/70/50/30/0)"
-        CUSTOM_SCALE = "custom_scale", "Индивидуальная шкала (JSON)"
-        FORMULA = "formula", "Формула (JSON)"
-        INTERVAL = "interval", "Интервальная шкала"
-
-    class RegionScope(models.TextChoices):
-        GLOBAL = "global", "Глобальный"
-        RU = "ru", "Только Россия"
-        EU = "eu", "Только Европа"
-
-    methodology = models.ForeignKey(
-        MethodologyVersion, on_delete=models.CASCADE, related_name="criteria",
-        verbose_name="Методика",
-    )
-    group = models.ForeignKey(
-        CriterionGroup, on_delete=models.SET_NULL, null=True, blank=True,
-        related_name="criteria", verbose_name="Группа (устар.)",
-    )
     code = models.CharField(
-        max_length=50, verbose_name="Код",
-        help_text="Уникальный код параметра в рамках методики, напр. noise_min",
+        max_length=50, unique=True, verbose_name="Код",
+        help_text="Уникальный код параметра, напр. noise_min",
     )
 
     name_ru = models.CharField(max_length=255, verbose_name="Название (RU)")
@@ -121,10 +106,48 @@ class Criterion(TimestampMixin):
     value_type = models.CharField(
         max_length=30, choices=ValueType.choices, verbose_name="Тип значения",
     )
+
+    is_active = models.BooleanField(default=True, verbose_name="Активен")
+
+    class Meta:
+        ordering = ["code"]
+        verbose_name = "Параметр"
+        verbose_name_plural = "Параметры"
+
+    def __str__(self) -> str:
+        return f"{self.name_ru} ({self.code})"
+
+
+class MethodologyCriterion(TimestampMixin):
+    """Связь параметра с версией методики + все настройки оценки."""
+
+    class ScoringType(models.TextChoices):
+        MIN_MEDIAN_MAX = "min_median_max", "Min / Median / Max"
+        BINARY = "binary", "Бинарный (0 или 100)"
+        UNIVERSAL_SCALE = "universal_scale", "Универсальная шкала (100/70/50/30/0)"
+        CUSTOM_SCALE = "custom_scale", "Индивидуальная шкала (JSON)"
+        FORMULA = "formula", "Формула (JSON)"
+        INTERVAL = "interval", "Интервальная шкала"
+
+    class RegionScope(models.TextChoices):
+        GLOBAL = "global", "Глобальный"
+        RU = "ru", "Только Россия"
+        EU = "eu", "Только Европа"
+
+    methodology = models.ForeignKey(
+        MethodologyVersion, on_delete=models.CASCADE,
+        related_name="methodology_criteria",
+        verbose_name="Методика",
+    )
+    criterion = models.ForeignKey(
+        "Criterion", on_delete=models.CASCADE,
+        related_name="methodology_entries",
+        verbose_name="Параметр",
+    )
+
     scoring_type = models.CharField(
         max_length=30, choices=ScoringType.choices, verbose_name="Тип скоринга",
     )
-
     weight = models.FloatField(
         default=0, verbose_name="Вес (%)",
         help_text="Вес параметра в процентах. Сумма весов всех параметров = 100%",
@@ -172,16 +195,16 @@ class Criterion(TimestampMixin):
 
     class Meta:
         ordering = ["display_order"]
-        verbose_name = "Параметр"
-        verbose_name_plural = "Параметры"
+        verbose_name = "Параметр методики"
+        verbose_name_plural = "Параметры методики"
         constraints = [
             models.UniqueConstraint(
-                fields=["methodology", "code"],
-                name="unique_criterion_code_per_methodology",
+                fields=["methodology", "criterion"],
+                name="unique_methodology_criterion",
             ),
             models.CheckConstraint(
                 condition=models.Q(weight__gte=0),
-                name="criterion_weight_non_negative",
+                name="mc_weight_non_negative",
             ),
         ]
 
@@ -199,4 +222,50 @@ class Criterion(TimestampMixin):
                 raise ValidationError({"median_value": "median_value не может быть больше max_value."})
 
     def __str__(self) -> str:
-        return f"{self.name_ru} ({self.weight}%)"
+        return f"{self.criterion.name_ru} ({self.weight}%) — {self.methodology}"
+
+    # --- Proxy-свойства для обратной совместимости со скорерами ---
+
+    @property
+    def code(self):
+        return self.criterion.code
+
+    @property
+    def value_type(self):
+        return self.criterion.value_type
+
+    @property
+    def name_ru(self):
+        return self.criterion.name_ru
+
+    @property
+    def name_en(self):
+        return self.criterion.name_en
+
+    @property
+    def name_de(self):
+        return self.criterion.name_de
+
+    @property
+    def name_pt(self):
+        return self.criterion.name_pt
+
+    @property
+    def description_ru(self):
+        return self.criterion.description_ru
+
+    @property
+    def description_en(self):
+        return self.criterion.description_en
+
+    @property
+    def description_de(self):
+        return self.criterion.description_de
+
+    @property
+    def description_pt(self):
+        return self.criterion.description_pt
+
+    @property
+    def unit(self):
+        return self.criterion.unit

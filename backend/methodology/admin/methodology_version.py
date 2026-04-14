@@ -7,12 +7,11 @@ from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.http import require_POST
 
 from catalog.services import migrate_model_raw_values_between_methodologies
-from .inlines import CriterionInline
+from .inlines import MethodologyCriterionInline
 from ..forms import DuplicateMethodologyVersionForm
-from ..models import Criterion, MethodologyVersion
+from ..models import MethodologyCriterion, MethodologyVersion
 from ..services import (
     backfill_criterion_extras_from_methodology,
     duplicate_methodology_version,
@@ -35,13 +34,16 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
     )
     list_filter = ("is_active", "needs_recalculation")
     search_fields = ("name", "version")
-    inlines = [CriterionInline]
+    inlines = [MethodologyCriterionInline]
     readonly_fields = ("created_at", "updated_at")
 
     def get_queryset(self, request) -> QuerySet:
         return super().get_queryset(request).annotate(
-            _criteria_count=Count("criteria", filter=Q(criteria__is_active=True)),
-            _weight_sum=Sum("criteria__weight"),
+            _criteria_count=Count(
+                "methodology_criteria",
+                filter=Q(methodology_criteria__is_active=True),
+            ),
+            _weight_sum=Sum("methodology_criteria__weight"),
         )
 
     @admin.display(description="Критериев")
@@ -64,7 +66,7 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
                 name="%s_%s_duplicate" % info,
             ),
             path(
-                "<path:object_id>/delete-criterion/<int:criterion_id>/",
+                "<path:object_id>/delete-criterion/<int:mc_id>/",
                 self.admin_site.admin_view(self.delete_criterion_view),
                 name="%s_%s_delete_criterion" % info,
             ),
@@ -120,7 +122,9 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
         if object_id:
             obj = self.get_object(request, object_id)
             if obj is not None:
-                agg = obj.criteria.aggregate(s=Sum("weight"))
+                agg = MethodologyCriterion.objects.filter(
+                    methodology=obj,
+                ).aggregate(s=Sum("weight"))
                 total = float(agg["s"] or 0)
                 if self.has_change_permission(request, obj):
                     meta = self.model._meta
@@ -131,7 +135,7 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
         extra_context["criteria_weight_total_initial"] = round(total, 2)
         return super().changeform_view(request, object_id, form_url, extra_context)
 
-    def delete_criterion_view(self, request, object_id, criterion_id):
+    def delete_criterion_view(self, request, object_id, mc_id):
         if request.method != "POST":
             return JsonResponse({"error": "POST required"}, status=405)
         methodology = self.get_object(request, object_id)
@@ -140,12 +144,12 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
         if not self.has_change_permission(request, methodology):
             return JsonResponse({"error": "Permission denied"}, status=403)
         try:
-            criterion = Criterion.objects.get(
-                pk=criterion_id, methodology_id=object_id,
+            mc = MethodologyCriterion.objects.get(
+                pk=mc_id, methodology_id=object_id,
             )
-        except Criterion.DoesNotExist:
-            return JsonResponse({"error": "Criterion not found"}, status=404)
-        criterion.delete()
+        except MethodologyCriterion.DoesNotExist:
+            return JsonResponse({"error": "MethodologyCriterion not found"}, status=404)
+        mc.delete()
         return JsonResponse({"ok": True})
 
     def delete_model(self, request, obj):
@@ -198,9 +202,9 @@ class MethodologyVersionAdmin(admin.ModelAdmin):
         formset.save_m2m()
         if (
             not change
-            and formset.model is Criterion
+            and formset.model is MethodologyCriterion
             and form.instance.pk
         ):
             tpl_pk = getattr(request, "_methodology_backfill_template_pk", None)
-            for c in form.instance.criteria.all():
-                backfill_criterion_extras_from_methodology(c, tpl_pk)
+            for mc in MethodologyCriterion.objects.filter(methodology=form.instance):
+                backfill_criterion_extras_from_methodology(mc, tpl_pk)

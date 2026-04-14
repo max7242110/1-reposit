@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from rest_framework import generics
 
-from methodology.models import Criterion, MethodologyVersion
+from methodology.models import MethodologyCriterion, MethodologyVersion
 from scoring.engine import max_possible_total_index
 
 from ..models import ACModel
@@ -19,7 +19,9 @@ class ACModelListView(LangMixin, generics.ListAPIView):
         ctx["index_max"] = max_possible_total_index(active)
         ctx["methodology"] = active
         ctx["criteria"] = list(
-            Criterion.objects.filter(methodology=active, is_active=True).order_by("display_order", "code")
+            MethodologyCriterion.objects.filter(
+                methodology=active, is_active=True,
+            ).select_related("criterion").order_by("display_order", "criterion__code")
         ) if active else []
         return ctx
 

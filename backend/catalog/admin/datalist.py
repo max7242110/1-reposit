@@ -5,7 +5,7 @@ from __future__ import annotations
 from django import forms
 from django.utils.safestring import mark_safe
 
-from methodology.models import Criterion
+from methodology.models import Criterion, MethodologyCriterion
 
 from .constants import INTEGER_DATALIST_CRITERION_CODES, MAX_DATALIST_OPTIONS
 
@@ -47,7 +47,7 @@ def integer_range_options(mn: float, mx: float) -> list[str]:
     return [str(i) for i in out]
 
 
-def build_options(criterion: Criterion) -> list[str]:
+def build_options(criterion: MethodologyCriterion) -> list[str]:
     """Варианты для datalist по типу критерия."""
     if criterion.value_type == Criterion.ValueType.BINARY:
         return ["да", "нет"]
@@ -90,7 +90,7 @@ def build_options(criterion: Criterion) -> list[str]:
     return []
 
 
-def build_hint(criterion: Criterion) -> str:
+def build_hint(criterion: MethodologyCriterion) -> str:
     """Текст подсказки для поля значения."""
     parts: list[str] = []
 

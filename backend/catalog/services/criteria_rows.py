@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from methodology.models import Criterion, MethodologyVersion
+from methodology.models import MethodologyCriterion, MethodologyVersion
 
 from catalog.models import ACModel, ModelRawValue
 
@@ -18,11 +18,11 @@ def ensure_all_criteria_rows(ac_model: ACModel) -> int:
             "criterion_id", flat=True,
         )
     )
-    missing = Criterion.objects.filter(
+    missing_mc = MethodologyCriterion.objects.filter(
         methodology=methodology, is_active=True,
-    ).exclude(pk__in=existing_ids)
+    ).exclude(criterion_id__in=existing_ids).select_related("criterion")
 
-    to_create = [ModelRawValue(model=ac_model, criterion=c) for c in missing]
+    to_create = [ModelRawValue(model=ac_model, criterion=mc.criterion) for mc in missing_mc]
     if to_create:
         ModelRawValue.objects.bulk_create(to_create)
     return len(to_create)

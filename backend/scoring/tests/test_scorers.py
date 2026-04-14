@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from methodology.models import Criterion, MethodologyVersion
+from methodology.models import Criterion, MethodologyCriterion, MethodologyVersion
 from scoring.scorers.binary import BinaryScorer
 from scoring.scorers.brand_age import BrandAgeScorer
 from scoring.scorers.categorical import CategoricalScorer
@@ -12,6 +12,18 @@ from scoring.scorers.formula import FormulaScorer
 from scoring.scorers.lab import LabScorer
 from scoring.scorers.numeric import NumericScorer
 
+# Поля, принадлежащие standalone Criterion
+_CRITERION_FIELDS = {"name_ru", "value_type", "unit", "is_active"}
+
+# Поля, принадлежащие MethodologyCriterion
+_MC_FIELDS = {
+    "scoring_type", "weight", "display_order", "min_value", "median_value",
+    "max_value", "is_inverted", "median_by_capacity", "custom_scale_json",
+    "formula_json", "is_required_lab", "is_required_checklist",
+    "is_required_catalog", "use_in_lab", "use_in_checklist", "use_in_catalog",
+    "region_scope", "note", "is_public", "is_active",
+}
+
 
 @pytest.fixture
 def methodology(db):
@@ -19,16 +31,23 @@ def methodology(db):
 
 
 def _make_criterion(methodology, code="test", **kwargs):
-    defaults = {
-        "name_ru": "Test",
-        "value_type": "numeric",
+    """Create standalone Criterion + MethodologyCriterion, return MC (scorers receive MC)."""
+    criterion_kwargs = {"name_ru": kwargs.pop("name_ru", "Test")}
+    value_type = kwargs.pop("value_type", "numeric")
+
+    mc_defaults = {
         "scoring_type": "min_median_max",
         "weight": 10,
         "display_order": 1,
         "is_active": True,
     }
-    defaults.update(kwargs)
-    return Criterion.objects.create(methodology=methodology, code=code, **defaults)
+    mc_defaults.update(kwargs)
+
+    criterion, _ = Criterion.objects.get_or_create(
+        code=code, defaults={"name_ru": criterion_kwargs["name_ru"], "value_type": value_type},
+    )
+    mc = MethodologyCriterion.objects.create(methodology=methodology, criterion=criterion, **mc_defaults)
+    return mc
 
 
 # ── NumericScorer (normal) ────────────────────────────────────────────

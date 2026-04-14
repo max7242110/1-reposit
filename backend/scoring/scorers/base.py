@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from methodology.models import Criterion
+from methodology.models import MethodologyCriterion
 
 
 @dataclass
@@ -19,5 +19,5 @@ class ScoreResult:
 class BaseScorer:
     """Base class for all scoring strategies."""
 
-    def calculate(self, criterion: Criterion, raw_value: Any, **context: Any) -> ScoreResult:
+    def calculate(self, criterion: MethodologyCriterion, raw_value: Any, **context: Any) -> ScoreResult:
         raise NotImplementedError

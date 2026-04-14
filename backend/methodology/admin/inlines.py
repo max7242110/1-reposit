@@ -2,17 +2,19 @@ from __future__ import annotations
 
 from django.contrib import admin
 
-from ..models import Criterion
+from ..models import MethodologyCriterion
 from ..services import template_criteria_inline_initial
 
 
-class CriterionInline(admin.TabularInline):
-    model = Criterion
+class MethodologyCriterionInline(admin.TabularInline):
+    model = MethodologyCriterion
     fk_name = "methodology"
     extra = 0
+    autocomplete_fields = ("criterion",)
     fields = (
-        "code", "name_ru", "value_type", "scoring_type", "weight",
-        "note", "region_scope", "is_public", "is_active", "display_order",
+        "criterion", "weight", "scoring_type",
+        "min_value", "median_value", "max_value", "is_inverted",
+        "region_scope", "is_public", "is_active", "display_order",
     )
     ordering = ("display_order",)
 
@@ -31,7 +33,7 @@ class CriterionInline(admin.TabularInline):
 
         rows_closure = rows
 
-        class PrefilledCriterionFormSet(FormSet):
+        class PrefilledMCFormSet(FormSet):
             def __init__(self, *args, **inner_kw):
                 super().__init__(*args, **inner_kw)
                 if self.instance.pk is None and not self.is_bound:
@@ -41,4 +43,4 @@ class CriterionInline(admin.TabularInline):
                                 if key in self.forms[i].fields:
                                     self.forms[i].initial[key] = val
 
-        return PrefilledCriterionFormSet
+        return PrefilledMCFormSet

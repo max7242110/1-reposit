@@ -62,7 +62,7 @@ class CalculationResult(models.Model):
     )
 
     class Meta:
-        ordering = ["criterion__display_order"]
+        ordering = ["criterion__code"]
         verbose_name = "Результат расчёта"
         verbose_name_plural = "Результаты расчётов"
         constraints = [
