@@ -125,6 +125,11 @@ export default async function ModelDetailPage({ params }: Props) {
                 Наружный блок: {model.outer_unit}
               </p>
             )}
+            {model.nominal_capacity != null && (
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">
+                Мощность охлаждения {model.nominal_capacity} Вт
+              </p>
+            )}
           </div>
           <div className="text-right">
             <div className="text-sm text-gray-500 dark:text-gray-400">

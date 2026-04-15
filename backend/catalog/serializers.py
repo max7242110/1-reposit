@@ -273,7 +273,6 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
             {
                 "criterion_code": r["criterion"].code,
                 "criterion_name": get_localized_field(r["criterion"], "name", lang),
-                "criterion_note": r["criterion"].note or "",
                 "criterion_description": get_localized_field(r["criterion"], "description", lang) or "",
                 "compressor_model": (r.get("compressor_model") or "").strip(),
                 "unit": r["criterion"].unit or "",

@@ -21,7 +21,7 @@ _MC_FIELDS = {
     "max_value", "is_inverted", "median_by_capacity", "custom_scale_json",
     "formula_json", "is_required_lab", "is_required_checklist",
     "is_required_catalog", "use_in_lab", "use_in_checklist", "use_in_catalog",
-    "region_scope", "note", "is_public", "is_active",
+    "region_scope", "is_public", "is_active",
 }
 
 

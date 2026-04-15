@@ -23,7 +23,6 @@ export default function IndexCriterionCard({ criterion }: Props) {
   const {
     criterion_code,
     criterion_name,
-    criterion_note,
     criterion_description,
     compressor_model,
     raw_value,
@@ -68,9 +67,6 @@ export default function IndexCriterionCard({ criterion }: Props) {
             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
               Модель компрессора: {compressor_model}
             </p>
-          ) : null}
-          {criterion_note ? (
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{criterion_note}</p>
           ) : null}
         </div>
         {above_reference && (

@@ -20,7 +20,7 @@ class ModelRawValueInline(admin.TabularInline):
     extra = 0
     fields = ("criterion", "raw_value", "compressor_model", "verification_status", "source")
     readonly_fields = ("criterion",)
-    ordering = ("criterion__display_order",)
+    ordering = ("criterion__code",)
     can_delete = False
 
     def get_queryset(self, request):
