@@ -10,12 +10,18 @@ function barFillClass(score: number): string {
   return "bg-rose-500 dark:bg-rose-400";
 }
 
+function capitalizeFirst(s: string): string {
+  if (!s) return s;
+  return s.charAt(0).toLocaleUpperCase("ru-RU") + s.slice(1);
+}
+
 interface Props {
   criterion: ParameterScore;
 }
 
 export default function IndexCriterionCard({ criterion }: Props) {
   const {
+    criterion_code,
     criterion_name,
     criterion_note,
     criterion_description,
@@ -28,11 +34,18 @@ export default function IndexCriterionCard({ criterion }: Props) {
   } = criterion;
   const pct = Math.min(Math.max((normalized_score / SCALE_MAX) * 100, 0), 100);
   const rawDisplay = raw_value.trim() ? raw_value : "—";
-  const displayValue = unit === "лет" && rawDisplay !== "—" ? formatYears(rawDisplay) : rawDisplay;
+  const displayValue = capitalizeFirst(
+    unit === "лет" && rawDisplay !== "—" ? formatYears(rawDisplay) : rawDisplay,
+  );
   const displayUnit = unit === "лет" ? "" : unit;
+  const isNoise = criterion_code === "noise";
+
+  const rowClass = isNoise
+    ? "my-3 px-4 py-4 rounded-lg border-2 border-blue-400 dark:border-blue-500 bg-blue-50/40 dark:bg-blue-900/10"
+    : "py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0";
 
   return (
-    <div className="py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+    <div className={rowClass}>
       <div className="flex items-start justify-between gap-2 mb-2">
         <div>
           <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-snug flex flex-wrap items-center gap-x-1.5 gap-y-0.5">

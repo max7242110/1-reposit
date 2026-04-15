@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const m = await getModelBySlug(slug);
     const idxLabel = `${m.total_index.toFixed(1)} / ${formatIndexMax(m.index_max ?? 100)}`;
     return {
-      title: `${m.brand.name} ${m.inner_unit}`,
+      title: `Кондиционер ${m.brand.name} ${m.inner_unit}`,
       description: `Индекс «Август-климат»: ${idxLabel}. ${m.brand.name} ${m.inner_unit} — подробные параметры и видеообзор.`,
       openGraph: {
         title: `${m.brand.name} ${m.inner_unit} — Рейтинг «Август-климат»`,
@@ -47,9 +47,16 @@ export default async function ModelDetailPage({ params }: Props) {
   const hasVideo = model.youtube_url || model.rutube_url || model.vk_url;
   const isArchived = model.publish_status === "archived";
 
-  const sortedScores = [...model.parameter_scores].sort(
-    (a, b) => b.normalized_score - a.normalized_score || b.weighted_score - a.weighted_score,
-  );
+  // noise — всегда первым (особый параметр); далее по вкладу в индекс DESC,
+  // тай-брейкер — normalized_score DESC.
+  const sortedScores = [...model.parameter_scores].sort((a, b) => {
+    if (a.criterion_code === "noise") return -1;
+    if (b.criterion_code === "noise") return 1;
+    return (
+      b.weighted_score - a.weighted_score ||
+      b.normalized_score - a.normalized_score
+    );
+  });
 
   const reviews = await getReviews(model.id).catch(() => []);
 
@@ -88,15 +95,21 @@ export default async function ModelDetailPage({ params }: Props) {
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <div className="flex items-center gap-4">
-              {model.brand.logo && (
-                <img
-                  src={model.brand.logo}
-                  alt={model.brand.name}
-                  className="h-16 sm:h-20 w-auto object-contain shrink-0"
-                />
-              )}
+              <span className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shrink-0">
+                {model.brand.logo ? (
+                  <img
+                    src={model.brand.logo}
+                    alt={`Логотип кондиционеров ${model.brand.name}`}
+                    className="max-w-[80%] max-h-[80%] object-contain"
+                  />
+                ) : (
+                  <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">
+                    {model.brand.name.slice(0, 2)}
+                  </span>
+                )}
+              </span>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                {model.brand.name}
+                Кондиционер {model.brand.name}
               </h1>
             </div>
             {model.series && (

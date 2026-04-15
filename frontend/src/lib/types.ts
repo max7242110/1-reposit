@@ -20,6 +20,7 @@ export interface ParameterScore {
   normalized_score: number;
   weighted_score: number;
   above_reference: boolean;
+  is_active: boolean;
 }
 
 export interface RawValue {
@@ -36,6 +37,7 @@ export interface RawValue {
 export interface Photo {
   id: number;
   image_url: string;
+  alt: string;
   order: number;
 }
 

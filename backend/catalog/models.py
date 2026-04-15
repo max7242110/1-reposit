@@ -214,6 +214,10 @@ class ACModelPhoto(TimestampMixin):
         verbose_name="Модель",
     )
     image = models.ImageField(upload_to="ac_photos/", verbose_name="Фото")
+    alt = models.CharField(
+        max_length=255, blank=True, default="",
+        verbose_name="Alt-текст", help_text="Alt-текст для SEO и доступности",
+    )
     order = models.PositiveSmallIntegerField(default=0, verbose_name="Порядок")
 
     class Meta:

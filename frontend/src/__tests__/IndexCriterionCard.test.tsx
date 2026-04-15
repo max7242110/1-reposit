@@ -10,6 +10,7 @@ const mockCriterion: ParameterScore = {
   normalized_score: 48.5,
   weighted_score: 10,
   above_reference: false,
+  is_active: true,
 };
 
 describe("IndexCriterionCard", () => {

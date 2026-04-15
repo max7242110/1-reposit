@@ -1,0 +1,6788 @@
+[
+  {
+    "slug": "CASARTE-Velato-CAS25CC1R3-S-1U25CC1R3",
+    "brand": "CASARTE",
+    "brand_year": 2018,
+    "inner_unit": "CAS25CC1/R3-С",
+    "capacity": 2800.0,
+    "price": "155000.00",
+    "total_index": 79.15,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.52",
+        "norm": 100,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "1.1",
+        "norm": 93.98,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "",
+        "norm": 70.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "тэн",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "",
+        "norm": 0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "0",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "",
+        "norm": 0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-30",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "30",
+        "norm": 80.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "15",
+        "norm": 100,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "мелкие светодиоды",
+        "norm": 50.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2018",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А+++",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "7",
+        "norm": 100,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "31.1"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.17"
+      }
+    ]
+  },
+  {
+    "slug": "FUNAI-ONSEN-RAC-I-ON30HP_D01S-RAC-I-ON30HP_D01U",
+    "brand": "FUNAI",
+    "brand_year": 2020,
+    "inner_unit": "RAC-I-ON30HP.D01/S",
+    "capacity": 2700.0,
+    "price": "117990.00",
+    "total_index": 75.66,
+    "has_pros": true,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.43",
+        "norm": 82.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "1.19",
+        "norm": 99.4,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "4630",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "тэн",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "7",
+        "norm": 55.26,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-30",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "15",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть через сторонние сервисы",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2020",
+        "norm": 18.75,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А+++",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "31"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.13"
+      }
+    ]
+  },
+  {
+    "slug": "THAICON-SENSAIR-TL-RWS25-FR-TL-ROS25-FR",
+    "brand": "THAICON",
+    "brand_year": 2026,
+    "inner_unit": "TL-RWS25-FR",
+    "capacity": 2680.0,
+    "price": "59700.00",
+    "total_index": 68.93,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.3",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.36",
+        "norm": 47.73,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2675",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "тэн",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "щётка",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "7",
+        "norm": 55.26,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-25",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "25",
+        "norm": 70.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть через сторонние сервисы",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "мелкие светодиоды",
+        "norm": 50.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2026",
+        "norm": 0,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А+++",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "5",
+        "norm": 75.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "32.8"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.07"
+      }
+    ]
+  },
+  {
+    "slug": "LG-Deluxe_Pro-LG_H12S1D_NS1R-H12S1D_U12R",
+    "brand": "LG",
+    "brand_year": 1996,
+    "inner_unit": "LG H12S1D.NS1R",
+    "capacity": 3500.0,
+    "price": "99990.00",
+    "total_index": 65.37,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.48",
+        "norm": 95.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.7",
+        "norm": 69.88,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "8",
+        "norm": 57.89,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "1996",
+        "norm": 96.67,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А++",
+        "norm": 75.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "33"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.13"
+      }
+    ]
+  },
+  {
+    "slug": "MDV-NOVA_3-in-1-MDSAH-09HRFN8-MDOAH-09HFN8",
+    "brand": "MDV",
+    "brand_year": 2012,
+    "inner_unit": "MDSAH-09HRFN8",
+    "capacity": 2780.0,
+    "price": "76200.00",
+    "total_index": 62.65,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.34",
+        "norm": 60.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.4",
+        "norm": 51.81,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "3070",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "щётка",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "7",
+        "norm": 55.26,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "",
+        "norm": 0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "25",
+        "norm": 70.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть через сторонние сервисы",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "крупная лампа",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2012",
+        "norm": 43.75,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А+++",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "5",
+        "norm": 75.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "28.6"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.13"
+      }
+    ]
+  },
+  {
+    "slug": "AQUA-Towada-AQI-25FIS1R3-BIN-AQI-25FIS1R3OUT",
+    "brand": "AQUA",
+    "brand_year": 2025,
+    "inner_unit": "AQI-25FIS1/R3-B(IN)",
+    "capacity": 2600.0,
+    "price": "66700.00",
+    "total_index": 60.83,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.27",
+        "norm": 42.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.41",
+        "norm": 52.41,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2400",
+        "norm": 70.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "термокабель",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "только корпус",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-20",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "есть для управления потоком",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "крупная лампа",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2025",
+        "norm": 3.12,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А+++",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "4",
+        "norm": 62.5,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "29.3"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.15"
+      }
+    ]
+  },
+  {
+    "slug": "Mitsubishi_Heavy-ZSP-W-SRK35ZSP-W-SRC35ZSP-W",
+    "brand": "Mitsubishi Heavy",
+    "brand_year": 2000,
+    "inner_unit": "SRK35ZSP-W",
+    "capacity": 3200.0,
+    "price": "93000.00",
+    "total_index": 55.18,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.32",
+        "norm": 55.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.69",
+        "norm": 69.28,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "0",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "3",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "",
+        "norm": 0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "15",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2000",
+        "norm": 83.33,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А++",
+        "norm": 75.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "30.9"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.09"
+      }
+    ]
+  },
+  {
+    "slug": "Midea-PRIMARY_MSAG3_inverter_R32-MSAG3-07N8C2-I-MSAG3-07N8C2-O",
+    "brand": "Midea",
+    "brand_year": 2008,
+    "inner_unit": "MSAG3-07N8C2-I",
+    "capacity": 2050.0,
+    "price": "41990.00",
+    "total_index": 54.7,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.27",
+        "norm": 42.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.37",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2300",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "1",
+        "norm": 50.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "100",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "корпус и экран",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "25",
+        "norm": 70.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть через сторонние сервисы",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2008",
+        "norm": 56.67,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": "100В"
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "31.6"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.2"
+      }
+    ]
+  },
+  {
+    "slug": "FUNAI-Akoya-RAC-I-AK25HP_D01S-RAC-I-AK25HP_D01U",
+    "brand": "FUNAI",
+    "brand_year": 2020,
+    "inner_unit": "RAC-I-AK25HP.D01/S",
+    "capacity": 2300.0,
+    "price": "36890.00",
+    "total_index": 52.06,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.19",
+        "norm": 22.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.37",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "3245",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "щётка",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "100",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "25",
+        "norm": 70.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть через сторонние сервисы",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2020",
+        "norm": 18.75,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "30.1"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.08"
+      }
+    ]
+  },
+  {
+    "slug": "Haier-Stellar_HP_Inverter-AS25SHP1HRA-S-1U25SHP1FRA",
+    "brand": "Haier",
+    "brand_year": 2007,
+    "inner_unit": "AS25SHP1HRA-S",
+    "capacity": 2700.0,
+    "price": "64700.00",
+    "total_index": 51.05,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.23",
+        "norm": 32.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.37",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2400",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "только корпус",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-20",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2007",
+        "norm": 60.0,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А++",
+        "norm": 75.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "29.9"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.18"
+      }
+    ]
+  },
+  {
+    "slug": "MDV-INTEGRA_Pro-MDSAI-09HRFN8-MDOAI-09HFN8",
+    "brand": "MDV",
+    "brand_year": 2012,
+    "inner_unit": "MDSAI-09HRFN8",
+    "capacity": 2640.0,
+    "price": "48800.00",
+    "total_index": 50.15,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.25",
+        "norm": 37.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.33",
+        "norm": 40.91,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2600",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "1",
+        "norm": 50.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "100",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-25",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "25",
+        "norm": 70.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть через сторонние сервисы",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2012",
+        "norm": 43.75,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А+++",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "4",
+        "norm": 62.5,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": "100В"
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "33.8"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.35"
+      }
+    ]
+  },
+  {
+    "slug": "Royal_Clima-Felicita-RCI-FC35HN-RCI-FC35HNOUT",
+    "brand": "Royal Clima",
+    "brand_year": 2012,
+    "inner_unit": "RCI-FC35HN",
+    "capacity": 3600.0,
+    "price": "41590.00",
+    "total_index": 48.56,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.27",
+        "norm": 42.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.37",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "3255",
+        "norm": 70.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "100",
+        "norm": 100.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-7 и выше",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "8",
+        "norm": 65.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть через сторонние сервисы",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2012",
+        "norm": 43.75,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "30.3"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.15"
+      }
+    ]
+  },
+  {
+    "slug": "FeRRUM-Titan_inv_-IFIS09VR-IFOS09VR1",
+    "brand": "FeRRUM",
+    "brand_year": 2020,
+    "inner_unit": "IFIS09VR",
+    "capacity": 2700.0,
+    "price": "39400.00",
+    "total_index": 48.27,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.26",
+        "norm": 40.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.28",
+        "norm": 29.55,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2675",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть через сторонние сервисы",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2020",
+        "norm": 18.75,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А++",
+        "norm": 75.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "32"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.07"
+      }
+    ]
+  },
+  {
+    "slug": "Energolux-Davos-SAS07R1-AI-SAU07R1-AI",
+    "brand": "Energolux",
+    "brand_year": 2011,
+    "inner_unit": "SAS07R1-AI",
+    "capacity": 2346.0,
+    "price": "37100.00",
+    "total_index": 41.63,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.13",
+        "norm": 7.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.27",
+        "norm": 27.27,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2325",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "25",
+        "norm": 70.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2011",
+        "norm": 46.88,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "5",
+        "norm": 75.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "32.6"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.35"
+      }
+    ]
+  },
+  {
+    "slug": "Kalashnikov-Gals-KVAC-I-09IN-G1-KVAC-I-09OD-G1-LE",
+    "brand": "Kalashnikov",
+    "brand_year": 2024,
+    "inner_unit": "KVAC-I-09IN-G1",
+    "capacity": 2800.0,
+    "price": "52000.00",
+    "total_index": 41.41,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.17",
+        "norm": 17.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.34",
+        "norm": 43.18,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "3070",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "7",
+        "norm": 55.26,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "3",
+        "norm": 0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2024",
+        "norm": 6.25,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А++",
+        "norm": 75.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "31.5"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.13"
+      }
+    ]
+  },
+  {
+    "slug": "AUX-Slassic_Inverter-ASW-H09A4BA-R2DI-AS-H09A4BA-R2DI",
+    "brand": "AUX",
+    "brand_year": 2010,
+    "inner_unit": "ASW-H09A4/BA-R2DI",
+    "capacity": 2750.0,
+    "price": "36800.00",
+    "total_index": 40.75,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.18",
+        "norm": 20.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.22",
+        "norm": 15.91,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2675",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "7",
+        "norm": 55.26,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "15",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2010",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "2",
+        "norm": 25.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "30.2"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.12"
+      }
+    ]
+  },
+  {
+    "slug": "Rovex-Rich-RS-09MUIN1-RS-09MUIN1",
+    "brand": "Rovex",
+    "brand_year": 2015,
+    "inner_unit": "RS-09MUIN1",
+    "capacity": 2638.0,
+    "price": "27900.00",
+    "total_index": 37.63,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.24",
+        "norm": 35.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.27",
+        "norm": 27.27,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2325",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "4",
+        "norm": 37.5,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "только корпус",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "25",
+        "norm": 70.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2015",
+        "norm": 34.38,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "33"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.2"
+      }
+    ]
+  },
+  {
+    "slug": "CENTEK-65Sxx_Super-CT65-S07-CT65-S07",
+    "brand": "CENTEK",
+    "brand_year": 2011,
+    "inner_unit": "CT65-S07",
+    "capacity": 2670.0,
+    "price": "21490.00",
+    "total_index": 37.05,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.21",
+        "norm": 27.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.25",
+        "norm": 22.73,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2600",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "щётка",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "4",
+        "norm": 37.5,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "только корпус",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-7 и выше",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "25",
+        "norm": 70.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "12",
+        "norm": 85.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2011",
+        "norm": 46.88,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": "150В"
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "35.9"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.18"
+      }
+    ]
+  },
+  {
+    "slug": "Coolberg-City_on-off-CS-12SH1-IN-CS-12SH1-OUT",
+    "brand": "Coolberg",
+    "brand_year": 2020,
+    "inner_unit": "CS-12SH1-IN",
+    "capacity": 3520.0,
+    "price": "35700.00",
+    "total_index": 34.47,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.3",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.37",
+        "norm": 50.0,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "4085",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "7",
+        "norm": 55.26,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-7 и выше",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2020",
+        "norm": 18.75,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "34.1"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.2"
+      }
+    ]
+  },
+  {
+    "slug": "Viomi-Cross_2-KFR-25GWY4CM1-KFR-25GWY4CM1",
+    "brand": "Viomi",
+    "brand_year": 2023,
+    "inner_unit": "KFR-25GW/Y4CM1",
+    "capacity": 2500.0,
+    "price": "58900.00",
+    "total_index": 33.33,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.26",
+        "norm": 40.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.35",
+        "norm": 45.45,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "1875",
+        "norm": 15.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "0",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "3",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "",
+        "norm": 0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "9",
+        "norm": 20.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "3",
+        "norm": 0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "есть в базе",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2023",
+        "norm": 9.38,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А++",
+        "norm": 75.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "34.5"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.11"
+      }
+    ]
+  },
+  {
+    "slug": "Royal_Clima-PANDORA-RC-PD22HNIN-RC-PD22HNOUT",
+    "brand": "Royal Clima",
+    "brand_year": 2012,
+    "inner_unit": "RC-PD22HN/IN",
+    "capacity": 2200.0,
+    "price": "20690.00",
+    "total_index": 30.24,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.15",
+        "norm": 12.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.25",
+        "norm": 22.73,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "3030",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "7",
+        "norm": 55.26,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-7 и выше",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "15",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2012",
+        "norm": 43.75,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": "150В"
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "33.8"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.22"
+      }
+    ]
+  },
+  {
+    "slug": "JAX-Tasmania-ACN-09HE-ACN-09HE",
+    "brand": "JAX",
+    "brand_year": 2009,
+    "inner_unit": "ACN-09HE",
+    "capacity": 2500.0,
+    "price": "19900.00",
+    "total_index": 29.69,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.22",
+        "norm": 30.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.22",
+        "norm": 15.91,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2600",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "только корпус",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-7 и выше",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "15",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2009",
+        "norm": 53.33,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "34.1"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.2"
+      }
+    ]
+  },
+  {
+    "slug": "Just_Aircon-Chroma-JAC-10HPSIACAC-JAC-10HPSIACAC",
+    "brand": "Just Aircon",
+    "brand_year": 2022,
+    "inner_unit": "JAC-10HPSIA/CAC",
+    "capacity": 2550.0,
+    "price": "34950.00",
+    "total_index": 28.14,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.13",
+        "norm": 7.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.29",
+        "norm": 31.82,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "",
+        "norm": 25.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "0",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "6",
+        "norm": 52.63,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-15",
+        "norm": 25.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "10",
+        "norm": 75.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2022",
+        "norm": 12.5,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "2",
+        "norm": 25.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "36"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.13"
+      }
+    ]
+  },
+  {
+    "slug": "Rovex-Grace-RS-09MST1-RE-09MST1",
+    "brand": "Rovex",
+    "brand_year": 2015,
+    "inner_unit": "RS-09MST1",
+    "capacity": 2700.0,
+    "price": "21900.00",
+    "total_index": 25.74,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.13",
+        "norm": 7.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.17",
+        "norm": 4.55,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2690",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "2",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "только корпус",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "есть",
+        "norm": 100.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-7 и выше",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "20",
+        "norm": 60.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "8",
+        "norm": 65.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "опционально",
+        "norm": 50.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2015",
+        "norm": 34.38,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "31.3"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.13"
+      }
+    ]
+  },
+  {
+    "slug": "ULTIMACOMFORT-EXCEED-EXD-09PN-IN-EXD-09PN-OUT",
+    "brand": "ULTIMACOMFORT",
+    "brand_year": 2021,
+    "inner_unit": "EXD-09PN-IN",
+    "capacity": 2650.0,
+    "price": "18390.00",
+    "total_index": 21.94,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.13",
+        "norm": 7.5,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.23",
+        "norm": 18.18,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2905",
+        "norm": 100.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "1",
+        "norm": 50.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "7",
+        "norm": 55.26,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-7 и выше",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "15",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2021",
+        "norm": 15.62,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "2",
+        "norm": 25.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "34.2"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.27"
+      }
+    ]
+  },
+  {
+    "slug": "KEG-Classic_L-KAC-9GHA-P100I-KAC-9GHA-P100O",
+    "brand": "KEG",
+    "brand_year": 2025,
+    "inner_unit": "KAC-9GHA-P100/I",
+    "capacity": 2600.0,
+    "price": "25900.00",
+    "total_index": 21.39,
+    "has_pros": false,
+    "params": [
+      {
+        "code": "heat_exchanger_inner",
+        "name": "Площадь труб теплообменника внутр. блока",
+        "unit": "кв.м",
+        "raw": "0.14",
+        "norm": 10.0,
+        "weight": 10.0
+      },
+      {
+        "code": "heat_exchanger_outer",
+        "name": "Площадь труб теплообменника наруж. блока",
+        "unit": "кв.м",
+        "raw": "0.24",
+        "norm": 20.45,
+        "weight": 10.0
+      },
+      {
+        "code": "compressor_power",
+        "name": "Мощность компрессора",
+        "unit": "Вт",
+        "raw": "2550",
+        "norm": 90.0,
+        "weight": 10.0
+      },
+      {
+        "code": "erv",
+        "name": "Наличие ЭРВ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fan_speed_outdoor",
+        "name": "Регулировка оборотов вентилятора наруж. блока",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "drain_pan_heater",
+        "name": "Наличие обогрева поддона",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ionizer_type",
+        "name": "Ионизатор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fine_filters",
+        "name": "Кол-во фильтров тонкой очистки",
+        "unit": "шт.",
+        "raw": "0",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "remote_backlight",
+        "name": "Наличие подсветки экрана пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "fan_speeds_indoor",
+        "name": "Количество скоростей вентилятора внутр. блока",
+        "unit": "шт.",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 3.0
+      },
+      {
+        "code": "russian_remote",
+        "name": "Русифицированный пульт ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "remote_holder",
+        "name": "Держатель пульта ДУ",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "inverter",
+        "name": "Инверторный компрессор",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "fresh_air",
+        "name": "Приток свежего воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "heating_capability",
+        "name": "Работа на обогрев",
+        "unit": "°C",
+        "raw": "-7 и выше",
+        "norm": 0.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_pipe_length",
+        "name": "Максимальная длина фреонопровода",
+        "unit": "м",
+        "raw": "15",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "max_height_diff",
+        "name": "Максимальный перепад высот",
+        "unit": "м",
+        "raw": "5",
+        "norm": 50.0,
+        "weight": 5.0
+      },
+      {
+        "code": "wifi",
+        "name": "Наличие WiFi",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "alice_control",
+        "name": "Управление через Алису",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "louver_control",
+        "name": "Управление жалюзи в стороны с пульта",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 2.0
+      },
+      {
+        "code": "ir_sensor",
+        "name": "Наличие ИК датчика присутствия человека",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 3.0
+      },
+      {
+        "code": "uv_lamp",
+        "name": "УФ лампа",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "self_clean_freezing",
+        "name": "Наличие самоочистки замораживанием",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "temp_sterilization",
+        "name": "Функция температурной стерилизации",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "brand_age_ru",
+        "name": "Возраст бренда на рынке РФ",
+        "unit": "год",
+        "raw": "2025",
+        "norm": 3.12,
+        "weight": 3.0
+      },
+      {
+        "code": "energy_efficiency",
+        "name": "Энергоэффективность",
+        "unit": "",
+        "raw": "А",
+        "norm": 25.0,
+        "weight": 3.0
+      },
+      {
+        "code": "standby_heating",
+        "name": "Функция дежурного обогрева +8 °C",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      },
+      {
+        "code": "warranty",
+        "name": "Гарантия",
+        "unit": "лет",
+        "raw": "3",
+        "norm": 50.0,
+        "weight": 4.0
+      },
+      {
+        "code": "air_freshener",
+        "name": "Ароматизатор воздуха",
+        "unit": "",
+        "raw": "нет",
+        "norm": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "extras": [
+      {
+        "code": "min_voltage",
+        "name": "Мин. напряжение",
+        "raw": ""
+      },
+      {
+        "code": "noise",
+        "name": "Есть замер минимального уровня шума",
+        "raw": "46"
+      },
+      {
+        "code": "vibration",
+        "name": "Вибрация наружного блока",
+        "raw": "0.4"
+      }
+    ]
+  }
+]

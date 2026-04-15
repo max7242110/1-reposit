@@ -51,7 +51,7 @@ export default function PhotoGallery({ photos }: Props) {
         >
           <img
             src={current.image_url}
-            alt="Фото кондиционера"
+            alt={current.alt || "Фото кондиционера"}
             className="max-w-full max-h-[360px] object-contain"
           />
         </div>
@@ -67,7 +67,7 @@ export default function PhotoGallery({ photos }: Props) {
                     : "border-gray-200 dark:border-gray-700 hover:border-blue-300"
                 }`}
               >
-                <img src={p.image_url} alt="" className="w-full h-full object-cover" />
+                <img src={p.image_url} alt={p.alt || ""} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>
@@ -109,7 +109,7 @@ export default function PhotoGallery({ photos }: Props) {
 
           <img
             src={current.image_url}
-            alt="Фото кондиционера"
+            alt={current.alt || "Фото кондиционера"}
             className="max-w-[90vw] max-h-[90vh] object-contain"
             onClick={(e) => e.stopPropagation()}
           />

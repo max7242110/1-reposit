@@ -83,7 +83,7 @@ class ACModelPhotoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ACModelPhoto
-        fields = ["id", "image_url", "order"]
+        fields = ["id", "image_url", "alt", "order"]
         read_only_fields = fields
 
     def get_image_url(self, obj: ACModelPhoto) -> str:
@@ -231,6 +231,42 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
         if methodology is None:
             return []
         _total, rows = compute_scores_for_model(obj, methodology)
+        for r in rows:
+            r["is_active"] = True
+
+        # Дополнительно добираем неактивные критерии — чтобы пользователь
+        # видел параметры с «Вклад в индекс: 0.00», если у модели есть замер.
+        # Пустые raw_value пропускаем.
+        raw_map = {
+            rv.criterion_id: rv
+            for rv in obj.raw_values.all()
+            if rv.criterion_id
+        }
+        model_ctx = _build_model_context(obj)
+        inactive_mcs = (
+            methodology.methodology_criteria
+            .filter(is_active=False)
+            .select_related("criterion")
+        )
+        for mc in inactive_mcs:
+            rv = raw_map.get(mc.criterion_id)
+            if not rv or not (rv.raw_value or "").strip():
+                continue
+            scorer = _get_scorer(mc)
+            if not scorer:
+                continue
+            ctx = {**model_ctx, "lab_status": rv.lab_status}
+            result = scorer.calculate(mc, rv.raw_value, **ctx)
+            rows.append({
+                "criterion": mc,
+                "raw_value": str(rv.raw_value),
+                "compressor_model": rv.compressor_model or "",
+                "normalized_score": round(result.normalized_score, 2),
+                "weighted_score": 0.0,
+                "above_reference": result.above_reference,
+                "is_active": False,
+            })
+
         lang = self.context.get("lang") or DEFAULT_LANGUAGE
         rows.sort(key=lambda r: (r["criterion"].display_order, r["criterion"].code))
         return [
@@ -245,6 +281,7 @@ class ACModelDetailSerializer(serializers.ModelSerializer):
                 "normalized_score": r["normalized_score"],
                 "weighted_score": r["weighted_score"],
                 "above_reference": r["above_reference"],
+                "is_active": r["is_active"],
             }
             for r in rows
         ]

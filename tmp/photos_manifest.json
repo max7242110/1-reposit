@@ -1,0 +1,170 @@
+[
+  {
+    "slug": "THAICON-SENSAIR-TL-RWS25-FR-TL-ROS25-FR",
+    "indoor": null,
+    "outdoor": null,
+    "remote": null,
+    "notes": "SKIP: brand/model likely synthetic. thaicon.ru — магазин КупиКлимат в Красноярске, не производитель. Артикулы TL-RWS25-FR / TL-ROS25-FR в вебе не найдены."
+  },
+  {
+    "slug": "LG-Deluxe_Pro-LG_H12S1D_NS1R-H12S1D_U12R",
+    "indoor": {"url": "https://lg-pro.ru/upload/iblock/1b1/d3khye5cwfskr8z7e80coej1aj6g8nvp.jpg", "source": "https://lg-pro.ru/catalog/nastennye_konditsionery/lg_h12s1d_ns1r_h12s1d_u12r/"},
+    "outdoor": null,
+    "remote": null,
+    "notes": "Артикулы H12S1D.NS1R/H12S1D.U12R подтверждены. Фото — combined (внутр+наруж+пульт в одном кадре). Отдельных прямых URL не нашли."
+  },
+  {
+    "slug": "MDV-NOVA_3-in-1-MDSAH-09HRFN8-MDOAH-09HFN8",
+    "indoor": {"url": "https://cyber-climat.ru/wp-content/uploads/2025/04/mdv-nova-vn-b.jpg", "source": "https://cyber-climat.ru/product/split-sistema-mdv-nova-3-in-1-erp-full-dc-inverter-mdsah-09hrfn8-mdoah-09hfn8/"},
+    "outdoor": {"url": "https://cyber-climat.ru/wp-content/uploads/2025/04/mdv-nova-n.jpg", "source": "https://cyber-climat.ru/product/split-sistema-mdv-nova-3-in-1-erp-full-dc-inverter-mdsah-09hrfn8-mdoah-09hfn8/"},
+    "remote": null,
+    "notes": "Артикулы MDSAH-09HRFN8/MDOAH-09HFN8 подтверждены на cyber-climat.ru. Пульт на странице — дженерик MDV, не загружаем."
+  },
+  {
+    "slug": "AQUA-Towada-AQI-25FIS1R3-BIN-AQI-25FIS1R3OUT",
+    "indoor": {"url": "https://kondicioneri-rostov.ru/components/com_jshopping/files/img_products/full_AQUA_AQI-FIS1-R3-B_TOWADA_Inverter.jpg", "source": "https://kondicioneri-rostov.ru/konditsionery/aqua/aqua-aqi-25fis1-r3-b-towada"},
+    "outdoor": null,
+    "remote": null,
+    "notes": "Артикул AQI-25FIS1/R3-B подтверждён. Наружный блок и пульт отдельно не найдены."
+  },
+  {
+    "slug": "Mitsubishi_Heavy-ZSP-W-SRK35ZSP-W-SRC35ZSP-W",
+    "indoor": {"url": "https://www.mitsubishi-climate.ru/images/rub_2_2_11_2_6/SRK-ZSP-W-20429.jpg", "source": "https://www.mitsubishi-climate.ru/srk35zsp-w-src35zsp-w.htm"},
+    "outdoor": {"url": "https://www.mitsubishi-climate.ru/images/rub_2_2_11_2_6/SRK-ZSP-W-47789.jpg", "source": "https://www.mitsubishi-climate.ru/srk35zsp-w-src35zsp-w.htm"},
+    "remote": {"url": "https://www.mitsubishi-climate.ru/images/rub_2_2_11_2_6/SRK-ZSP-W-35513.jpg", "source": "https://www.mitsubishi-climate.ru/srk35zsp-w-src35zsp-w.htm"},
+    "notes": "SRK35ZSP-W/SRC35ZSP-W подтверждены. outdoor — combined-фото (на нём виден наружный блок + внутр + пульт). Пульт 35513 — отдельный."
+  },
+  {
+    "slug": "Midea-PRIMARY_MSAG3_inverter_R32-MSAG3-07N8C2-I-MSAG3-07N8C2-O",
+    "indoor": {"url": "https://air-midea.com/upload/iblock/8d3/kz7dzu7bfqkkp88pqvcnbl219gup1tmo.jpg", "source": "https://air-midea.com/catalog/product/MSAG3_07N8C2_I_MSAG3_07N8C2_O/"},
+    "outdoor": {"url": "https://air-midea.com/upload/iblock/441/hk63t07vxtlr8x1pfal076rt8ttw4y8e.jpg", "source": "https://air-midea.com/catalog/product/MSAG3_07N8C2_I_MSAG3_07N8C2_O/"},
+    "remote": {"url": "https://air-midea.com/upload/iblock/2d4/3e91pfk3m0pgmdh4txh1yt50m7zg7akc.jpg", "source": "https://air-midea.com/catalog/product/MSAG3_07N8C2_I_MSAG3_07N8C2_O/"},
+    "notes": "Полный набор, официальный air-midea.com."
+  },
+  {
+    "slug": "FUNAI-Akoya-RAC-I-AK25HP_D01S-RAC-I-AK25HP_D01U",
+    "indoor": {"url": "https://kondicioner-funai.ru/image/cache/catalog/product/2025/akoya-inverter-01-500x500.png", "source": "https://kondicioner-funai.ru/nastennye-kondicionery-funai/akoya-inverter/funai-rac-i-ak25hp-d01.html"},
+    "outdoor": {"url": "https://pro-komfort.com/wa-data/public/shop/products/87/10/101087/images/277404/277404.970.jpg", "source": "https://pro-komfort.com/kondicioneri/nastennye-split-sistemy/split-sistema-funai-rac-i-ak25hp-d01-s-rac-i-ak25hp-d01-u-akoya-inverter/"},
+    "remote": {"url": "https://kondicioner-funai.ru/image/cache/catalog/product/2025/akoya-inverter-03-500x500.png", "source": "https://kondicioner-funai.ru/nastennye-kondicionery-funai/akoya-inverter/funai-rac-i-ak25hp-d01.html"},
+    "notes": "Полный набор, kondicioner-funai.ru + pro-komfort.com."
+  },
+  {
+    "slug": "Haier-Stellar_HP_Inverter-AS25SHP1HRA-S-1U25SHP1FRA",
+    "indoor": {"url": "https://micro-climate.ru/files/products/konditsioner_haier_stellar_hp_dc_inverter_as25shp1hra_s_1u25shp1fra_1.1600x1200.jpg", "source": "https://micro-climate.ru/products/haier-stellar-hp-dc-inverter-as25shp1hra-s1u25shp1fra"},
+    "outdoor": {"url": "https://micro-climate.ru/files/products/konditsioner_haier_stellar_hp_dc_inverter_as25shp1hra_s_1u25shp1fra_5.1600x1200.jpg", "source": "https://micro-climate.ru/products/haier-stellar-hp-dc-inverter-as25shp1hra-s1u25shp1fra"},
+    "remote": {"url": "https://micro-climate.ru/files/products/konditsioner_haier_stellar_hp_dc_inverter_as25shp1hra_s_1u25shp1fra_4.1600x1200.jpg", "source": "https://micro-climate.ru/products/haier-stellar-hp-dc-inverter-as25shp1hra-s1u25shp1fra"},
+    "notes": "Полный набор, micro-climate.ru."
+  },
+  {
+    "slug": "MDV-INTEGRA_Pro-MDSAI-09HRFN8-MDOAI-09HFN8",
+    "indoor": {"url": "https://mdv-aircond.ru/upload/resize_cache/iblock/fb9/750_300_1619711fa078991f0a23d032687646b21/o5yfd00vo5dzptiayjlsaieqj4ffxkf0.png", "source": "https://mdv-aircond.ru/catalog/bytovye-split-sistemy/invertornye-split-sistemy/integra-pro/mdsai-09hrfn8-mdoai-09hfn8/"},
+    "outdoor": {"url": "https://mdv-aircond.ru/upload/resize_cache/uf/741/100_60_1619711fa078991f0a23d032687646b21/j7a4cnpr12c7924y68dxevvuqhhquc7z.png", "source": "https://mdv-aircond.ru/catalog/bytovye-split-sistemy/invertornye-split-sistemy/integra-pro/mdsai-09hrfn8-mdoai-09hfn8/"},
+    "remote": null,
+    "notes": "Официальный mdv-aircond.ru. ВНИМАНИЕ: outdoor — маленький thumbnail 100x60, низкое качество."
+  },
+  {
+    "slug": "Royal_Clima-Felicita-RCI-FC35HN-RCI-FC35HNOUT",
+    "indoor": {"url": "https://www.royalclima-rus.ru/upload/iblock/058/ha4y6yx29cb451py13etvsyh53zoejs0.jpg", "source": "https://www.royalclima-rus.ru/catalog/royalclima/konditsionery-invertornye/rci-fc35hn-in-rci-fc35hn-out-felicita-inverter-new-wi-fi/"},
+    "outdoor": {"url": "https://www.royalclima-rus.ru/upload/iblock/204/c5r4yp1z1jt1fri7o209ou92wdsjmgz5.jpg", "source": "https://www.royalclima-rus.ru/catalog/royalclima/konditsionery-invertornye/rci-fc35hn-in-rci-fc35hn-out-felicita-inverter-new-wi-fi/"},
+    "remote": {"url": "https://www.royalclima-rus.ru/upload/iblock/564/vm1d423ze24w8is8054uv8y7e3ofyz2d.jpg", "source": "https://www.royalclima-rus.ru/catalog/royalclima/konditsionery-invertornye/rci-fc35hn-in-rci-fc35hn-out-felicita-inverter-new-wi-fi/"},
+    "notes": "Полный набор, официальный royalclima-rus.ru."
+  },
+  {
+    "slug": "FeRRUM-Titan_inv_-IFIS09VR-IFOS09VR1",
+    "indoor": {"url": "https://severcon.ru/upload/resize_cache/iblock/13c/210f1atns90ee9jhwft5422ac8l725yj/630_630_0/1_09.jpg", "source": "https://www.severcon.ru/catalog/split-sistema-ferrum-titan-inverter-ifis09vr1s-ifos09vr1.html"},
+    "outdoor": {"url": "https://severcon.ru/upload/resize_cache/iblock/d4e/cc3z9vu52v7hqtqgwela5pmsp1r465lq/630_630_0/FERRUM_TITAN_INV_iFOS_VR1_2.png", "source": "https://www.severcon.ru/catalog/split-sistema-ferrum-titan-inverter-ifis09vr1s-ifos09vr1.html"},
+    "remote": null,
+    "notes": "severcon.ru, артикулы iFIS09VR1/iFOS09VR1 — совпадают с IFIS09VR/IFOS09VR1 (минорная разница в нотации)."
+  },
+  {
+    "slug": "Energolux-Davos-SAS07R1-AI-SAU07R1-AI",
+    "indoor": {"url": "https://cityclimat.ru/images/item/image/site1/112/111738_278.jpg", "source": "https://cityclimat.ru/shop/byt/nastennye-konditsionery/energolux/sas07r1-ai-sau07r1-ai/"},
+    "outdoor": {"url": "https://cityclimat.ru/images/item/image/site1/112/111742_329.jpg", "source": "https://cityclimat.ru/shop/byt/nastennye-konditsionery/energolux/sas07r1-ai-sau07r1-ai/"},
+    "remote": null,
+    "notes": "cityclimat.ru, артикулы SAS07R1-AI/SAU07R1-AI подтверждены."
+  },
+  {
+    "slug": "Kalashnikov-Gals-KVAC-I-09IN-G1-KVAC-I-09OD-G1-LE",
+    "indoor": {"url": "https://kalashnikov.group/media/public/pics/Render_Project_Kalashnikov_Gals_001_AEm3oFI.png", "source": "https://www.severcon.ru/catalog/teplovoy-invertor-kalashnikov-gals-kvac-i-09n-g1-kvac-i-09od-g1-le.html"},
+    "outdoor": {"url": "https://severcon.ru/upload/resize_cache/iblock/3b7/2s814vej8qddhmt0tbgbfol9ncvq7biy/630_630_0/Render_Project_Kalashnikov_Gals_002-_-OUT.png", "source": "https://www.severcon.ru/catalog/teplovoy-invertor-kalashnikov-gals-kvac-i-09n-g1-kvac-i-09od-g1-le.html"},
+    "remote": {"url": "https://severcon.ru/upload/resize_cache/iblock/863/z449o0n3pmu0wr5k9w3n4dx6447uvzpk/630_630_0/Render_Project_PDU_Kalashnikov_002.png", "source": "https://www.severcon.ru/catalog/teplovoy-invertor-kalashnikov-gals-kvac-i-09n-g1-kvac-i-09od-g1-le.html"},
+    "notes": "Полный набор. Outer артикул KVAC-I-09OD-G1-LE точный. Inner на странице KVAC-I-09N-G1 (в slug KVAC-I-09IN-G1) — вариант того же артикула."
+  },
+  {
+    "slug": "AUX-Slassic_Inverter-ASW-H09A4BA-R2DI-AS-H09A4BA-R2DI",
+    "indoor": {"url": "https://aux.com.ru/upload/iblock/39a/ae6wo4mimv6rza4gv1m13e5fdxv116le.jpg", "source": "https://aux.com.ru/catalog/nastennye_konditsionery/aux_asw_h09a4_ba_r2di_as_h09a4_ba_r2di/"},
+    "outdoor": {"url": "https://aux.com.ru/upload/iblock/ff6/wwzfiyxwgh6ra17ug563oodptvkfr0s3.jpg", "source": "https://aux.com.ru/catalog/nastennye_konditsionery/aux_asw_h09a4_ba_r2di_as_h09a4_ba_r2di/"},
+    "remote": {"url": "https://aux.com.ru/upload/iblock/193/fvniu5qn6k2sirnnhmlt0pazy02pmfl1.jpg", "source": "https://aux.com.ru/catalog/nastennye_konditsionery/aux_asw_h09a4_ba_r2di_as_h09a4_ba_r2di/"},
+    "notes": "Полный набор, официальный aux.com.ru."
+  },
+  {
+    "slug": "Rovex-Rich-RS-09MUIN1-RS-09MUIN1",
+    "indoor": {"url": "https://konder.su/upload/phpthumb/8/7eb3daedf12c30932df5a29bd72e0150.webp", "source": "https://konder.su/konditsioner-rovex-rs-09muin1-invertor/"},
+    "outdoor": {"url": "https://konder.su/upload/phpthumb/8/01f681751932a60209118a6058ec37fb.webp", "source": "https://konder.su/konditsioner-rovex-rs-09muin1-invertor/"},
+    "remote": {"url": "https://konder.su/upload/phpthumb/8/fd0453ef8ae144e6ed995ed5ff9ec4dd.webp", "source": "https://konder.su/konditsioner-rovex-rs-09muin1-invertor/"},
+    "notes": "Полный набор, konder.su."
+  },
+  {
+    "slug": "CENTEK-65Sxx_Super-CT65-S07-CT65-S07",
+    "indoor": {"url": "https://domklimata.com/upload/iblock/2ef/agdj4xl7ib3n139hvjfm7i4gnx2nyiao.png", "source": "https://domklimata.com/catalog/konditsionery/split-sistemy/konditsioner-centek-super-ct-65s07/"},
+    "outdoor": {"url": "https://domklimata.com/upload/iblock/748/7y5x462rx4ltoyeldiiqjg4c8y7nn2fv.jpg", "source": "https://domklimata.com/catalog/konditsionery/split-sistemy/konditsioner-centek-super-ct-65s07/"},
+    "remote": null,
+    "notes": "domklimata.com, артикул CT-65S07 подтверждён."
+  },
+  {
+    "slug": "Coolberg-City_on-off-CS-12SH1-IN-CS-12SH1-OUT",
+    "indoor": {"url": "https://www.severcon.ru/upload/resize_cache/iblock/d83/1upp19fgawr4u3g3amrc2jrydt83bd5m/630_630_0/1.jpg", "source": "https://www.severcon.ru/catalog/klassicheskaya-split-sistema-%D1%81oolberg-city-on-off-cs-12sh1-in-cs-12sh1-out.html"},
+    "outdoor": {"url": "https://www.severcon.ru/upload/resize_cache/iblock/e06/swf1pd3zdsnk3f2gb9y7v82xayjwebws/630_630_0/4.jpg", "source": "https://www.severcon.ru/catalog/klassicheskaya-split-sistema-%D1%81oolberg-city-on-off-cs-12sh1-in-cs-12sh1-out.html"},
+    "remote": {"url": "https://www.severcon.ru/upload/resize_cache/iblock/22b/0kcodxfeo1gyy0z6sntcj7k05sukheiz/630_630_0/Pult-City-3D-nanesenie.jpg", "source": "https://www.severcon.ru/catalog/klassicheskaya-split-sistema-%D1%81oolberg-city-on-off-cs-12sh1-in-cs-12sh1-out.html"},
+    "notes": "Полный набор. severcon.ru, артикулы CS-12SH1-IN/OUT подтверждены."
+  },
+  {
+    "slug": "Viomi-Cross_2-KFR-25GWY4CM1-KFR-25GWY4CM1",
+    "indoor": null,
+    "outdoor": null,
+    "remote": null,
+    "notes": "SKIP: артикул KFR-25GW/Y4CM1 нигде не подтверждён. Viomi Cross 2 на ru.viomi.com имеет другие суффиксы (EY2UMC, EY3PMB)."
+  },
+  {
+    "slug": "Royal_Clima-PANDORA-RC-PD22HNIN-RC-PD22HNOUT",
+    "indoor": {"url": "https://cyber-climat.ru/wp-content/uploads/2022/01/la0t50zizval1rdwgeb5ev3hd4u9632x.png", "source": "https://cyber-climat.ru/product/royal-clima-pandora-rc-pd22hn/"},
+    "outdoor": {"url": "https://cyber-climat.ru/wp-content/uploads/2022/01/ooh39gi0zcwcg78imeivjp3r4s6wb98q.png", "source": "https://cyber-climat.ru/product/royal-clima-pandora-rc-pd22hn/"},
+    "remote": {"url": "https://cyber-climat.ru/wp-content/uploads/2022/01/y7fcqbent4la598j1vkcis63ypx9ufdu.png", "source": "https://cyber-climat.ru/product/royal-clima-pandora-rc-pd22hn/"},
+    "notes": "Полный набор, cyber-climat.ru. Артикул RC-PD22HN подтверждён."
+  },
+  {
+    "slug": "JAX-Tasmania-ACN-09HE-ACN-09HE",
+    "indoor": {"url": "https://a-klimat.ru/_imgs/400x400/files/shop_series/1345/imgs/2/161425501.jpg", "source": "https://a-klimat.ru/katalog-msk/bytovye/16320-acn-09he/"},
+    "outdoor": null,
+    "remote": null,
+    "notes": "a-klimat.ru, артикул ACN-09HE подтверждён. Только внутренний блок."
+  },
+  {
+    "slug": "Just_Aircon-Chroma-JAC-10HPSIACAC-JAC-10HPSIACAC",
+    "indoor": {"url": "https://splitcenter.ru/upload/iblock/efa/s45s2s0h0lmxscso67k71lxw547u1drp/split-sistema-just-aircon-jac-10hpsia-cac-chernyy.jpg", "source": "https://splitcenter.ru/catalog/konditsionery/split-sistemy/split-sistema-just-aircon-jac-10hpsia-cac-chernyy/"},
+    "outdoor": {"url": "https://splitcenter.ru/upload/iblock/178/mo93njgpi6lqhnaym4970kmwuybivvyv/f7006cb2-aec3-11ee-9a7c-2cfda1c6b585_d7bec256-aefd-11ee-9a7c-2cfda1c6b585.jpg", "source": "https://splitcenter.ru/catalog/konditsionery/split-sistemy/split-sistema-just-aircon-jac-10hpsia-cac-chernyy/"},
+    "remote": null,
+    "notes": "splitcenter.ru. Артикул JAC-10HPSIA/CAC подтверждён."
+  },
+  {
+    "slug": "Rovex-Grace-RS-09MST1-RE-09MST1",
+    "indoor": null,
+    "outdoor": null,
+    "remote": null,
+    "notes": "SKIP: артикул RS-09MST1 на ретейлерах есть, но прямые URL изображений не извлекаемы (lazy-load/динамический рендеринг)."
+  },
+  {
+    "slug": "ULTIMACOMFORT-EXCEED-EXD-09PN-IN-EXD-09PN-OUT",
+    "indoor": {"url": "https://emp-gr.ru/wp-content/uploads/2025/02/exceed-classic-01.webp", "source": "https://emp-gr.ru/exd-09pn-in-exd-09pn-out/"},
+    "outdoor": {"url": "https://emp-gr.ru/wp-content/uploads/2025/02/exceed-classic-02.webp", "source": "https://emp-gr.ru/exd-09pn-in-exd-09pn-out/"},
+    "remote": null,
+    "notes": "emp-gr.ru. Артикулы EXD-09PN-IN/OUT в заголовке страницы."
+  },
+  {
+    "slug": "KEG-Classic_L-KAC-9GHA-P100I-KAC-9GHA-P100O",
+    "indoor": null,
+    "outdoor": null,
+    "remote": null,
+    "notes": "SKIP: бренд KEG с серией Classic L не найден ни на одном российском ретейлере. На Alibaba артикул KAC-9GHA-P100 без бренда KEG — вероятно OEM-артикул, бренд синтетический."
+  }
+]

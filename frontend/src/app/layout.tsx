@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
     default: "Рейтинг кондиционеров 2026",
-    template: "%s | Рейтинг кондиционеров",
+    template: "%s | Рейтинг кондиционеров и отзывы",
   },
   description:
     "Независимый рейтинг бытовых кондиционеров на основе реальных измерений: шум, вибрация, качество комплектующих и функциональность.",

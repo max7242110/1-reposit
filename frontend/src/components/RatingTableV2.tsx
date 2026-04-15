@@ -83,7 +83,7 @@ export default function RatingTableV2({ models, indexMode = "standard", customIn
                       {m.brand_logo ? (
                         <img
                           src={m.brand_logo}
-                          alt={m.brand}
+                          alt={`Логотип кондиционеров ${m.brand}`}
                           className="max-w-[80%] max-h-[80%] object-contain"
                           loading="lazy"
                         />
