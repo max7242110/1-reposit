@@ -16,21 +16,26 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export const revalidate = 86400;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const canonical = `/${slug}`;
   try {
     const m = await getModelBySlug(slug);
     const idxLabel = `${m.total_index.toFixed(1)} / ${formatIndexMax(m.index_max ?? 100)}`;
     return {
       title: `Кондиционер ${m.brand.name} ${m.inner_unit}`,
       description: `Индекс «Август-климат»: ${idxLabel}. ${m.brand.name} ${m.inner_unit} — подробные параметры и видеообзор.`,
+      alternates: { canonical },
       openGraph: {
         title: `${m.brand.name} ${m.inner_unit} — Рейтинг «Август-климат»`,
         description: `Индекс: ${idxLabel}. Подробные характеристики.`,
+        url: canonical,
       },
     };
   } catch {
-    return { title: "Модель не найдена" };
+    return { title: "Модель не найдена", alternates: { canonical } };
   }
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useRef } from "react";
 
 const DEBOUNCE_MS = 400;
@@ -12,6 +12,7 @@ interface Props {
 
 export default function RatingFilters({ defaultPriceMin, defaultPriceMax }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -23,10 +24,10 @@ export default function RatingFilters({ defaultPriceMin, defaultPriceMax }: Prop
       } else {
         params.delete(key);
       }
-      const basePath = window.location.pathname.startsWith("/v2") ? "/v2" : "/";
-      router.push(`${basePath}?${params.toString()}`);
+      const qs = params.toString();
+      router.push(qs ? `${pathname}?${qs}` : pathname);
     },
-    [router, searchParams],
+    [router, pathname, searchParams],
   );
 
   const handleDebounced = useCallback(

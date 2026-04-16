@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: "Добавить кондиционер в рейтинг",
   description:
     "Как добавить свой кондиционер в независимый рейтинг «Август-климат»: инструкция и форма заявки.",
+  alternates: { canonical: "/submit" },
+  robots: { index: false, follow: true },
 };
 
 export const revalidate = 60;

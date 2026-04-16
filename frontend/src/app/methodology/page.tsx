@@ -8,7 +8,11 @@ export const metadata: Metadata = {
   title: "Методика рейтинга",
   description:
     "Как рассчитывается рейтинг кондиционеров «Август-климат»: описание каждого критерия, веса, шкалы оценки.",
+  alternates: { canonical: "/methodology" },
+  robots: { index: true, follow: true },
 };
+
+export const revalidate = 86400;
 
 const SCORING_LABELS: Record<string, string> = {
   min_median_max: "Линейная шкала (min / медиана / max)",

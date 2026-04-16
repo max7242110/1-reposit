@@ -14,6 +14,8 @@ const STORAGE_KEY = "custom_rating_enabled";
 interface Props {
   models: ACModelSummary[];
   methodology: Methodology | null;
+  heading?: string;
+  intro?: string;
 }
 
 function computeCustomIndex(
@@ -33,7 +35,7 @@ function computeCustomIndex(
   return Math.round((score / totalWeight) * 10) / 10;
 }
 
-export default function RatingPageContent({ models, methodology }: Props) {
+export default function RatingPageContent({ models, methodology, heading, intro }: Props) {
   const [activeTab, setActiveTab] = useState<TabKey>("standard");
   const [enabled, setEnabled] = useState<Record<string, boolean>>({});
 
@@ -92,10 +94,11 @@ export default function RatingPageContent({ models, methodology }: Props) {
     <>
       <section className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Рейтинг «Август-климат»
+          {heading ?? "Рейтинг «Август-климат»"}
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Интегральный индекс качества бытовых кондиционеров на основе независимых измерений и анализа параметров.
+          {intro ??
+            "Интегральный индекс качества бытовых кондиционеров на основе независимых измерений и анализа параметров."}
         </p>
       </section>
 

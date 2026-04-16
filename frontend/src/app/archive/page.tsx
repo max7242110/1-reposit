@@ -7,6 +7,8 @@ import { getArchivedModels } from "@/lib/api";
 export const metadata: Metadata = {
   title: "Архивные модели",
   description: "Модели кондиционеров, выведенные из активного рейтинга «Август-климат».",
+  alternates: { canonical: "/archive" },
+  robots: { index: false, follow: true },
 };
 
 export default async function ArchivePage() {
