@@ -39,7 +39,7 @@ export default function RatingFilters({ defaultPriceMin, defaultPriceMax }: Prop
   );
 
   return (
-    <div className="flex flex-wrap gap-3 mb-6" role="search" aria-label="Фильтры рейтинга">
+    <div className="contents" role="search" aria-label="Фильтры рейтинга">
       <label className="sr-only" htmlFor="brand-filter">Поиск по бренду</label>
       <input
         id="brand-filter"

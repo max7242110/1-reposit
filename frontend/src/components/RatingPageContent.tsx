@@ -16,6 +16,7 @@ interface Props {
   methodology: Methodology | null;
   heading?: string;
   intro?: string;
+  seoBlock?: React.ReactNode;
 }
 
 function computeCustomIndex(
@@ -35,7 +36,7 @@ function computeCustomIndex(
   return Math.round((score / totalWeight) * 10) / 10;
 }
 
-export default function RatingPageContent({ models, methodology, heading, intro }: Props) {
+export default function RatingPageContent({ models, methodology, heading, intro, seoBlock }: Props) {
   const [activeTab, setActiveTab] = useState<TabKey>("standard");
   const [enabled, setEnabled] = useState<Record<string, boolean>>({});
 
@@ -109,17 +110,25 @@ export default function RatingPageContent({ models, methodology, heading, intro 
     <>
       <section className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          {heading ?? "Рейтинг «Август-климат»"}
+          {heading ?? "Рейтинг кондиционеров"}
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
           {intro ??
-            "Интегральный индекс качества бытовых кондиционеров на основе независимых измерений и анализа параметров."}
+            "Интегральный индекс «Август-климат» качества бытовых кондиционеров на основе наших измерений и анализа параметров."}
         </p>
       </section>
 
-      <Suspense fallback={<div className="text-center text-gray-400 py-4">Загрузка фильтров...</div>}>
-        <RatingFilters defaultPriceMin={priceBounds.min} defaultPriceMax={priceBounds.max} />
-      </Suspense>
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <Suspense fallback={<div className="text-gray-400 text-sm">Загрузка фильтров...</div>}>
+          <RatingFilters defaultPriceMin={priceBounds.min} defaultPriceMax={priceBounds.max} />
+        </Suspense>
+        <Link
+          href="/submit"
+          className="shrink-0 inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors ml-auto"
+        >
+          Добавить в рейтинг
+        </Link>
+      </div>
 
       {/* Табы */}
       <div className="flex gap-1 mb-6 border-b border-gray-200 dark:border-gray-700">
@@ -169,7 +178,7 @@ export default function RatingPageContent({ models, methodology, heading, intro 
               href="/submit"
               className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
             >
-              Добавить кондиционер в рейтинг
+              Добавить в рейтинг
             </Link>
           </div>
         </>
@@ -193,6 +202,8 @@ export default function RatingPageContent({ models, methodology, heading, intro 
           </div>
         ) : null;
       })()}
+
+      {seoBlock}
     </>
   );
 }

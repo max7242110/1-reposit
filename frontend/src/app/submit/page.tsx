@@ -5,7 +5,7 @@ import SubmitForm from "@/components/SubmitForm";
 import { getBrands, getPage } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Добавить кондиционер в рейтинг",
+  title: "Добавить новый кондиционер в рейтинг",
   description:
     "Как добавить свой кондиционер в независимый рейтинг «Август-климат»: инструкция и форма заявки.",
   alternates: { canonical: "/submit" },

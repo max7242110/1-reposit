@@ -36,5 +36,14 @@ export default async function HomePage({ searchParams }: Props) {
     getMethodology().catch(() => null),
   ]);
 
-  return <RatingPageContent models={models} methodology={methodology} />;
+  const year = getRatingYear();
+
+  return (
+    <RatingPageContent
+      models={models}
+      methodology={methodology}
+      heading={`Рейтинг кондиционеров ${year}`}
+      intro="Интегральный индекс «Август-климат» качества бытовых кондиционеров на основе наших измерений и анализа параметров."
+    />
+  );
 }
