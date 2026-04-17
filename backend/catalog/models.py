@@ -66,6 +66,12 @@ class ACModel(TimestampMixin):
     pros_text = models.TextField(blank=True, default="", verbose_name="Плюсы (AI)")
     cons_text = models.TextField(blank=True, default="", verbose_name="Минусы (AI)")
 
+    is_ad = models.BooleanField(default=False, verbose_name="Рекламная модель")
+    ad_position = models.PositiveIntegerField(
+        null=True, blank=True, verbose_name="Позиция в рейтинге",
+        help_text="Номер позиции в списке (1 = первая). Пусто = не рекламная.",
+    )
+
     class Meta:
         ordering = ["-total_index"]
         verbose_name = "Модель кондиционера"

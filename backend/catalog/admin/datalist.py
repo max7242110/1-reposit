@@ -47,16 +47,29 @@ def integer_range_options(mn: float, mx: float) -> list[str]:
     return [str(i) for i in out]
 
 
-def build_options(criterion: MethodologyCriterion) -> list[str]:
-    """Варианты для datalist по типу критерия."""
+class OptionsResult:
+    """Результат build_options: список вариантов + рекомендуемый тип виджета."""
+
+    __slots__ = ("options", "use_select")
+
+    def __init__(self, options: list[str], *, use_select: bool = False):
+        self.options = options
+        self.use_select = use_select
+
+    def __bool__(self) -> bool:
+        return bool(self.options)
+
+
+def build_options(criterion: MethodologyCriterion) -> OptionsResult:
+    """Варианты для поля raw_value по типу критерия."""
     if criterion.value_type == Criterion.ValueType.BINARY:
-        return ["есть", "нет"]
+        return OptionsResult(["есть", "нет"], use_select=True)
 
     if criterion.value_type == Criterion.ValueType.BRAND_AGE:
-        return []
+        return OptionsResult([])
 
     if criterion.value_type == Criterion.ValueType.FALLBACK:
-        return [str(v) for v in range(500, 5100, 100)]
+        return OptionsResult([str(v) for v in range(500, 5100, 100)])
 
     scale = criterion.custom_scale_json
     if isinstance(scale, dict) and scale:
@@ -67,13 +80,13 @@ def build_options(criterion: MethodologyCriterion) -> list[str]:
             if label.lower() not in seen:
                 seen.add(label.lower())
                 opts.append(label)
-        return opts
+        return OptionsResult(opts, use_select=True)
 
     mn = criterion.min_value
     mx = criterion.max_value
     if mn is not None and mx is not None and mx > mn:
         if criterion.code in INTEGER_DATALIST_CRITERION_CODES:
-            return integer_range_options(float(mn), float(mx))
+            return OptionsResult(integer_range_options(float(mn), float(mx)))
         step = numeric_step(mn, mx)
         count = int((mx - mn) / step) + 1
         if count > MAX_DATALIST_OPTIONS:
@@ -85,9 +98,9 @@ def build_options(criterion: MethodologyCriterion) -> list[str]:
             val += step
             if len(opts) > MAX_DATALIST_OPTIONS:
                 break
-        return opts
+        return OptionsResult(opts)
 
-    return []
+    return OptionsResult([])
 
 
 def build_hint(criterion: MethodologyCriterion) -> str:
@@ -124,6 +137,7 @@ class DatalistTextInput(forms.TextInput):
         dl_id = f"dl_{name}"
         attrs = attrs or {}
         attrs["list"] = dl_id
+        attrs["autocomplete"] = "off"
         attrs.setdefault("style", "width:180px;")
 
         input_html = super().render(name, value, attrs, renderer)

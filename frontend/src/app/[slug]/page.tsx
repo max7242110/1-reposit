@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import BackLink from "@/components/BackLink";
+import Tooltip from "@/components/Tooltip";
 import CollapsibleParameters from "@/components/CollapsibleParameters";
 import PhotoGallery from "@/components/PhotoGallery";
 import ProsConsBlock from "@/components/ProsConsBlock";
@@ -132,7 +133,10 @@ export default async function ModelDetailPage({ params }: Props) {
             )}
             {model.nominal_capacity != null && (
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">
-                Мощность охлаждения {model.nominal_capacity} Вт
+                Мощность охлаждения {model.nominal_capacity} Вт{" "}
+                <Tooltip text="В среднем на каждые 10 м² площади помещения необходимо 1000 Вт мощности охлаждения. При сложной задаче и/или наличии дополнительных источников тепла посоветуйтесь с вашим ИИ-агентом.">
+                  <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-[10px] font-bold cursor-help align-middle">?</span>
+                </Tooltip>
               </p>
             )}
           </div>

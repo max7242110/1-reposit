@@ -11,12 +11,16 @@ interface Props {
   brands: BrandOption[];
 }
 
+const DRAIN_PAN_HEATER_OPTIONS = [
+  { value: "нет", label: "Нет" },
+  { value: "тэн", label: "ТЭН" },
+  { value: "термокабель", label: "Термокабель" },
+];
+
 const IONIZER_OPTIONS = [
   { value: "нет", label: "Нет" },
-  { value: "стандартная щётка", label: "Стандартная щётка" },
   { value: "щётка", label: "Щётка" },
-  { value: "устройство", label: "Устройство" },
-  { value: "технологический", label: "Технологический" },
+  { value: "отдельный прибор", label: "Отдельный прибор" },
 ];
 
 const RUSSIAN_REMOTE_OPTIONS = [
@@ -27,7 +31,7 @@ const RUSSIAN_REMOTE_OPTIONS = [
 
 const UV_LAMP_OPTIONS = [
   { value: "нет", label: "Нет" },
-  { value: "мелкие LED", label: "Мелкие LED" },
+  { value: "мелкие светодиоды", label: "Мелкие светодиоды" },
   { value: "крупная лампа", label: "Крупная лампа" },
 ];
 
@@ -89,7 +93,7 @@ export default function SubmitForm({ brands }: Props) {
   const [price, setPrice] = useState("");
 
   // Boolean criteria
-  const [drainPanHeater, setDrainPanHeater] = useState(false);
+  const [drainPanHeater, setDrainPanHeater] = useState("нет");
   const [erv, setErv] = useState(false);
   const [fanSpeedOutdoor, setFanSpeedOutdoor] = useState(false);
   const [remoteBacklight, setRemoteBacklight] = useState(false);
@@ -318,7 +322,7 @@ export default function SubmitForm({ brands }: Props) {
       )}
 
       <div>
-        <Label tip="Необязательное поле. Например: «Zephyr», «Ultima Comfort»">Серия</Label>
+        <Label tip="Необязательное поле. Например «ZOOM» или «AURORA».">Серия</Label>
         <input type="text" value={series} onChange={(e) => setSeries(e.target.value)} className={inputCls} maxLength={255} />
       </div>
 
@@ -343,7 +347,7 @@ export default function SubmitForm({ brands }: Props) {
           <input type="text" value={compressorModel} onChange={(e) => setCompressorModel(e.target.value)} className={inputCls} maxLength={255} required />
         </div>
         <div>
-          <Label required tip="Указана в характеристиках кондиционера. Типичные значения: 2050, 2640, 3520, 5280, 7030 Вт (или 7000, 9000, 12000, 18000, 24000 BTU).">
+          <Label required tip="Указана в характеристиках кондиционера. Типичные значения: 2050, 2640, 3520, 5280, 7030 Вт.">
             Холодопроизводительность (Вт)
           </Label>
           <input type="number" value={nominalCapacity} onChange={(e) => setNominalCapacity(e.target.value)} className={inputCls} min={1} step="1" required />
@@ -360,11 +364,16 @@ export default function SubmitForm({ brands }: Props) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-3">
-          <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-            <input type="checkbox" checked={drainPanHeater} onChange={(e) => setDrainPanHeater(e.target.checked)} className="rounded" />
-            Обогрев поддона
-            <HelpIcon tip="Наличие нагревательного элемента в поддоне наружного блока для обогрева в зимний период." />
-          </label>
+          <div>
+            <Label required tip="Наличие нагревательного элемента в поддоне наружного блока для обогрева в зимний период.">
+              Обогрев поддона
+            </Label>
+            <select value={drainPanHeater} onChange={(e) => setDrainPanHeater(e.target.value)} className={inputCls}>
+              {DRAIN_PAN_HEATER_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </div>
           <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
             <input type="checkbox" checked={erv} onChange={(e) => setErv(e.target.checked)} className="rounded" />
             Наличие ЭРВ
@@ -373,7 +382,7 @@ export default function SubmitForm({ brands }: Props) {
           <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
             <input type="checkbox" checked={fanSpeedOutdoor} onChange={(e) => setFanSpeedOutdoor(e.target.checked)} className="rounded" />
             Регулировка оборотов вент. наруж. блока
-            <HelpIcon tip="Плавная или ступенчатая регулировка оборотов вентилятора наружного блока." />
+            <HelpIcon tip="Наличие или отсутствие регулировки оборотов." />
           </label>
           <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
             <input type="checkbox" checked={remoteBacklight} onChange={(e) => setRemoteBacklight(e.target.checked)} className="rounded" />
@@ -452,7 +461,7 @@ export default function SubmitForm({ brands }: Props) {
           <input type="number" value={innerTubeCount} onChange={(e) => setInnerTubeCount(e.target.value)} className={inputCls} min={1} required />
         </div>
         <div>
-          <Label required tip="Наружный диаметр медных трубок в миллиметрах. Типичные значения: 5, 7, 9.52 мм. Измеряется штангенциркулем.">
+          <Label required tip="Наружный диаметр медных трубок в миллиметрах. Типичные значения: 5, 7 или 9 мм. Измеряется штангенциркулем.">
             Диаметр трубок (мм)
           </Label>
           <input type="number" value={innerDiameter} onChange={(e) => setInnerDiameter(e.target.value)} className={inputCls} min={0} step="0.01" required />
@@ -482,7 +491,7 @@ export default function SubmitForm({ brands }: Props) {
           <input type="number" value={outerTubeCount} onChange={(e) => setOuterTubeCount(e.target.value)} className={inputCls} min={1} required />
         </div>
         <div>
-          <Label required tip="Наружный диаметр медных трубок теплообменника наружного блока в миллиметрах.">
+          <Label required tip="Наружный диаметр медных трубок теплообменника наружного блока в миллиметрах. Типичные значения: 5, 7 или 9 мм.">
             Диаметр трубок (мм)
           </Label>
           <input type="number" value={outerDiameter} onChange={(e) => setOuterDiameter(e.target.value)} className={inputCls} min={0} step="0.01" required />

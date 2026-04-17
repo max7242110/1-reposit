@@ -58,19 +58,34 @@ export default function RatingPageContent({ models, methodology, heading, intro 
   };
 
   const displayModels = useMemo(() => {
+    const ads = models.filter((m) => m.is_ad && m.ad_position != null);
+    const adIds = new Set(ads.map((m) => m.id));
+    const regular = models.filter((m) => !adIds.has(m.id));
+
+    let sorted: ACModelSummary[];
     if (activeTab === "quiet") {
-      return [...models]
+      sorted = [...regular]
         .filter((m) => m.has_noise_measurement)
         .sort((a, b) => (b.noise_score ?? 0) - (a.noise_score ?? 0));
-    }
-    if (activeTab === "custom" && methodology) {
-      return [...models].sort(
+    } else if (activeTab === "custom" && methodology) {
+      sorted = [...regular].sort(
         (a, b) =>
           computeCustomIndex(b, methodology.criteria, enabled) -
           computeCustomIndex(a, methodology.criteria, enabled),
       );
+    } else {
+      sorted = [...regular];
     }
-    return models; // standard — already sorted by total_index from API
+
+    const sortedAds = [...ads].sort(
+      (a, b) => (a.ad_position ?? 0) - (b.ad_position ?? 0),
+    );
+    for (const ad of sortedAds) {
+      const pos = Math.min((ad.ad_position ?? 1) - 1, sorted.length);
+      sorted.splice(pos, 0, ad);
+    }
+
+    return sorted;
   }, [activeTab, models, methodology, enabled]);
 
   const tabs: { key: TabKey; label: string }[] = [

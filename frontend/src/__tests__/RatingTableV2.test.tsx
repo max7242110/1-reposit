@@ -31,6 +31,8 @@ const mockModels: ACModelSummary[] = [
     noise_score: null,
     has_noise_measurement: false,
     scores: {},
+    is_ad: false,
+    ad_position: null,
   },
   {
     id: 2,
@@ -51,6 +53,8 @@ const mockModels: ACModelSummary[] = [
     noise_score: 78.5,
     has_noise_measurement: true,
     scores: { noise: 78.5 },
+    is_ad: false,
+    ad_position: null,
   },
 ];
 

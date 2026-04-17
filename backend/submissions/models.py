@@ -42,7 +42,9 @@ class ACSubmission(TimestampMixin):
         verbose_name="Цена (руб.)",
     )
 
-    drain_pan_heater = models.BooleanField(verbose_name="Обогрев поддона")
+    drain_pan_heater = models.CharField(
+        max_length=50, verbose_name="Обогрев поддона",
+    )
     erv = models.BooleanField(verbose_name="Наличие ЭРВ")
     fan_speed_outdoor = models.BooleanField(
         verbose_name="Регулировка оборотов вент. наруж. блока",

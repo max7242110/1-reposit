@@ -118,6 +118,7 @@ class ACModelListSerializer(serializers.ModelSerializer):
             "nominal_capacity", "total_index", "index_max",
             "publish_status", "region_availability",
             "price", "noise_score", "has_noise_measurement", "scores",
+            "is_ad", "ad_position",
         ]
         read_only_fields = fields
 

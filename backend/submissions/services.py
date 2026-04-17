@@ -8,13 +8,13 @@ from .models import ACSubmission
 
 
 _BOOL_MAP = {
-    "drain_pan_heater": "drain_pan_heater",
     "erv": "erv",
     "fan_speed_outdoor": "fan_speed_outdoor",
     "remote_backlight": "remote_backlight",
 }
 
 _VALUE_MAP = {
+    "drain_pan_heater": "drain_pan_heater",
     "fan_speeds_indoor": "fan_speeds_indoor",
     "fine_filters": "fine_filters",
     "ionizer_type": "ionizer_type",

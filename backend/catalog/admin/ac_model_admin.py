@@ -35,8 +35,9 @@ class ACModelAdmin(admin.ModelAdmin):
         "nominal_capacity",
         "total_index",
         "publish_status",
+        "is_ad",
     )
-    list_filter = ("publish_status", "brand", "equipment_type")
+    list_filter = ("publish_status", "brand", "equipment_type", "is_ad")
     list_select_related = ("brand", "equipment_type")
     search_fields = ("inner_unit", "outer_unit", "brand__name", "series")
     list_per_page = 30
@@ -60,6 +61,7 @@ class ACModelAdmin(admin.ModelAdmin):
             },
         ),
         ("Публикация", {"fields": ("publish_status", "total_index", "price")}),
+        ("Реклама", {"fields": ("is_ad", "ad_position")}),
         (
             "Плюсы / Минусы (AI)",
             {"classes": ("collapse",), "fields": ("pros_text", "cons_text")},

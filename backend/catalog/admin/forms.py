@@ -85,13 +85,20 @@ class RawValueFormSet(BaseInlineFormSet):
 
             mc = mc_cache.get(inst.criterion_id)
             if mc:
-                options = build_options(mc)
+                result = build_options(mc)
                 hint = build_hint(mc)
 
-                if options:
-                    form.fields["raw_value"].widget = DatalistTextInput(
-                        datalist_options=options,
-                    )
+                if result:
+                    if result.use_select:
+                        choices = [("", "—")] + [(o, o) for o in result.options]
+                        form.fields["raw_value"].widget = forms.Select(
+                            choices=choices,
+                            attrs={"style": "width:180px;"},
+                        )
+                    else:
+                        form.fields["raw_value"].widget = DatalistTextInput(
+                            datalist_options=result.options,
+                        )
                 if hint:
                     form.fields["raw_value"].help_text = hint
 

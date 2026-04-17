@@ -40,9 +40,20 @@ export default function RatingTableV2({ models, indexMode = "standard", customIn
           </tr>
         </thead>
         <tbody>
-          {models.map((m, idx) => {
+          {(() => {
+            let rank = 0;
+            return models.map((m) => {
+            const isAd = m.is_ad && m.ad_position != null;
+            if (!isAd) rank++;
+
             let indexDisplay: React.ReactNode;
-            if (customIndex) {
+            if (isAd) {
+              indexDisplay = (
+                <span className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 font-semibold text-sm whitespace-nowrap">
+                  Реклама
+                </span>
+              );
+            } else if (customIndex) {
               const score = customIndex[m.id] ?? 0;
               indexDisplay = (
                 <span className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-800 dark:text-purple-300 font-semibold text-sm tabular-nums whitespace-nowrap">
@@ -69,10 +80,18 @@ export default function RatingTableV2({ models, indexMode = "standard", customIn
             return (
               <tr
                 key={m.id}
-                className="border-b border-gray-100 dark:border-gray-800 hover:bg-blue-50 dark:hover:bg-gray-800/50 transition-colors"
+                className={
+                  isAd
+                    ? "border-b border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 ring-1 ring-inset ring-amber-300 dark:ring-amber-700"
+                    : "border-b border-gray-100 dark:border-gray-800 hover:bg-blue-50 dark:hover:bg-gray-800/50 transition-colors"
+                }
               >
                 <td className="px-4 py-4">
-                  <span className={`text-lg font-bold ${getMedalColor(idx + 1)}`}>{idx + 1}</span>
+                  {isAd ? (
+                    <span className="text-lg font-bold text-amber-400">—</span>
+                  ) : (
+                    <span className={`text-lg font-bold ${getMedalColor(rank)}`}>{rank}</span>
+                  )}
                 </td>
                 <td className="px-4 py-4">
                   <Link
@@ -110,7 +129,8 @@ export default function RatingTableV2({ models, indexMode = "standard", customIn
                 </td>
               </tr>
             );
-          })}
+          });
+          })()}
         </tbody>
       </table>
     </div>

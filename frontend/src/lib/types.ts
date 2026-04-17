@@ -65,6 +65,8 @@ export interface ACModelSummary {
   has_noise_measurement: boolean;
   /** Словарь {criterion_code: normalized_score} для пользовательского рейтинга. */
   scores: Record<string, number>;
+  is_ad: boolean;
+  ad_position: number | null;
 }
 
 export interface ACModelDetail {
