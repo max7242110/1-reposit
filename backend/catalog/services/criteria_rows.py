@@ -1,4 +1,4 @@
-"""Создание строк ModelRawValue под все активные критерии методики."""
+"""Создание строк ModelRawValue под все критерии методики (включая неактивные)."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from catalog.models import ACModel, ModelRawValue
 
 
 def ensure_all_criteria_rows(ac_model: ACModel) -> int:
-    """Создать пустые ModelRawValue для каждого активного критерия, если строки ещё нет."""
+    """Создать пустые ModelRawValue для каждого критерия методики, если строки ещё нет."""
     methodology = MethodologyVersion.objects.filter(is_active=True).first()
     if not methodology:
         return 0
@@ -19,7 +19,7 @@ def ensure_all_criteria_rows(ac_model: ACModel) -> int:
         )
     )
     missing_mc = MethodologyCriterion.objects.filter(
-        methodology=methodology, is_active=True,
+        methodology=methodology,
     ).exclude(criterion_id__in=existing_ids).select_related("criterion")
 
     to_create = [ModelRawValue(model=ac_model, criterion=mc.criterion) for mc in missing_mc]
