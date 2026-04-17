@@ -93,6 +93,11 @@ export interface ACModelDetail {
   methodology_version: string | null;
 }
 
+export interface BrandOption {
+  id: number;
+  name: string;
+}
+
 export interface CriterionInfo {
   code: string;
   name_ru: string;

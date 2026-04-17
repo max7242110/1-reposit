@@ -1,6 +1,7 @@
 import {
   ACModelDetail,
   ACModelSummary,
+  BrandOption,
   Methodology,
   Review,
 } from "./types";
@@ -110,6 +111,39 @@ export interface ReviewCreatePayload {
   comment?: string;
   /** Honeypot: должно остаться пустым. */
   website?: string;
+}
+
+// Brands (for submission form)
+export async function getBrands(): Promise<BrandOption[]> {
+  return apiFetch<BrandOption[]>("/v2/brands/");
+}
+
+// Submissions
+export async function createSubmission(
+  data: Record<string, string | number | boolean>,
+  photos: File[],
+): Promise<void> {
+  const formData = new FormData();
+  for (const [key, value] of Object.entries(data)) {
+    if (value !== undefined && value !== null && value !== "") {
+      formData.append(key, String(value));
+    }
+  }
+  for (const photo of photos) {
+    formData.append("photos", photo);
+  }
+  const res = await fetch(`${API_BASE}/v2/submissions/`, {
+    method: "POST",
+    body: formData,
+  });
+  if (!res.ok) {
+    let msg = `${res.status} ${res.statusText}`;
+    try {
+      const body = await res.json();
+      msg = typeof body === "string" ? body : JSON.stringify(body);
+    } catch {}
+    throw new ApiError(res.status, msg);
+  }
 }
 
 export async function createReview(payload: ReviewCreatePayload): Promise<Review> {

@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 
 import BackLink from "@/components/BackLink";
-import { getPage } from "@/lib/api";
+import SubmitForm from "@/components/SubmitForm";
+import { getBrands, getPage } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Добавить кондиционер в рейтинг",
@@ -14,7 +15,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function SubmitPage() {
-  const page = await getPage("submit");
+  const [page, brands] = await Promise.all([
+    getPage("submit"),
+    getBrands().catch(() => []),
+  ]);
 
   return (
     <>
@@ -28,6 +32,8 @@ export default async function SubmitPage() {
         className="prose prose-gray dark:prose-invert max-w-none"
         dangerouslySetInnerHTML={{ __html: page.content_ru }}
       />
+
+      <SubmitForm brands={brands} />
     </>
   );
 }

@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "catalog",
     "scoring",
     "reviews",
+    "submissions",
     # legacy v1 (kept for data migration)
     "ratings",
 ]

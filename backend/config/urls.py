@@ -9,6 +9,7 @@ urlpatterns = [
     path("api/v2/", include("catalog.urls")),
     path("api/v2/", include("core.urls")),
     path("api/v2/", include("reviews.urls")),
+    path("api/v2/", include("submissions.urls")),
     # v1 legacy API (kept for backward compatibility)
     path("api/v1/", include(("ratings.urls", "ratings_v1"))),
     path("api/", include("ratings.urls")),
