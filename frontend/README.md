@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend — Рейтинг кондиционеров
 
-## Getting Started
+Next.js 16 приложение (App Router) с серверным рендерингом и ISR-кэшированием.
 
-First, run the development server:
+## Стек
+
+- **Next.js 16** — App Router, SSR/ISR
+- **React 19** — UI
+- **TypeScript** — строгий режим
+- **Tailwind CSS 4** — стилизация
+
+## Запуск
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local   # настроить API URL
+npm install
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Переменные окружения
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Переменная | Описание | По умолчанию |
+|-----------|----------|-------------|
+| `NEXT_PUBLIC_API_URL` | URL бэкенда | `http://localhost:8000/api` |
+| `NEXT_PUBLIC_SITE_URL` | URL сайта (для canonical, OG) | `http://localhost:3000` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Структура
 
-## Learn More
+```
+src/
+  app/              — Страницы (App Router)
+    page.tsx        — Главная (рейтинг с табами и фильтрами)
+    [slug]/         — Карточка модели
+    quiet/          — Рейтинг тихих кондиционеров (SEO)
+    price/[slug]/   — Рейтинг по ценовым сегментам (SEO)
+    submit/         — Форма заявки
+    methodology/    — Страница методики
+    archive/        — Архивные модели
+  components/       — UI-компоненты
+  lib/
+    api.ts          — API-клиент (v1 + v2)
+    types.ts        — TypeScript-типы
+    year.ts         — Утилита для текущего года рейтинга
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Команды
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev          # Dev-сервер с HMR
+npm run build        # Продакшн-сборка
+npm start            # Запуск продакшн-сборки
+npm run lint         # ESLint
+npm test             # Jest-тесты
+npm run test:coverage # Тесты с покрытием
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ISR-кэширование
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Страницы используют `revalidate` для ISR:
+- Главная, quiet, price — `86400` (24 часа)
+- Submit, methodology — `60` (1 минута, CMS-контент)
+- Карточка модели — `86400`

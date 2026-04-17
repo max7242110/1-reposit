@@ -36,3 +36,11 @@ backend/media/
 
 # Временные файлы MS Office
 ~$*
+
+# Рабочие директории (не часть кодовой базы)
+tmp/
+backups/
+*.sql
+
+# Frontend build cache
+frontend/tsconfig.tsbuildinfo
